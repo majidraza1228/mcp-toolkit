@@ -113,12 +113,12 @@ class MCPManager:
         if server:
             session = self.client.get_session(server)
             if session:
-                tools_by_server[server] = session.list_tools()
+                tools_by_server[server] = await session.list_tools()
         else:
             for server_name in self.client.sessions:
                 session = self.client.get_session(server_name)
                 if session:
-                    tools_by_server[server_name] = session.list_tools()
+                    tools_by_server[server_name] = await session.list_tools()
 
         return tools_by_server
 
@@ -181,14 +181,37 @@ class MCPManager:
         for server_name in self.client.sessions:
             session = self.client.get_session(server_name)
             if session:
-                tools = session.list_tools()
-                resources = session.list_resources()
-                status[server_name] = {
-                    "connected": True,
-                    "tools_count": len(tools),
-                    "resources_count": len(resources),
-                    "tools": [t.get("name", "unknown") for t in tools],
-                }
+                # These methods are async, so we need to run them in event loop
+                try:
+                    loop = asyncio.get_event_loop()
+                    if loop.is_running():
+                        # If loop is already running, we can't use run_until_complete
+                        # Just return basic status without tool counts
+                        status[server_name] = {
+                            "connected": True,
+                            "tools_count": 0,
+                            "resources_count": 0,
+                            "tools": [],
+                        }
+                    else:
+                        tools = loop.run_until_complete(session.list_tools())
+                        resources = loop.run_until_complete(session.list_resources())
+                        status[server_name] = {
+                            "connected": True,
+                            "tools_count": len(tools),
+                            "resources_count": len(resources),
+                            "tools": [t.name if hasattr(t, 'name') else str(t) for t in tools],
+                        }
+                except RuntimeError:
+                    # No event loop, create a new one
+                    tools = asyncio.run(session.list_tools())
+                    resources = asyncio.run(session.list_resources())
+                    status[server_name] = {
+                        "connected": True,
+                        "tools_count": len(tools),
+                        "resources_count": len(resources),
+                        "tools": [t.name if hasattr(t, 'name') else str(t) for t in tools],
+                    }
             else:
                 status[server_name] = {"connected": False}
 

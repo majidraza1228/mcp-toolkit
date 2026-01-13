@@ -87,14 +87,19 @@ async def test_mcp_servers():
         from utils import MCPManager
 
         manager = MCPManager()
+        print("Initializing MCP manager...", flush=True)
         await manager.initialize()
+        print("MCP manager initialized!", flush=True)
 
+        print("Getting server status...", flush=True)
         status = manager.get_server_status()
         print("\n✓ Successfully connected to MCP servers:")
         for server, info in status.items():
             print(f"  - {server}: {info.get('tools_count', 0)} tools available")
 
+        print("Cleaning up MCP manager...", flush=True)
         await manager.cleanup()
+        print("Cleanup complete!", flush=True)
         return True
 
     except Exception as e:
@@ -141,7 +146,9 @@ def main():
 
     # Test MCP server connections
     try:
+        print("About to test MCP servers...", flush=True)
         success = asyncio.run(test_mcp_servers())
+        print(f"Test completed with success={success}", flush=True)
         if not success:
             print("\n⚠️  MCP server connection failed.")
             response = input("Continue anyway? (y/N): ")
@@ -152,17 +159,20 @@ def main():
         sys.exit(0)
 
     # Launch UI
-    print("\n" + "="*60)
-    print("🚀 Launching web interface...")
-    print("="*60 + "\n")
+    print("\n" + "="*60, flush=True)
+    print("🚀 Launching web interface...", flush=True)
+    print("="*60 + "\n", flush=True)
 
     try:
+        print("Importing ui_client...", flush=True)
         from ui_client import main as launch_ui
+        print("Calling launch_ui()...", flush=True)
         launch_ui()
+        print("launch_ui() returned", flush=True)
     except KeyboardInterrupt:
         print("\n\n👋 Shutting down gracefully...")
     except Exception as e:
-        print(f"\n❌ Error: {e}")
+        print(f"\n❌ Error launching UI: {e}", flush=True)
         import traceback
         traceback.print_exc()
         sys.exit(1)

@@ -38,13 +38,13 @@ class UIClient:
         return self._loop
 
     def chat(
-        self, message: str, history: List[Tuple[str, str]]
-    ) -> Tuple[str, List[Tuple[str, str]]]:
+        self, message: str, history: List
+    ) -> Tuple[str, List]:
         """Process a chat message.
 
         Args:
             message: User's message
-            history: Chat history
+            history: Chat history (list of message dicts)
 
         Returns:
             Tuple of (empty string to clear input, updated history)
@@ -52,8 +52,12 @@ class UIClient:
         if not message.strip():
             return "", history
 
-        # Add user message to history
-        history.append((message, None))
+        # Ensure history is a list
+        if history is None:
+            history = []
+
+        # Add user message to history in Gradio 6.x format
+        history.append({"role": "user", "content": message})
 
         # Run agent query
         loop = self._get_event_loop()
@@ -73,12 +77,13 @@ class UIClient:
 
             loop.run_until_complete(collect_response())
 
-            # Update history with response
-            history[-1] = (message, response_text)
+            # Add assistant response to history
+            history.append({"role": "assistant", "content": response_text})
 
         except Exception as e:
             error_msg = f"Error: {str(e)}"
-            history[-1] = (message, error_msg)
+            # Add error as assistant response
+            history.append({"role": "assistant", "content": error_msg})
 
         return "", history
 
@@ -116,11 +121,14 @@ class UIClient:
         """
         return [], "Conversation cleared!"
 
-    def create_interface(self) -> gr.Blocks:
+    def create_interface(self, initial_status: str = "") -> Tuple[gr.Blocks, dict]:
         """Create the Gradio interface.
 
+        Args:
+            initial_status: Initial server status to display
+
         Returns:
-            Gradio Blocks interface
+            Tuple of (Gradio Blocks interface, launch parameters)
         """
         # Custom CSS for better styling
         custom_css = """
@@ -147,8 +155,6 @@ class UIClient:
         """
 
         with gr.Blocks(
-            theme=gr.themes.Soft(),
-            css=custom_css,
             title="AI Agent Interface",
         ) as interface:
             # Header
@@ -167,7 +173,7 @@ class UIClient:
                     chatbot = gr.Chatbot(
                         label="Conversation",
                         height=500,
-                        show_copy_button=True,
+                        value=[],  # Initialize with empty list for message format
                     )
 
                     with gr.Row():
@@ -211,7 +217,7 @@ class UIClient:
                 # Right column - Server status and info
                 with gr.Column(scale=1):
                     server_status = gr.Markdown(
-                        value=self.get_server_status(),
+                        value=initial_status or "⚠️ No server status available",
                         label="Server Status",
                     )
                     refresh_btn = gr.Button("🔄 Refresh Status", size="sm")
@@ -279,7 +285,12 @@ class UIClient:
                 outputs=status_msg,
             )
 
-        return interface
+        # Return interface and launch parameters for Gradio 6.0
+        launch_params = {
+            "theme": gr.themes.Soft(),
+            "css": custom_css,
+        }
+        return interface, launch_params
 
     def launch(
         self,
@@ -295,19 +306,42 @@ class UIClient:
             server_name: Server name/IP to bind to
         """
         # Initialize agent service
+        print("Getting event loop...", flush=True)
         loop = self._get_event_loop()
+        print("Initializing agent service...", flush=True)
         loop.run_until_complete(self.initialize())
+        print("Agent service initialized!", flush=True)
+
+        # Get initial server status before creating interface
+        print("Getting initial server status...", flush=True)
+        try:
+            initial_status = self.get_server_status()
+            print(f"Initial status retrieved: {len(initial_status) if initial_status else 0} chars", flush=True)
+        except Exception as e:
+            print(f"Error getting server status: {e}", flush=True)
+            import traceback
+            traceback.print_exc()
+            initial_status = f"⚠️ Error getting status: {e}"
 
         # Create and launch interface
-        interface = self.create_interface()
+        print("Creating interface...", flush=True)
+        interface, launch_params = self.create_interface(initial_status=initial_status)
+        print("Interface created!", flush=True)
 
         try:
+            print(f"\n✓ Server starting on http://{server_name}:{server_port}", flush=True)
+            print(f"✓ Local URL: http://localhost:{server_port}", flush=True)
+            print("✓ Press Ctrl+C to stop\n", flush=True)
+            print("Calling interface.launch()...", flush=True)
+
             interface.launch(
                 share=share,
                 server_port=server_port,
                 server_name=server_name,
                 show_error=True,
+                **launch_params,
             )
+            print("interface.launch() completed", flush=True)
         finally:
             # Cleanup on exit
             loop.run_until_complete(self.cleanup())
@@ -320,6 +354,9 @@ def main():
 
     # Create and launch UI
     ui = UIClient()
+    print("\n" + "="*60)
+    print("🌐 Web interface starting...")
+    print("="*60)
     ui.launch(
         share=False,  # Set to True to create a public link
         server_port=7860,
