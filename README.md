@@ -4,13 +4,18 @@ A Python-based AI Agent toolkit for interacting with PostgreSQL databases and Gi
 
 ## Features
 
-- 🤖 **AI Agent**: Natural language interface powered by LLMs (OpenAI, Anthropic, Groq)
+- 🤖 **AI Agent**: Natural language interface powered by multiple LLMs
+  - **VS Code Copilot / GitHub Models** (recommended)
+  - OpenAI (GPT-4, GPT-3.5)
+  - Anthropic (Claude 3.5)
+  - Groq (ultra-fast inference)
 - 🗄️ **PostgreSQL Integration**: Query and manage databases conversationally
 - 🐙 **GitHub Integration**: Manage repositories, issues, and PRs
 - 🌐 **Web UI**: Beautiful Gradio interface for easy interaction
 - 💬 **Conversation Memory**: Maintains context across queries
 - ⚡ **Streaming Responses**: Real-time agent output
 - 🔧 **Extensible**: Easy to add new MCP servers
+- 💰 **Cost Effective**: Use GitHub Models free tier or your Copilot subscription
 
 ## Architecture
 
@@ -72,17 +77,27 @@ nano .env  # or use your preferred editor
 
 **Required environment variables:**
 ```bash
-# LLM API Key (choose one)
-OPENAI_API_KEY=sk-...
-# or ANTHROPIC_API_KEY=sk-ant-...
-# or GROQ_API_KEY=gsk_...
+# Choose LLM Provider (recommended: github for VS Code Copilot users)
+LLM_PROVIDER=github
 
-# GitHub Token
+# Option 1: VS Code Copilot / GitHub Models (FREE/INCLUDED)
 GITHUB_TOKEN=ghp_...
+GITHUB_MODELS_API_KEY=${GITHUB_TOKEN}
+LLM_MODEL=gpt-4o
+
+# Option 2: Standard OpenAI
+# LLM_PROVIDER=openai
+# OPENAI_API_KEY=sk-...
+
+# Option 3: Anthropic Claude
+# LLM_PROVIDER=anthropic
+# ANTHROPIC_API_KEY=sk-ant-...
 
 # PostgreSQL Connection
 DATABASE_URL=postgresql://user:password@localhost:5432/mydb
 ```
+
+**📖 New to GitHub Models?** See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for detailed setup instructions.
 
 ### Run
 
@@ -142,6 +157,7 @@ mcp-toolkit/
 ## Documentation
 
 - [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
+- [VS Code Copilot Setup](VSCODE_COPILOT_SETUP.md) - Use GitHub Models / Copilot as your LLM
 - [Architecture Guide](ARCHITECTURE.md) - Deep dive into the system
 - [Implementation Summary](IMPLEMENTATION_SUMMARY.md) - Technical overview
 
@@ -185,11 +201,13 @@ Edit `mcp_config.json`:
 
 ### Change LLM Provider
 
-Edit `agent_service.py` to use different LLM providers:
-- OpenAI GPT-4
-- Anthropic Claude
-- Groq
-- Local models (Ollama)
+Simply change `LLM_PROVIDER` in `.env`:
+- `github` - VS Code Copilot / GitHub Models (recommended)
+- `openai` - Standard OpenAI API
+- `anthropic` - Anthropic Claude
+- `groq` - Ultra-fast inference
+
+No code changes needed! See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for details.
 
 ### Customize Agent Behavior
 
@@ -239,10 +257,12 @@ pg_isready
 
 ### Missing API Keys
 
-Ensure your `.env` file has at least one LLM API key:
-- `OPENAI_API_KEY`
-- `ANTHROPIC_API_KEY`
-- `GROQ_API_KEY`
+Ensure your `.env` file has at least one LLM provider configured:
+- `GITHUB_MODELS_API_KEY` or `GITHUB_TOKEN` (for GitHub Models)
+- `OPENAI_API_KEY` (for OpenAI)
+- `ANTHROPIC_API_KEY` (for Anthropic)
+
+See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for setup instructions.
 
 ## Dependencies
 

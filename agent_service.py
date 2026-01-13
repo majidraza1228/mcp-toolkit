@@ -10,6 +10,13 @@ from langchain_anthropic import ChatAnthropic
 
 from mcp_use import MCPAgent
 
+# GitHub Models (VS Code Copilot) support
+try:
+    from langchain_openai import AzureChatOpenAI
+    AZURE_AVAILABLE = True
+except ImportError:
+    AZURE_AVAILABLE = False
+
 from utils import MCPManager, get_system_prompt
 
 # Load environment variables
@@ -76,20 +83,47 @@ class AgentService:
         Returns:
             LangChain LLM instance
         """
-        # Check which API key is available
-        if os.getenv("OPENAI_API_KEY"):
+        llm_provider = os.getenv("LLM_PROVIDER", "openai").lower()
+
+        # VS Code Copilot / GitHub Models
+        if llm_provider == "github" or os.getenv("GITHUB_MODELS_API_KEY"):
+            github_token = os.getenv("GITHUB_MODELS_API_KEY") or os.getenv("GITHUB_TOKEN")
+            if not github_token:
+                raise ValueError(
+                    "GitHub Models requires GITHUB_MODELS_API_KEY or GITHUB_TOKEN in .env"
+                )
+
+            # GitHub Models uses OpenAI-compatible API
             return ChatOpenAI(
-                model=self.model,
+                model=self.model or "gpt-4o",  # GitHub Models default
+                temperature=self.temperature,
+                openai_api_key=github_token,
+                openai_api_base="https://models.inference.ai.azure.com",
+                # Alternative endpoint: https://api.githubcopilot.com
+            )
+
+        # Standard OpenAI
+        elif llm_provider == "openai" or os.getenv("OPENAI_API_KEY"):
+            if not os.getenv("OPENAI_API_KEY"):
+                raise ValueError("OpenAI requires OPENAI_API_KEY in .env")
+            return ChatOpenAI(
+                model=self.model or "gpt-4",
                 temperature=self.temperature,
             )
-        elif os.getenv("ANTHROPIC_API_KEY"):
+
+        # Anthropic Claude
+        elif llm_provider == "anthropic" or os.getenv("ANTHROPIC_API_KEY"):
+            if not os.getenv("ANTHROPIC_API_KEY"):
+                raise ValueError("Anthropic requires ANTHROPIC_API_KEY in .env")
             return ChatAnthropic(
                 model=self.model or "claude-3-5-sonnet-20241022",
                 temperature=self.temperature,
             )
+
         else:
             raise ValueError(
-                "No LLM API key found. Set OPENAI_API_KEY or ANTHROPIC_API_KEY in .env"
+                "No LLM provider configured. Set LLM_PROVIDER=openai/github/anthropic "
+                "and corresponding API key in .env"
             )
 
     async def run(self, query: str, conversation_id: Optional[str] = None) -> Dict[str, Any]:
