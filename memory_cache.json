@@ -1,92 +1,514 @@
 {
+  "version": "2.0",
+  "metadata": {
+    "created_at": "2026-01-13 22:28:17.118653",
+    "last_updated": "2026-01-13T23:49:20.585781",
+    "schema_version": "2.0"
+  },
   "queries": {
     "8af1021414e9ab1e27f614dd97c2f038": {
       "query": "show me the table",
+      "normalized_query": "show me the table",
       "response": "Sure, I can help with that. But I need to know which table you want to see from your PostgreSQL database. Could you please provide the table name?",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:28:17.118653",
-      "last_used": "2026-01-13 22:28:17.118664",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:28:17.118653",
+        "last_used": "2026-01-13 22:28:17.118664"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "show"
+      ],
+      "related_queries": []
     },
     "613048cdd44b3ee6b461546d5f76fb37": {
       "query": "use Postgress MCP and use Adventureworks",
+      "normalized_query": "use postgress mcp and use adventureworks",
       "response": "Great! We are now connected to the PostgreSQL MCP server. However, I don't have the Adventureworks database in my list. Here are the databases I can access:\n\n- employees\n- product_reviews\n- test\n- chatbot\n- suppliers\n\nCould you please specify from which database you want to see the table? Or if you meant a table named \"Adventureworks\", could you please specify in which of the above databases it is located?",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:28:49.849595",
-      "last_used": "2026-01-13 22:28:49.849601",
-      "use_count": 1,
-      "positive_feedback": 1,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:28:49.849595",
+        "last_used": "2026-01-13 22:28:49.849601"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 1,
+        "negative": 0,
+        "score": 1.0
+      },
+      "tags": [],
+      "related_queries": []
     },
     "8217f5eb86c41854a00ecb3ce8f1363a": {
       "query": "show me the tables",
+      "normalized_query": "show me the tables",
       "response": "The 'employees' database has the following tables:\n\n1. Table name: employeeid, Data type: integer\n2. Table name: firstname, Data type: character varying\n3. Table name: lastname, Data type: character varying\n4. Table name: department, Data type: character varying\n5. Table name: salary, Data type: numeric\n\nThese are the tables available in the 'employees' schema. If you want to fetch tables from another schema, please provide the name.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:35:28.532124",
-      "last_used": "2026-01-13 22:35:28.532138",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:35:28.532124",
+        "last_used": "2026-01-13 22:35:28.532138"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "show"
+      ],
+      "related_queries": []
     },
     "3716d055547af6a510bd4f817e869a90": {
       "query": "use Adventureworks db",
+      "normalized_query": "use adventureworks db",
       "response": "I apologize for the misunderstanding. It seems that the 'Adventureworks' database is not available on the MCP server. Currently, we only have access to the 'postgres' server. \n\nIf you want to fetch tables from a schema in the postgres server, please provide the schema name.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:35:54.189452",
-      "last_used": "2026-01-13 22:35:54.189458",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:35:54.189452",
+        "last_used": "2026-01-13 22:35:54.189458"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
     },
     "ace72f227e71c8777807fcc32303b4b1": {
       "query": "show me the list of tables\n",
+      "normalized_query": "show me the list of tables",
       "response": "Here are the tables in each of the available schemas:\n\n1. **Employees Schema**\n   - employeeid, Data type: integer\n   - firstname, Data type: character varying\n   - lastname, Data type: character varying\n   - department, Data type: character varying\n   - salary, Data type: numeric\n\n2. **Product Reviews Schema**\n   - id, Data type: integer\n   - product_name, Data type: character varying\n   - rating, Data type: integer\n   - comment, Data type: text\n\n3. **Test Schema**\n   - id, Data type: integer\n   - name, Data type: character varying\n   - address, Data type: character varying\n   - zipcode, Data type: character varying\n\n4. **Chatbot Schema**\n   - name, Data type: character varying\n   - address, Data type: character varying\n   - zipcode, Data type: character varying\n\n5. **Suppliers Schema**\n   - supplierid, Data type: integer\n   - suppliername, Data type: character varying\n   - contactemail, Data type: character varying\n\nThese are the tables available in your database.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:36:29.544904",
-      "last_used": "2026-01-13 22:36:29.544911",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:36:29.544904",
+        "last_used": "2026-01-13 22:36:29.544911"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "list",
+        "show"
+      ],
+      "related_queries": []
     },
     "21a42595a5c622f1dae6572078cd2386": {
       "query": "list me all the employees",
+      "normalized_query": "list me all the employees",
       "response": "Here are the employees in the database:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: 75000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: 65000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: 60000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: 80000.00\n\nThis is the list of all employees in the database.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:37:10.169475",
-      "last_used": "2026-01-13 22:37:10.169482",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:37:10.169475",
+        "last_used": "2026-01-13 22:37:10.169482"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "employees",
+        "list"
+      ],
+      "related_queries": []
     },
     "cfeab0e2aeb62cb8833b42b9619b210f": {
       "query": "list all the employees",
+      "normalized_query": "list all the employees",
       "response": "Here are all the employees:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: 75000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: 65000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: 60000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: 80000.00\n\nThis is the list of all employees in the database.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
       "tools_used": [],
-      "timestamp": "2026-01-13 22:37:33.282500",
-      "last_used": "2026-01-13 22:37:58.678189",
-      "use_count": 2,
-      "positive_feedback": 1,
-      "negative_feedback": 0
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 22:37:33.282500",
+        "last_used": "2026-01-13 22:37:58.678189"
+      },
+      "usage": {
+        "count": 2,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 1,
+        "negative": 0,
+        "score": 1.0
+      },
+      "tags": [
+        "employees",
+        "list"
+      ],
+      "related_queries": []
+    },
+    "7381eeca87efdcb1893bb60996c42ef0": {
+      "query": "show me repos",
+      "normalized_query": "show me repos",
+      "response": "Here are some repositories:\n\n1. [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) by codecrafters-io: Master programming by recreating your favorite technologies from scratch.\n\n2. [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp) by freeCodeCamp: freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.\n\n3. [awesome](https://github.com/sindresorhus/awesome) by sindresorhus: Awesome lists about all kinds of interesting topics\n\n4. [public-apis](https://github.com/public-apis/public-apis) by public-apis: A collective list of free APIs\n\n5. [free-programming-books](https://github.com/EbookFoundation/free-programming-books) by EbookFoundation: Freely available programming books\n\n6. [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) by kamranahmedse: Interactive roadmaps, guides and other educational content to help developers grow in their careers.\n\n7. [coding-interview-university](https://github.com/jwasham/coding-interview-university) by jwasham: A complete computer science study plan to become a software engineer.\n\n8. [system-design-primer](https://github.com/donnemartin/system-design-primer) by donnemartin: Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.\n\n9. [awesome-python](https://github.com/vinta/awesome-python) by vinta: An opinionated list of awesome Python frameworks, libraries, software and resources.\n\n10. [996.ICU](https://github.com/996icu/996.ICU) by 996icu: Repo for counting stars and contributing. Press F to pay respect to glorious developers.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13 23:32:37.649058",
+        "last_used": "2026-01-13 23:32:37.649071"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "6b5ca09eb9b36d40a5370cf0bf64f55e": {
+      "query": "use adventureworks  list all the tables",
+      "normalized_query": "use adventureworks  list all the tables",
+      "response": "The 'adventureworks' database contains the following tables:\n\n1. employees\n2. product_reviews\n3. test\n4. chatbot\n5. suppliers",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13T23:44:23.762711",
+        "last_used": "2026-01-13T23:44:23.762711"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 1,
+        "negative": 0,
+        "score": 1.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "list"
+      ],
+      "related_queries": []
+    },
+    "c37997856827a6fb0b1564a6b1b16fba": {
+      "query": "show me employee list",
+      "normalized_query": "show me employee list",
+      "response": "Here is the list of employees:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: $75,000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: $65,000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: $60,000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: $80,000.00",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13T23:45:56.487888",
+        "last_used": "2026-01-13T23:45:56.487888"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "list",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "070035ad4283935b3fce8fcf284dbcf3": {
+      "query": "give me employee name have Bob\n",
+      "normalized_query": "give me employee name have bob",
+      "response": "The employee with the first name \"Bob\" is Bob Brown.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13T23:46:41.496557",
+        "last_used": "2026-01-13T23:46:41.496557"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 3,
+        "score": -1.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "8a2c375cb38975fca37904dc26b0e28b": {
+      "query": "show me all the schemas",
+      "normalized_query": "show me all the schemas",
+      "response": "Here are all the schemas in the database:\n\n1. pg_toast\n2. pg_catalog\n3. public\n4. information_schema\n5. person\n6. humanresources\n7. production\n8. purchasing\n9. sales\n10. pe\n11. hr\n12. pr\n13. pu\n14. sa",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13T23:47:05.941049",
+        "last_used": "2026-01-13T23:47:05.941049"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 3,
+        "score": -1.0
+      },
+      "tags": [
+        "schema",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "a54bebfda9ccd7b0c5276b9970cbf3b8": {
+      "query": "show me all the employees",
+      "normalized_query": "show me all the employees",
+      "response": "Here are all the employees in your database:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: $75,000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: $65,000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: $60,000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: $80,000.00",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-13T23:49:20.585755",
+        "last_used": "2026-01-13T23:49:20.585755"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "employees",
+        "show"
+      ],
+      "related_queries": []
     }
   },
-  "feedback": [
+  "categories": {
+    "database_queries": [
+      "8af1021414e9ab1e27f614dd97c2f038",
+      "8217f5eb86c41854a00ecb3ce8f1363a",
+      "ace72f227e71c8777807fcc32303b4b1",
+      "21a42595a5c622f1dae6572078cd2386",
+      "cfeab0e2aeb62cb8833b42b9619b210f",
+      "7381eeca87efdcb1893bb60996c42ef0",
+      "6b5ca09eb9b36d40a5370cf0bf64f55e",
+      "c37997856827a6fb0b1564a6b1b16fba",
+      "8a2c375cb38975fca37904dc26b0e28b",
+      "a54bebfda9ccd7b0c5276b9970cbf3b8"
+    ],
+    "general": [
+      "613048cdd44b3ee6b461546d5f76fb37",
+      "3716d055547af6a510bd4f817e869a90",
+      "070035ad4283935b3fce8fcf284dbcf3"
+    ]
+  },
+  "feedback_log": [
     {
+      "query_hash": "613048cdd44b3ee6b461546d5f76fb37",
       "query": "use Postgress MCP and use Adventureworks",
       "rating": "up",
       "timestamp": "2026-01-13 22:28:57.982469"
     },
     {
+      "query_hash": "cfeab0e2aeb62cb8833b42b9619b210f",
       "query": "list all the employees",
       "rating": "up",
       "timestamp": "2026-01-13 22:37:49.958284"
+    },
+    {
+      "query_hash": "6b5ca09eb9b36d40a5370cf0bf64f55e",
+      "query": "use adventureworks  list all the tables",
+      "rating": "up",
+      "timestamp": "2026-01-13T23:45:49.575791"
+    },
+    {
+      "query_hash": "070035ad4283935b3fce8fcf284dbcf3",
+      "query": "give me employee name have Bob\n",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:46:47.993658"
+    },
+    {
+      "query_hash": "070035ad4283935b3fce8fcf284dbcf3",
+      "query": "give me employee name have Bob\n",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:46:49.444865"
+    },
+    {
+      "query_hash": "070035ad4283935b3fce8fcf284dbcf3",
+      "query": "give me employee name have Bob\n",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:46:50.227303"
+    },
+    {
+      "query_hash": "8a2c375cb38975fca37904dc26b0e28b",
+      "query": "show me all the schemas",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:47:11.728524"
+    },
+    {
+      "query_hash": "8a2c375cb38975fca37904dc26b0e28b",
+      "query": "show me all the schemas",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:47:14.679276"
+    },
+    {
+      "query_hash": "8a2c375cb38975fca37904dc26b0e28b",
+      "query": "show me all the schemas",
+      "rating": "down",
+      "timestamp": "2026-01-13T23:47:14.995820"
     }
   ],
   "stats": {
-    "total_queries": 7,
+    "total_queries": 15,
     "cache_hits": 1,
-    "positive_feedback": 2,
-    "negative_feedback": 0
+    "positive_feedback": 3,
+    "negative_feedback": 6
   }
 }
