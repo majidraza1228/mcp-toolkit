@@ -1,0 +1,92 @@
+{
+  "queries": {
+    "8af1021414e9ab1e27f614dd97c2f038": {
+      "query": "show me the table",
+      "response": "Sure, I can help with that. But I need to know which table you want to see from your PostgreSQL database. Could you please provide the table name?",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:28:17.118653",
+      "last_used": "2026-01-13 22:28:17.118664",
+      "use_count": 1,
+      "positive_feedback": 0,
+      "negative_feedback": 0
+    },
+    "613048cdd44b3ee6b461546d5f76fb37": {
+      "query": "use Postgress MCP and use Adventureworks",
+      "response": "Great! We are now connected to the PostgreSQL MCP server. However, I don't have the Adventureworks database in my list. Here are the databases I can access:\n\n- employees\n- product_reviews\n- test\n- chatbot\n- suppliers\n\nCould you please specify from which database you want to see the table? Or if you meant a table named \"Adventureworks\", could you please specify in which of the above databases it is located?",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:28:49.849595",
+      "last_used": "2026-01-13 22:28:49.849601",
+      "use_count": 1,
+      "positive_feedback": 1,
+      "negative_feedback": 0
+    },
+    "8217f5eb86c41854a00ecb3ce8f1363a": {
+      "query": "show me the tables",
+      "response": "The 'employees' database has the following tables:\n\n1. Table name: employeeid, Data type: integer\n2. Table name: firstname, Data type: character varying\n3. Table name: lastname, Data type: character varying\n4. Table name: department, Data type: character varying\n5. Table name: salary, Data type: numeric\n\nThese are the tables available in the 'employees' schema. If you want to fetch tables from another schema, please provide the name.",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:35:28.532124",
+      "last_used": "2026-01-13 22:35:28.532138",
+      "use_count": 1,
+      "positive_feedback": 0,
+      "negative_feedback": 0
+    },
+    "3716d055547af6a510bd4f817e869a90": {
+      "query": "use Adventureworks db",
+      "response": "I apologize for the misunderstanding. It seems that the 'Adventureworks' database is not available on the MCP server. Currently, we only have access to the 'postgres' server. \n\nIf you want to fetch tables from a schema in the postgres server, please provide the schema name.",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:35:54.189452",
+      "last_used": "2026-01-13 22:35:54.189458",
+      "use_count": 1,
+      "positive_feedback": 0,
+      "negative_feedback": 0
+    },
+    "ace72f227e71c8777807fcc32303b4b1": {
+      "query": "show me the list of tables\n",
+      "response": "Here are the tables in each of the available schemas:\n\n1. **Employees Schema**\n   - employeeid, Data type: integer\n   - firstname, Data type: character varying\n   - lastname, Data type: character varying\n   - department, Data type: character varying\n   - salary, Data type: numeric\n\n2. **Product Reviews Schema**\n   - id, Data type: integer\n   - product_name, Data type: character varying\n   - rating, Data type: integer\n   - comment, Data type: text\n\n3. **Test Schema**\n   - id, Data type: integer\n   - name, Data type: character varying\n   - address, Data type: character varying\n   - zipcode, Data type: character varying\n\n4. **Chatbot Schema**\n   - name, Data type: character varying\n   - address, Data type: character varying\n   - zipcode, Data type: character varying\n\n5. **Suppliers Schema**\n   - supplierid, Data type: integer\n   - suppliername, Data type: character varying\n   - contactemail, Data type: character varying\n\nThese are the tables available in your database.",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:36:29.544904",
+      "last_used": "2026-01-13 22:36:29.544911",
+      "use_count": 1,
+      "positive_feedback": 0,
+      "negative_feedback": 0
+    },
+    "21a42595a5c622f1dae6572078cd2386": {
+      "query": "list me all the employees",
+      "response": "Here are the employees in the database:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: 75000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: 65000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: 60000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: 80000.00\n\nThis is the list of all employees in the database.",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:37:10.169475",
+      "last_used": "2026-01-13 22:37:10.169482",
+      "use_count": 1,
+      "positive_feedback": 0,
+      "negative_feedback": 0
+    },
+    "cfeab0e2aeb62cb8833b42b9619b210f": {
+      "query": "list all the employees",
+      "response": "Here are all the employees:\n\n1. Employee ID: 1\n   - First Name: John\n   - Last Name: Doe\n   - Department: Engineering\n   - Salary: 75000.00\n\n2. Employee ID: 2\n   - First Name: Jane\n   - Last Name: Smith\n   - Department: Marketing\n   - Salary: 65000.00\n\n3. Employee ID: 3\n   - First Name: Alice\n   - Last Name: Johnson\n   - Department: HR\n   - Salary: 60000.00\n\n4. Employee ID: 4\n   - First Name: Bob\n   - Last Name: Brown\n   - Department: Finance\n   - Salary: 80000.00\n\nThis is the list of all employees in the database.",
+      "tools_used": [],
+      "timestamp": "2026-01-13 22:37:33.282500",
+      "last_used": "2026-01-13 22:37:58.678189",
+      "use_count": 2,
+      "positive_feedback": 1,
+      "negative_feedback": 0
+    }
+  },
+  "feedback": [
+    {
+      "query": "use Postgress MCP and use Adventureworks",
+      "rating": "up",
+      "timestamp": "2026-01-13 22:28:57.982469"
+    },
+    {
+      "query": "list all the employees",
+      "rating": "up",
+      "timestamp": "2026-01-13 22:37:49.958284"
+    }
+  ],
+  "stats": {
+    "total_queries": 7,
+    "cache_hits": 1,
+    "positive_feedback": 2,
+    "negative_feedback": 0
+  }
+}
