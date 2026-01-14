@@ -70,15 +70,32 @@ class UIClient:
                 async for chunk in self.service.stream(
                     message, conversation_id=self.conversation_id
                 ):
-                    if "messages" in chunk and chunk["messages"]:
-                        last_message = chunk["messages"][-1]
-                        if hasattr(last_message, "content"):
-                            response_text = last_message.content
+                    # Handle string chunks (final response)
+                    if isinstance(chunk, str):
+                        response_text = chunk
+                    # Handle tuple chunks (intermediate steps - ignore these)
+                    elif isinstance(chunk, tuple):
+                        continue
+                    # Handle dict chunks
+                    elif isinstance(chunk, dict):
+                        if "messages" in chunk and chunk["messages"]:
+                            last_message = chunk["messages"][-1]
+                            if hasattr(last_message, "content"):
+                                response_text = last_message.content
+                        elif "response" in chunk:
+                            response_text = str(chunk["response"])
+                        elif "content" in chunk:
+                            response_text = chunk["content"]
+                    elif hasattr(chunk, "content"):
+                        response_text = chunk.content
 
             loop.run_until_complete(collect_response())
 
             # Add assistant response to history
-            history.append({"role": "assistant", "content": response_text})
+            if response_text:
+                history.append({"role": "assistant", "content": response_text})
+            else:
+                history.append({"role": "assistant", "content": "⚠️ No response received from agent"})
 
         except Exception as e:
             error_msg = f"Error: {str(e)}"

@@ -141,7 +141,9 @@ class AgentService:
 
         print(f"\n🤔 Processing: {query}")
 
-        result = await self.agent.run(query, conversation_id=conversation_id)
+        # MCPAgent.run() doesn't accept conversation_id parameter
+        # Just pass the query
+        result = await self.agent.run(query)
 
         return {
             "query": query,
@@ -166,7 +168,9 @@ class AgentService:
 
         print(f"\n🤔 Processing (streaming): {query}")
 
-        async for chunk in self.agent.stream(query, conversation_id=conversation_id):
+        # MCPAgent.stream() doesn't accept conversation_id parameter
+        # Just pass the query
+        async for chunk in self.agent.stream(query):
             yield chunk
 
     async def get_conversation_history(

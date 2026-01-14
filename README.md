@@ -1,311 +1,210 @@
-# MCP Toolkit
+# 🤖 MCP Toolkit - AI Agent with Database & API Access
 
-A Python-based AI Agent toolkit for interacting with PostgreSQL databases and GitHub using the Model Context Protocol (MCP).
+A standalone Python application that uses the Model Context Protocol (MCP) to connect AI agents to databases, APIs, and file systems through a web-based chat interface.
 
-## Features
+## 🌟 What Is This?
 
-- 🤖 **AI Agent**: Natural language interface powered by multiple LLMs
-  - **VS Code Copilot / GitHub Models** (recommended)
-  - OpenAI (GPT-4, GPT-3.5)
-  - Anthropic (Claude 3.5)
-  - Groq (ultra-fast inference)
-- 🗄️ **PostgreSQL Integration**: Query and manage databases conversationally
-- 🐙 **GitHub Integration**: Manage repositories, issues, and PRs
-- 🌐 **Web UI**: Beautiful Gradio interface for easy interaction
-- 💬 **Conversation Memory**: Maintains context across queries
-- ⚡ **Streaming Responses**: Real-time agent output
-- 🔧 **Extensible**: Easy to add new MCP servers
-- 💰 **Cost Effective**: Use GitHub Models free tier or your Copilot subscription
+This is a **browser-based AI chat application** that can:
+- 💾 Query your PostgreSQL database with natural language
+- 🐙 Interact with GitHub repositories
+- 📁 Access and search local files
+- 🤖 Use AI (GPT-4) to understand and respond to your questions
 
-## Architecture
+**No VS Code required** - runs completely standalone in your web browser!
 
-```
-┌─────────────────────┐
-│   Gradio Web UI     │ ← User Interface
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│   AI Agent          │ ← Natural Language Processing
-└──────────┬──────────┘
-           │
-           ▼
-┌─────────────────────┐
-│   MCP Client        │ ← Protocol Handler
-└──────────┬──────────┘
-           │
-           ├──────────────┬──────────────┐
-           ▼              ▼              ▼
-    ┌──────────┐   ┌──────────┐   ┌──────────┐
-    │Postgres  │   │ GitHub   │   │Filesystem│
-    │MCP Server│   │MCP Server│   │MCP Server│
-    └──────────┘   └──────────┘   └──────────┘
-```
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.11+
-- Node.js 18+ (for MCP servers)
-- PostgreSQL database (optional for testing)
-- GitHub Personal Access Token
-
-### Installation
+## 🚀 Quick Start
 
 ```bash
-# Clone the repository
-git clone https://github.com/majidraza1228/mcp-toolkit.git
-cd mcp-toolkit
+# Start the application
+./start.sh
 
-# Install Python dependencies
-pip install -r requirements.txt
+# Open in your browser
+# http://localhost:7860
 
-# Verify Node.js is installed
-node --version  # Should show v18+
+# Stop when done
+./stop.sh
 ```
 
-### Configuration
+## 📖 Documentation
 
+- **[QUICK_START.md](QUICK_START.md)** - Get started in 5 minutes
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Understand how it works
+- **[mcp_config.json](mcp_config.json)** - Configure MCP servers
+- **[.env](.env)** - Set your API keys and credentials
+
+## ✨ Features
+
+### 🗣️ Natural Language Interface
+Ask questions in plain English:
+```
+"Show me all tables in the database"
+"How many employees are in the company?"
+"What are my recent GitHub repositories?"
+"List all Python files in this directory"
+```
+
+### 🔌 Multiple Data Sources via MCP
+- **PostgreSQL** - Query your Adventureworks database
+- **GitHub** - Access repos, issues, code
+- **Filesystem** - Read and search local files
+
+### 🧠 AI-Powered
+- Uses OpenAI GPT-4 (your API key)
+- Automatically chooses the right tool
+- Provides natural language responses
+
+### 🌐 Web-Based UI
+- Clean chat interface (Gradio)
+- Works in any browser
+- No installation required for end users
+
+## 🏗️ Architecture
+
+```
+Browser → Python App → AI Agent → MCP Servers → Data Sources
+                                   ├─ PostgreSQL
+                                   ├─ GitHub API
+                                   └─ Filesystem
+```
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed explanation.
+
+## 📋 Requirements
+
+- **Python 3.11+** - Main application
+- **Node.js** - For MCP servers
+- **PostgreSQL** - Your database
+- **OpenAI API Key** - For AI responses
+- **GitHub Token** - For GitHub access (optional)
+
+## 🔧 Installation
+
+1. **Clone or download this repository**
+
+2. **Install Python dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Configure environment variables**
+   Edit `.env` file:
+   ```bash
+   OPENAI_API_KEY=your-key-here
+   GITHUB_TOKEN=your-token-here
+   DATABASE_URL=postgresql://user:pass@localhost:5431/db
+   ```
+
+4. **Start the application**
+   ```bash
+   ./start.sh
+   ```
+
+5. **Open in browser**
+   Navigate to: http://localhost:7860
+
+## 💬 Example Conversations
+
+### Database Queries
+```
+You: Connect to postgres server
+Agent: Connected! 6 tools are now available.
+
+You: List all tables
+Agent: Here are the tables:
+      1. employees
+      2. product_reviews
+
+You: Show me data from employees table
+Agent: [Displays employee data]
+```
+
+### GitHub Queries
+```
+You: What are my GitHub repositories?
+Agent: You have 15 repositories:
+      1. mcp-toolkit - AI agent application
+      2. python-scripts - Utility scripts
+      ...
+```
+
+### File System
+```
+You: List all Python files
+Agent: Found 5 Python files:
+      - run.py
+      - ui_client.py
+      - agent_service.py
+      ...
+```
+
+## 🔐 Security Notes
+
+- Keep your `.env` file private (contains API keys)
+- Don't commit `.env` to version control
+- MCP servers run as local processes with your permissions
+- Database access uses your credentials
+
+## 🆚 vs VS Code Copilot
+
+| Feature | MCP Toolkit | VS Code Copilot |
+|---------|-------------|-----------------|
+| Requires VS Code | ❌ No | ✅ Yes |
+| Interface | Web Browser | IDE |
+| Database Access | ✅ Yes | Limited |
+| Custom MCP Servers | ✅ Yes | Limited |
+| Deployment | Server | Desktop |
+| Your API Key | ✅ Yes | No |
+
+## 🐛 Troubleshooting
+
+**Application won't start:**
+- Check Python version: `/usr/local/bin/python3.11 --version`
+- Check Node.js: `node --version`
+- View logs: `tail -f /tmp/mcp_app.log`
+
+**Database connection fails:**
+- Verify PostgreSQL is running
+- Check `DATABASE_URL` in `.env`
+- Test connection: `psql $DATABASE_URL`
+
+**No AI responses:**
+- Verify `OPENAI_API_KEY` in `.env`
+- Check OpenAI account has credits
+- Check logs for API errors
+
+**Port 7860 in use:**
 ```bash
-# Copy environment template
-cp .env.example .env
-
-# Edit .env and add your credentials
-nano .env  # or use your preferred editor
+./stop.sh  # Kill any existing instances
+./start.sh # Start fresh
 ```
 
-**Required environment variables:**
-```bash
-# Choose LLM Provider (recommended: github for VS Code Copilot users)
-LLM_PROVIDER=github
+## 📚 Learn More
 
-# Option 1: VS Code Copilot / GitHub Models (FREE/INCLUDED)
-GITHUB_TOKEN=ghp_...
-GITHUB_MODELS_API_KEY=${GITHUB_TOKEN}
-LLM_MODEL=gpt-4o
+- **MCP Protocol**: https://modelcontextprotocol.io
+- **mcp-use Library**: https://github.com/sparfenyuk/mcp-use
+- **Gradio**: https://gradio.app
+- **LangChain**: https://langchain.com
 
-# Option 2: Standard OpenAI
-# LLM_PROVIDER=openai
-# OPENAI_API_KEY=sk-...
+## 🤝 Contributing
 
-# Option 3: Anthropic Claude
-# LLM_PROVIDER=anthropic
-# ANTHROPIC_API_KEY=sk-ant-...
+Feel free to:
+- Add new MCP servers
+- Improve the UI
+- Add new features
+- Report bugs
 
-# PostgreSQL Connection
-DATABASE_URL=postgresql://user:password@localhost:5432/mydb
-```
+## 📝 License
 
-**📖 New to GitHub Models?** See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for detailed setup instructions.
+[Your license here]
 
-### Run
-
-```bash
-# Launch the application
-python run.py
-```
-
-The web UI will open at [http://localhost:7860](http://localhost:7860)
-
-## Usage Examples
-
-### Example 1: Database Queries
-```
-User: "List all tables in my database"
-Agent: *Queries PostgreSQL and returns table list*
-```
-
-### Example 2: GitHub Operations
-```
-User: "Show me my repositories with the most stars"
-Agent: *Fetches repos from GitHub and sorts by stars*
-```
-
-### Example 3: Cross-Server Workflows
-```
-User: "Find all developers in my database and check their GitHub activity"
-Agent: *Queries database, then checks each developer's GitHub profile*
-```
-
-## Project Structure
-
-```
-mcp-toolkit/
-├── README.md                    # This file
-├── QUICKSTART.md               # 5-minute setup guide
-├── ARCHITECTURE.md             # Detailed architecture
-├── requirements.txt            # Python dependencies
-├── .env.example               # Environment template
-├── mcp_config.json            # MCP servers configuration
-│
-├── run.py                     # Main launcher
-├── agent_service.py           # AI Agent implementation
-├── ui_client.py              # Gradio web interface
-│
-├── utils/                     # Utility modules
-│   ├── mcp_manager.py        # MCP client wrapper
-│   └── prompts.py            # System prompts
-│
-└── examples/                  # Usage examples
-    ├── basic_query.py
-    ├── streaming_example.py
-    ├── multi_step_task.py
-    └── direct_tool_call.py
-```
-
-## Documentation
-
-- [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
-- [VS Code Copilot Setup](VSCODE_COPILOT_SETUP.md) - Use GitHub Models / Copilot as your LLM
-- [Architecture Guide](ARCHITECTURE.md) - Deep dive into the system
-- [Implementation Summary](IMPLEMENTATION_SUMMARY.md) - Technical overview
-
-## Available MCP Servers
-
-The toolkit connects to these MCP servers:
-
-1. **PostgreSQL** - Database operations
-   - Execute SQL queries
-   - Inspect schema
-   - Manage data
-
-2. **GitHub** - Repository management
-   - List repositories
-   - Create issues and PRs
-   - Search code
-
-3. **Filesystem** (optional) - File operations
-   - Read/write files
-   - Navigate directories
-   - Search files
-
-## Customization
-
-### Add New MCP Server
-
-Edit `mcp_config.json`:
-```json
-{
-  "mcpServers": {
-    "slack": {
-      "command": "npx",
-      "args": ["@modelcontextprotocol/server-slack"],
-      "env": {
-        "SLACK_TOKEN": "${SLACK_TOKEN}"
-      }
-    }
-  }
-}
-```
-
-### Change LLM Provider
-
-Simply change `LLM_PROVIDER` in `.env`:
-- `github` - VS Code Copilot / GitHub Models (recommended)
-- `openai` - Standard OpenAI API
-- `anthropic` - Anthropic Claude
-- `groq` - Ultra-fast inference
-
-No code changes needed! See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for details.
-
-### Customize Agent Behavior
-
-Edit `utils/prompts.py` to change how the agent behaves:
-- Add safety rules
-- Change tone/style
-- Add domain-specific instructions
-
-## Running Examples
-
-```bash
-# Basic query example
-python examples/basic_query.py
-
-# Streaming responses
-python examples/streaming_example.py
-
-# Multi-step workflow
-python examples/multi_step_task.py
-
-# Direct tool calls (no LLM)
-python examples/direct_tool_call.py
-```
-
-## Troubleshooting
-
-### MCP Server Connection Issues
-
-Test servers manually:
-```bash
-# Test Postgres server
-npx @modelcontextprotocol/server-postgres postgresql://localhost/mydb
-
-# Test GitHub server
-GITHUB_TOKEN=your_token npx @modelcontextprotocol/server-github
-```
-
-### Database Connection Errors
-
-```bash
-# Test database connection
-psql $DATABASE_URL
-
-# Check if PostgreSQL is running
-pg_isready
-```
-
-### Missing API Keys
-
-Ensure your `.env` file has at least one LLM provider configured:
-- `GITHUB_MODELS_API_KEY` or `GITHUB_TOKEN` (for GitHub Models)
-- `OPENAI_API_KEY` (for OpenAI)
-- `ANTHROPIC_API_KEY` (for Anthropic)
-
-See [VSCODE_COPILOT_SETUP.md](VSCODE_COPILOT_SETUP.md) for setup instructions.
-
-## Dependencies
-
-### Python Packages
-- `mcp-use` - MCP client and agent framework
-- `gradio` - Web UI framework
-- `langchain` - LLM orchestration
-- `psycopg2-binary` - PostgreSQL adapter
-- `python-dotenv` - Environment variable management
-
-### Node.js Packages (auto-installed)
-- `@modelcontextprotocol/server-postgres` - PostgreSQL MCP server
-- `@modelcontextprotocol/server-github` - GitHub MCP server
-- `@modelcontextprotocol/server-filesystem` - Filesystem MCP server
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Acknowledgments
+## 🎉 Credits
 
 Built with:
-- [mcp-use](https://github.com/modelcontextprotocol/mcp-use) - MCP framework
-- [Model Context Protocol](https://modelcontextprotocol.io) - MCP specification
+- [mcp-use](https://github.com/sparfenyuk/mcp-use) - MCP client library
 - [Gradio](https://gradio.app) - Web UI framework
-- [LangChain](https://python.langchain.com) - LLM framework
-
-## Support
-
-For issues and questions:
-- Open an issue on [GitHub](https://github.com/majidraza1228/mcp-toolkit/issues)
-- Check the documentation files in this repository
+- [LangChain](https://langchain.com) - AI agent framework
+- [Model Context Protocol](https://modelcontextprotocol.io) - Standard protocol
 
 ---
 
-**Ready to get started?**
-
-```bash
-python run.py
-```
-
-Happy building! 🚀
+**Happy Chatting with Your Data! 🚀**

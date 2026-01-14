@@ -1,522 +1,315 @@
-# Architecture Guide
+# MCP Toolkit Architecture Explained
 
-Complete architectural overview of the Python Full-Stack MCP Application.
+## 🎯 Overview
 
-## System Architecture
+Your MCP Toolkit is a **standalone Python application** that connects to various data sources through the Model Context Protocol (MCP). It does **NOT** require VS Code or VS Code Copilot to run.
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        USER INTERFACE LAYER                      │
-│  ┌────────────────────────────────────────────────────────┐     │
-│  │  Gradio Web UI (ui_client.py)                          │     │
-│  │  - Chat interface                                      │     │
-│  │  - Server status dashboard                             │     │
-│  │  - Example queries                                     │     │
-│  │  Port: 7860                                            │     │
-│  └─────────────────────┬──────────────────────────────────┘     │
-└────────────────────────┼────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      AI AGENT SERVICE LAYER                      │
-│  ┌────────────────────────────────────────────────────────┐     │
-│  │  AgentService (agent_service.py)                       │     │
-│  │  ┌──────────────────────────────────────────────┐     │     │
-│  │  │  MCPAgent (from mcp-use library)             │     │     │
-│  │  │  - Natural language processing               │     │     │
-│  │  │  - Multi-step reasoning                      │     │     │
-│  │  │  - Tool selection & execution                │     │     │
-│  │  │  - Conversation memory                       │     │     │
-│  │  └──────────────────┬───────────────────────────┘     │     │
-│  │                     │                                  │     │
-│  │                     ▼                                  │     │
-│  │  ┌──────────────────────────────────────────────┐     │     │
-│  │  │  LLM (LangChain)                             │     │     │
-│  │  │  - OpenAI GPT-4                              │     │     │
-│  │  │  - Anthropic Claude                          │     │     │
-│  │  │  - Groq / Local models                       │     │     │
-│  │  └──────────────────────────────────────────────┘     │     │
-│  └─────────────────────┬──────────────────────────────────┘     │
-└────────────────────────┼────────────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    MCP CLIENT MANAGER LAYER                      │
-│  ┌────────────────────────────────────────────────────────┐     │
-│  │  MCPManager (utils/mcp_manager.py)                     │     │
-│  │  ┌──────────────────────────────────────────────┐     │     │
-│  │  │  MCPClient (from mcp-use library)            │     │     │
-│  │  │  - Session management                        │     │     │
-│  │  │  - Connection pooling                        │     │     │
-│  │  │  - Tool discovery                            │     │     │
-│  │  │  - Resource access                           │     │     │
-│  │  └──────────┬────────────┬──────────────┬───────┘     │     │
-│  └─────────────┼────────────┼──────────────┼─────────────┘     │
-└────────────────┼────────────┼──────────────┼───────────────────┘
-                 │            │              │
-                 ▼            ▼              ▼
-┌────────────────────────────────────────────────────────────────┐
-│                    MCP SERVERS LAYER (Node.js)                 │
-│                                                                │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
-│  │  Postgres    │  │   GitHub     │  │   Filesystem     │    │
-│  │  MCP Server  │  │  MCP Server  │  │   MCP Server     │    │
-│  ├──────────────┤  ├──────────────┤  ├──────────────────┤    │
-│  │ Tools:       │  │ Tools:       │  │ Tools:           │    │
-│  │ - query      │  │ - list_repos │  │ - read_file      │    │
-│  │ - execute    │  │ - create_issue│ │ - write_file     │    │
-│  │ - schema     │  │ - get_user   │  │ - list_dir       │    │
-│  │              │  │ - search     │  │ - search         │    │
-│  │ Resources:   │  │              │  │                  │    │
-│  │ - tables     │  │ Resources:   │  │ Resources:       │    │
-│  │ - schemas    │  │ - profile    │  │ - file://        │    │
-│  └──────┬───────┘  └──────┬───────┘  └─────┬────────────┘    │
-│         │                 │                 │                 │
-└─────────┼─────────────────┼─────────────────┼─────────────────┘
-          │                 │                 │
-          ▼                 ▼                 ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     EXTERNAL SERVICES                            │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐      │
-│  │  PostgreSQL  │  │  GitHub API  │  │  Local Files     │      │
-│  │  Database    │  │  (REST API)  │  │  System          │      │
-│  └──────────────┘  └──────────────┘  └──────────────────┘      │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-## Communication Flow
-
-### 1. User Query Flow
+## 🏗️ Component Architecture
 
 ```
-User types query in Gradio UI
-         │
-         ▼
-UI Client (ui_client.py) receives input
-         │
-         ▼
-AgentService.stream(query) is called
-         │
-         ▼
-MCPAgent receives query + conversation history
-         │
-         ▼
-LLM processes query and decides which tools to use
-         │
-         ▼
-MCPClient routes tool calls to appropriate MCP servers
-         │
-         ▼
-MCP Server executes tool (queries DB, calls GitHub API, etc.)
-         │
-         ▼
-Result returns through the stack
-         │
-         ▼
-LLM formats response in natural language
-         │
-         ▼
-Streamed back to UI in real-time
-         │
-         ▼
-User sees response in chat interface
+┌─────────────────────────────────────────────────────────────┐
+│                    USER'S BROWSER                           │
+│              http://localhost:7860                          │
+│         (Gradio Web Interface - Chat UI)                    │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+                     │ HTTP Requests
+                     ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  PYTHON APPLICATION                         │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │         ui_client.py (Gradio UI)                     │  │
+│  │  - Handles chat messages                             │  │
+│  │  - Displays responses                                │  │
+│  └──────────────────┬───────────────────────────────────┘  │
+│                     │                                       │
+│                     ↓                                       │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │      agent_service.py (AI Agent)                     │  │
+│  │  - Uses MCPAgent from mcp-use                        │  │
+│  │  - Processes natural language queries                │  │
+│  │  - Routes to appropriate MCP servers                 │  │
+│  └──────────────────┬───────────────────────────────────┘  │
+│                     │                                       │
+│                     ↓                                       │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │    mcp_manager.py (MCP Client Manager)               │  │
+│  │  - Manages connections to MCP servers                │  │
+│  │  - Loads mcp_config.json                             │  │
+│  │  - Routes tool calls                                 │  │
+│  └──────────────────┬───────────────────────────────────┘  │
+└────────────────────┼────────────────────────────────────────┘
+                     │
+                     │ MCP Protocol (stdio/JSON-RPC)
+                     │
+        ┌────────────┼────────────┬─────────────┐
+        │            │            │             │
+        ↓            ↓            ↓             ↓
+┌───────────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐
+│  PostgreSQL   │ │  GitHub  │ │Filesystem│ │  LLM   │
+│  MCP Server   │ │MCP Server│ │MCP Server│ │Provider│
+├───────────────┤ ├──────────┤ ├──────────┤ ├────────┤
+│ Node.js       │ │ Node.js  │ │ Node.js  │ │OpenAI/ │
+│ Process       │ │ Process  │ │ Process  │ │Anthropic│
+│               │ │          │ │          │ │ API    │
+│ Connects to:  │ │Uses:     │ │Accesses: │ │        │
+│ Adventureworks│ │GitHub API│ │Local     │ │        │
+│ Database      │ │with your │ │Files     │ │        │
+│               │ │token     │ │          │ │        │
+└───────────────┘ └──────────┘ └──────────┘ └────────┘
 ```
 
-### 2. Direct Tool Call Flow (No LLM)
+## 🔌 Component Details
 
-```
-Python code calls MCPManager.call_tool()
-         │
-         ▼
-MCPClient.get_session(server).call_tool(name, args)
-         │
-         ▼
-MCP Server executes tool
-         │
-         ▼
-Raw result returned directly (no LLM processing)
-```
+### 1. **MCP Servers** (Node.js processes)
 
-## Component Responsibilities
+Each server is a separate Node.js process that:
+- Runs as a child process spawned by Python
+- Communicates via **stdio** (standard input/output)
+- Uses JSON-RPC protocol for requests/responses
+- Provides tools/resources to the agent
 
-### UI Layer (`ui_client.py`)
+**Your 3 MCP Servers:**
 
-**Responsibilities:**
-- Render web interface with Gradio
-- Handle user input/output
-- Display conversation history
-- Show server status
-- Manage UI state
-
-**Key Methods:**
-- `chat()`: Process user messages
-- `get_server_status()`: Display server info
-- `create_interface()`: Build Gradio UI
-
-### Agent Layer (`agent_service.py`)
-
-**Responsibilities:**
-- Initialize and manage MCPAgent
-- Configure LLM provider
-- Stream responses
-- Maintain conversation context
-- Handle errors and retries
-
-**Key Methods:**
-- `initialize()`: Set up agent and servers
-- `run()`: Execute query (blocking)
-- `stream()`: Execute query (streaming)
-- `cleanup()`: Close connections
-
-### MCP Manager (`utils/mcp_manager.py`)
-
-**Responsibilities:**
-- Manage MCP client lifecycle
-- Load and parse configuration
-- Substitute environment variables
-- Provide convenience methods
-- Cache server information
-
-**Key Methods:**
-- `initialize()`: Connect to all servers
-- `get_available_tools()`: List all tools
-- `call_tool()`: Direct tool execution
-- `get_server_status()`: Health check
-
-### MCP Servers (Node.js)
-
-**Responsibilities:**
-- Implement MCP protocol
-- Expose tools and resources
-- Handle authentication (OAuth, tokens)
-- Execute business logic
-- Return structured results
-
-**Protocol:**
-- JSON-RPC 2.0 over stdio/HTTP/WebSocket
-- Tool calls with typed parameters
-- Resource reads with URIs
-- Streaming support
-
-## Data Flow Examples
-
-### Example 1: Simple Database Query
-
-```
-User: "List all tables"
-    ↓
-Agent analyzes query → needs database access
-    ↓
-Selects postgres server → query tool
-    ↓
-Calls: query(sql="SELECT table_name FROM information_schema.tables")
-    ↓
-Postgres MCP executes SQL
-    ↓
-Returns: [{table_name: "users"}, {table_name: "orders"}, ...]
-    ↓
-LLM formats: "Your database has 3 tables: users, orders, products"
-    ↓
-User sees formatted response
-```
-
-### Example 2: Cross-Server Workflow
-
-```
-User: "Find developers in DB and check their GitHub repos"
-    ↓
-Agent plans multi-step workflow:
-    ↓
-Step 1: Query postgres for developers
-    query(sql="SELECT github_username FROM developers")
-    Returns: ["alice", "bob"]
-    ↓
-Step 2: For each developer, query GitHub
-    list_repos(owner="alice") → [repo1, repo2]
-    list_repos(owner="bob") → [repo3, repo4]
-    ↓
-Step 3: Aggregate and format results
-    ↓
-User sees: "Found 2 developers with 4 total repositories..."
-```
-
-## Configuration Management
-
-### Environment Variables (`.env`)
-
-```
-OPENAI_API_KEY     → Used by LangChain for LLM
-ANTHROPIC_API_KEY  → Alternative LLM provider
-GITHUB_TOKEN       → Passed to GitHub MCP server
-DATABASE_URL       → Passed to Postgres MCP server
-```
-
-### MCP Configuration (`mcp_config.json`)
-
+#### a) **PostgreSQL MCP Server**
 ```json
 {
-  "mcpServers": {
-    "server-name": {
-      "command": "npx",              // How to run server
-      "args": ["@scope/package"],    // Server package
-      "env": {                       // Environment for server
-        "API_KEY": "${API_KEY}"      // Substituted from .env
-      }
-    }
-  }
+  "command": "npx",
+  "args": ["@modelcontextprotocol/server-postgres", "${DATABASE_URL}"]
 }
 ```
+- **What it does**: Connects to your Adventureworks PostgreSQL database
+- **Tools provided**: 
+  - `query` - Execute SQL queries
+  - `employees_database_schema` - Get schema info
+  - `product_reviews_database_schema` - Get schema info
+- **Connection**: Uses `DATABASE_URL` from .env file
+- **No VS Code needed**: Runs independently
 
-### System Prompts (`utils/prompts.py`)
+#### b) **GitHub MCP Server**
+```json
+{
+  "command": "npx",
+  "args": ["@modelcontextprotocol/server-github"],
+  "env": {"GITHUB_TOKEN": "${GITHUB_TOKEN}"}
+}
+```
+- **What it does**: Connects to GitHub API
+- **Tools provided**:
+  - List repositories
+  - Create issues
+  - Search code
+  - etc.
+- **Connection**: Uses `GITHUB_TOKEN` from .env file
+- **No VS Code needed**: Direct GitHub API access
 
+#### c) **Filesystem MCP Server**
+```json
+{
+  "command": "npx",
+  "args": ["@modelcontextprotocol/server-filesystem", "."]
+}
+```
+- **What it does**: Provides file system access
+- **Tools provided**:
+  - Read files
+  - List directories
+  - Search files
+- **Scope**: Current directory (`.`)
+- **No VS Code needed**: Direct file system access
+
+### 2. **Python Application Layer**
+
+#### a) **mcp_manager.py** - MCP Client Manager
 ```python
-SYSTEM_PROMPT = """
-Instructions for the AI agent on how to behave,
-what to prioritize, safety guidelines, etc.
-"""
+from mcp_use import MCPClient
+
+# Loads mcp_config.json
+# Spawns Node.js MCP server processes
+# Manages tool calls and responses
 ```
 
-## Conversation Memory
+**How it works:**
+1. Reads `mcp_config.json`
+2. Substitutes environment variables from `.env`
+3. Spawns each MCP server as a subprocess
+4. Maintains stdio connections to each server
+5. Routes tool calls to appropriate servers
 
-```
-Conversation ID: "user-123-session-1"
-    ↓
-MCPAgent maintains history per conversation_id
-    ↓
-Messages stored: [
-  {role: "user", content: "List tables"},
-  {role: "assistant", content: "You have 3 tables..."},
-  {role: "user", content: "Query the users table"},
-  {role: "assistant", content: "Here are the users..."}
-]
-    ↓
-Each new query includes full history for context
-    ↓
-Allows follow-up questions: "How many are there?"
-(agent knows "there" refers to users)
-```
-
-## Error Handling
-
-```
-Error at any layer
-    ↓
-Try/except catches exception
-    ↓
-Agent Layer: Retry with backoff if transient
-    ↓
-If persistent: Format error message for user
-    ↓
-UI displays: "⚠️ Error: Connection to database failed"
-    ↓
-Logs full stack trace for debugging
-    ↓
-Cleanup: Close connections gracefully
-```
-
-## Security Considerations
-
-### 1. Database Access
-- Use connection pooling
-- Parameterized queries only (prevent SQL injection)
-- Read-only user for queries
-- Rate limiting on destructive operations
-
-### 2. GitHub API
-- Token stored in environment (not code)
-- Scoped tokens (minimal permissions)
-- Respect rate limits
-- OAuth flow for user-specific access
-
-### 3. LLM API Keys
-- Never logged or exposed
-- Stored in `.env` (gitignored)
-- Rotated regularly
-- Usage monitoring
-
-### 4. Agent Safety
-- Confirmation required for DELETE/UPDATE/DROP
-- SQL query preview before execution
-- Sandbox mode available (E2B integration)
-- Tool access control (disallow dangerous tools)
-
-## Scaling Considerations
-
-### Current Setup (Development)
-- Single Python process
-- Stdio connections to MCP servers
-- Local database
-- No load balancing
-
-### Production Recommendations
-
-**Horizontal Scaling:**
-```
-Load Balancer
-    ↓
-Multiple Agent Service instances
-    ↓
-Shared MCP servers (HTTP/WebSocket instead of stdio)
-    ↓
-Database connection pooling
-    ↓
-Redis for conversation state
-```
-
-**Optimizations:**
-- Cache tool metadata
-- Connection pooling for DB
-- Async everywhere
-- Rate limiting per user
-- Circuit breakers for external APIs
-
-## Observability
-
-### Logging
+#### b) **agent_service.py** - AI Agent Service
 ```python
-import logging
+from mcp_use import MCPAgent
+from langchain_openai import ChatOpenAI
 
-logger.info(f"Query: {query}")
-logger.debug(f"Tool call: {tool_name}({args})")
-logger.error(f"Error: {e}", exc_info=True)
+# Creates AI agent with LLM + MCP tools
+# Processes natural language queries
+# Returns responses
 ```
 
-### Metrics (Optional: Langfuse)
+**How it works:**
+1. Creates an LLM instance (OpenAI, Anthropic, etc.)
+2. Creates MCPAgent with available MCP tools
+3. Receives natural language query
+4. Agent decides which tools to call
+5. Executes tool calls via MCP servers
+6. Returns formatted response
+
+#### c) **ui_client.py** - Web Interface
 ```python
-from langfuse.callback import CallbackHandler
+import gradio as gr
 
-agent = MCPAgent(
-    llm=llm,
-    client=client,
-    callbacks=[CallbackHandler()]
-)
-
-# Automatically tracks:
-# - Query latency
-# - Token usage
-# - Tool call frequency
-# - Error rates
+# Creates web-based chat interface
+# Handles user messages
+# Displays agent responses
 ```
 
-### Health Checks
-```python
-status = service.get_server_status()
-# Returns: {server: {connected: bool, tools_count: int}}
+**How it works:**
+1. Creates Gradio chat interface
+2. Runs web server on port 7860
+3. Sends user messages to agent_service
+4. Receives streaming responses
+5. Updates chat UI in real-time
 
-if not all(s["connected"] for s in status.values()):
-    alert("MCP server down!")
+### 3. **External Services**
+
+#### a) **LLM Provider**
+- **OpenAI GPT-4** (in your case)
+- Uses `OPENAI_API_KEY` from .env
+- Provides natural language understanding
+- Makes decisions about which tools to use
+
+#### b) **Data Sources**
+- **PostgreSQL Database**: Adventureworks on localhost:5431
+- **GitHub API**: Via your personal access token
+- **Local Filesystem**: Current directory
+
+## 🔄 Request Flow Example
+
+**User asks: "Show me all tables in the database"**
+
+```
+1. Browser (http://localhost:7860)
+   └→ Sends message to Gradio UI
+
+2. ui_client.py (chat method)
+   └→ Calls agent_service.stream(query)
+
+3. agent_service.py
+   └→ Passes query to MCPAgent.stream()
+   
+4. MCPAgent (from mcp-use library)
+   ├→ Sends query to LLM (OpenAI GPT-4)
+   │  "Which tool should I use for this?"
+   │
+   └→ LLM decides: "Use connect_to_mcp_server tool"
+   
+5. MCPAgent calls tool
+   └→ mcp_manager routes to postgres MCP server
+   
+6. PostgreSQL MCP Server
+   ├→ Receives: query tool call
+   ├→ Executes: SELECT table_name FROM information_schema.tables
+   └→ Returns: List of tables
+   
+7. Response flows back:
+   PostgreSQL Server → mcp_manager → MCPAgent → agent_service → ui_client → Browser
+   
+8. User sees: "Here are the tables: employees, product_reviews..."
 ```
 
-## Extension Points
+## 🆚 VS Code Copilot vs Your Solution
 
-### Add New MCP Server
-1. Add to `mcp_config.json`
-2. Restart application
-3. Tools automatically available to agent
-
-### Add New LLM Provider
-1. Install provider package
-2. Update `agent_service._create_llm()`
-3. Set API key in `.env`
-
-### Customize Agent Behavior
-1. Edit `utils/prompts.py`
-2. Add safety rules, formatting preferences
-3. Restart agent service
-
-### Add Middleware
-```python
-async def logging_middleware(query, next):
-    print(f"Query: {query}")
-    result = await next()
-    print(f"Result: {result}")
-    return result
-
-agent = MCPAgent(
-    llm=llm,
-    client=client,
-    middleware=[logging_middleware]
-)
+### **Your Solution (Standalone)**
+```
+✅ Runs independently - no IDE needed
+✅ Web-based UI (Gradio)
+✅ Connects to multiple MCP servers
+✅ Uses mcp_config.json for configuration
+✅ Can be deployed on a server
+✅ Accessible from any browser
+✅ Your own LLM API key
 ```
 
-## Testing Strategy
-
-### Unit Tests
-```python
-# Test MCP manager
-async def test_mcp_manager_init():
-    manager = MCPManager("test_config.json")
-    await manager.initialize()
-    assert len(manager.get_available_servers()) > 0
-
-# Test agent service
-async def test_agent_query():
-    service = AgentService()
-    await service.initialize()
-    result = await service.run("List tables")
-    assert "tables" in result["response"].lower()
+### **VS Code Copilot + MCP (Different approach)**
+```
+- Runs inside VS Code editor
+- IDE-integrated experience
+- Uses VS Code's configuration
+- Requires VS Code to be open
+- GitHub Copilot subscription
+- Limited to coding tasks
 ```
 
-### Integration Tests
-```python
-# Test full stack
-async def test_end_to_end():
-    ui = UIClient()
-    await ui.initialize()
-    _, history = ui.chat("Show my repos", [])
-    assert len(history) == 1
-    assert history[0][1] is not None  # Has response
-```
+## 🔑 Key Differences
 
-### Manual Testing
+| Aspect | Your Solution | VS Code Copilot MCP |
+|--------|--------------|---------------------|
+| **Requires VS Code?** | ❌ No | ✅ Yes |
+| **Interface** | Web Browser | VS Code IDE |
+| **Configuration** | mcp_config.json | VS Code settings.json |
+| **MCP Servers** | Custom (postgres, github, filesystem) | VS Code managed |
+| **LLM** | Your API key (OpenAI/Anthropic) | GitHub Copilot |
+| **Use Case** | General Q&A, Data queries | Code assistance |
+| **Deployment** | Can run on server | Desktop only |
+| **Access** | Any browser | VS Code editor |
+
+## 💡 Your .env File Configuration
+
 ```bash
-# Test MCP servers independently
-npx @modelcontextprotocol/server-postgres $DATABASE_URL
+# LLM Provider
+OPENAI_API_KEY=sk-proj-...   # ← Powers the AI responses
 
-# Test agent without UI
-python agent_service.py
+# Data Sources
+GITHUB_TOKEN=ghp_...          # ← For GitHub MCP server
+DATABASE_URL=postgresql://... # ← For PostgreSQL MCP server
 
-# Test full application
-python run.py
+# These connect to MCP servers, NOT to VS Code
 ```
 
-## Deployment Architecture
+## 🚀 Startup Process
 
-### Docker Compose
-```yaml
-services:
-  agent:
-    build: .
-    environment:
-      - DATABASE_URL=postgresql://db:5432/mydb
-    depends_on:
-      - db
+When you run `./start.sh`:
 
-  db:
-    image: postgres:15
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
-  ui:
-    build: .
-    command: python ui_client.py
-    ports:
-      - "7860:7860"
-    depends_on:
-      - agent
+```bash
+1. Python 3.11 starts run.py
+   ↓
+2. Loads .env variables
+   ↓
+3. mcp_manager.initialize()
+   ├─→ Reads mcp_config.json
+   ├─→ Spawns: npx @modelcontextprotocol/server-postgres
+   ├─→ Spawns: npx @modelcontextprotocol/server-github  
+   └─→ Spawns: npx @modelcontextprotocol/server-filesystem
+   ↓
+4. agent_service.initialize()
+   ├─→ Creates OpenAI LLM client
+   └─→ Creates MCPAgent with MCP tools
+   ↓
+5. ui_client launches Gradio
+   └─→ Web server starts on port 7860
+   ↓
+6. Open http://localhost:7860 in ANY browser
+   (Chrome, Firefox, Safari, etc.)
 ```
 
-### Cloud Deployment
-- **AWS**: ECS + RDS + ALB
-- **GCP**: Cloud Run + Cloud SQL
-- **Azure**: Container Instances + Postgres
-- **Fly.io**: Simple deployment with Postgres addon
+## 🎯 Summary
 
----
+**Your MCP Toolkit is:**
+- ✅ **Standalone Python application**
+- ✅ **Completely independent** from VS Code
+- ✅ **Browser-based** web interface
+- ✅ **Uses MCP protocol** to connect to data sources
+- ✅ **Your own LLM** (OpenAI with your API key)
 
-This architecture enables:
-- **Modularity**: Swap components easily
-- **Scalability**: Add servers/agents as needed
-- **Flexibility**: Multiple LLMs, UIs, servers
-- **Maintainability**: Clear separation of concerns
-- **Extensibility**: Easy to add new capabilities
+**You do NOT need:**
+- ❌ VS Code installed
+- ❌ VS Code Copilot subscription
+- ❌ Any IDE at all
+
+**You just need:**
+- ✅ Python 3.11
+- ✅ Node.js (for MCP servers)
+- ✅ A web browser
+- ✅ Your API keys (.env file)
+
+The only connection to "VS Code Copilot" is that you **can** configure the LLM provider to use GitHub Models (which Copilot also uses), but that's just an alternative LLM provider - not required at all!

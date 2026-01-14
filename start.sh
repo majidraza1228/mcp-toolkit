@@ -1,42 +1,39 @@
 #!/bin/bash
 
-# MCP Toolkit Launcher
-# Automatically uses the correct Python version (3.11+)
+echo "Starting MCP Toolkit..."
 
-echo "🚀 Starting MCP Toolkit..."
-echo ""
+# Use Python 3.11
+PYTHON=/usr/local/bin/python3.11
 
-# Find Python 3.11+
-PYTHON=""
-
-# Check common locations for Python 3.11+
-for py in python3.11 python3.12 python3.13 /usr/local/opt/python@3.11/libexec/bin/python3 /opt/homebrew/bin/python3.11; do
-    if command -v "$py" &> /dev/null; then
-        VERSION=$("$py" --version 2>&1 | grep -oE '[0-9]+\.[0-9]+' | head -1)
-        MAJOR=$(echo "$VERSION" | cut -d. -f1)
-        MINOR=$(echo "$VERSION" | cut -d. -f2)
-
-        if [ "$MAJOR" -eq 3 ] && [ "$MINOR" -ge 11 ]; then
-            PYTHON="$py"
-            echo "✓ Found Python $VERSION at: $py"
-            break
-        fi
-    fi
-done
-
-if [ -z "$PYTHON" ]; then
-    echo "❌ Error: Python 3.11+ not found!"
-    echo ""
-    echo "Please install Python 3.11 or higher:"
-    echo "  - macOS: brew install python@3.11"
-    echo "  - Ubuntu: sudo apt install python3.11"
-    echo "  - Windows: Download from python.org"
+if [ ! -f "$PYTHON" ]; then
+    echo "❌ Error: Python 3.11 not found at $PYTHON"
+    echo "   Please install Python 3.11 or update the PYTHON variable in this script"
     exit 1
 fi
 
-# Run the application
-echo ""
-echo "▶️  Launching application..."
-echo ""
-"$PYTHON" run.py
+# Start the application
+$PYTHON run.py > /tmp/mcp_app.log 2>&1 &
+APP_PID=$!
 
+echo "Waiting for server to start..."
+
+# Wait up to 20 seconds for the server to start
+for i in {1..20}; do
+    sleep 1
+    if lsof -i :7860 > /dev/null 2>&1; then
+        echo ""
+        echo "✅ Server started successfully!"
+        echo ""
+        echo "🌐 Open in your browser: http://localhost:7860"
+        echo ""
+        echo "📋 Logs: tail -f /tmp/mcp_app.log"
+        echo "⏹️  Stop: ./stop.sh"
+        exit 0
+    fi
+    echo -n "."
+done
+
+echo ""
+echo "❌ Server did not start within 20 seconds"
+echo "Check the logs: tail -20 /tmp/mcp_app.log"
+exit 1
