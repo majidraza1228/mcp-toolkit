@@ -29,6 +29,9 @@ This is a **browser-based AI chat application** that can:
 
 - **[QUICK_START.md](QUICK_START.md)** - Get started in 5 minutes
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Understand how it works
+- **[LEARNING_SYSTEM.md](LEARNING_SYSTEM.md)** - Self-learning capabilities explained
+- **[AI_AGENT_EXPLAINED.md](AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
+- **[SELF_LEARNING_GUIDE.md](SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
 - **[mcp_config.json](mcp_config.json)** - Configure MCP servers
 - **[.env](.env)** - Set your API keys and credentials
 
@@ -43,10 +46,20 @@ Ask questions in plain English:
 "List all Python files in this directory"
 ```
 
+### 🧠 Self-Learning System (NEW!)
+- **Query Caching**: 20-30x faster responses for repeated queries
+- **User Feedback**: 👍/👎 buttons to rate responses
+- **Smart Retrieval**: Only serves high-quality cached responses
+- **Learning Dashboard**: Track cache hits and feedback metrics
+- **Persistent Memory**: Learns across sessions
+
+![AI Agent Interface](docs/screenshots/ai-agent-interface.png)
+
 ### 🔌 Multiple Data Sources via MCP
 - **PostgreSQL** - Query your Adventureworks database
 - **GitHub** - Access repos, issues, code
 - **Filesystem** - Read and search local files
+- **Server Selector** - Choose which MCP server to use
 
 ### 🧠 AI-Powered
 - Uses OpenAI GPT-4 (your API key)
