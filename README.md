@@ -52,8 +52,10 @@ Ask questions in plain English:
 - **Smart Retrieval**: Only serves high-quality cached responses
 - **Learning Dashboard**: Track cache hits and feedback metrics
 - **Persistent Memory**: Learns across sessions
+- **Professional Dark Theme**: Modern, eye-friendly interface
+- **MCP Server Selector**: Choose which server to use (postgres/github/filesystem/all)
 
-![AI Agent Interface](docs/screenshots/ai-agent-interface.png)
+> See the interface in action at http://localhost:7860 after running `./start.sh`
 
 ### 🔌 Multiple Data Sources via MCP
 - **PostgreSQL** - Query your Adventureworks database

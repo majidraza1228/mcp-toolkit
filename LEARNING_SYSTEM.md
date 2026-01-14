@@ -4,8 +4,7 @@
 
 The MCP Toolkit AI Agent implements a **self-learning system** that improves over time based on user feedback and query patterns. This document explains how the learning mechanisms work and how the agent becomes smarter with use.
 
-![AI Agent Interface](docs/screenshots/ai-agent-interface.png)
-*Professional dark theme interface with MCP server selector and learning features*
+> **Interface Preview:** The application features a professional dark theme with MCP server selector, thumbs up/down feedback buttons, and real-time learning statistics dashboard. To see the interface, start the application with `./start.sh` and visit http://localhost:7860
 
 ## Table of Contents
 

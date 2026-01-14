@@ -2,9 +2,9 @@
 
 ## AI Agent Interface
 
-![AI Agent Interface](ai-agent-interface.png)
+> **Note:** To add a screenshot here, capture an image of the running application and save it as `ai-agent-interface.png` in this directory.
 
-The screenshot above shows the complete AI Agent interface with:
+The interface shows the complete AI Agent with:
 
 1. **Professional Dark Theme** - Modern, eye-friendly dark color scheme
 2. **MCP Server Selector** - Dropdown to choose which server to use (postgres, github, filesystem, or all)
