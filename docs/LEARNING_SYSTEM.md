@@ -73,26 +73,66 @@ def _get_query_hash(query: str) -> str:
 - Query: `"List all tables in the database"`
 - Hash: `a3f2e8c9d1b4f7e6a5c8d9e1f2a3b4c5`
 
-#### Step 2: Cache Storage
-The query and response are stored in `memory_cache.json`:
+#### Step 2: Cache Storage (v2.0 Format)
+The query and response are stored in `memory_cache.json` with rich metadata:
 
 ```json
 {
+  "version": "2.0",
+  "metadata": {
+    "created_at": "2026-01-13T22:28:17",
+    "last_updated": "2026-01-13T22:45:12",
+    "schema_version": "2.0"
+  },
   "queries": {
     "a3f2e8c9d1b4f7e6a5c8d9e1f2a3b4c5": {
       "query": "List all tables in the database",
+      "normalized_query": "list all tables in the database",
       "response": "Here are all the tables:\n1. users\n2. employees\n3. departments",
-      "tools_used": ["postgres"],
-      "timestamp": "2026-01-13T22:30:45",
-      "use_count": 1,
-      "positive_feedback": 0,
-      "negative_feedback": 0
+      "context": {
+        "database": "employees",
+        "schema": "public",
+        "mcp_server": "postgres"
+      },
+      "tools_used": ["postgres.query"],
+      "tokens": {
+        "input": 45,
+        "output": 320
+      },
+      "timestamps": {
+        "created": "2026-01-13T22:30:45",
+        "last_used": "2026-01-13T22:45:12"
+      },
+      "usage": {
+        "count": 5,
+        "sessions": ["session_abc123"]
+      },
+      "feedback": {
+        "positive": 3,
+        "negative": 0,
+        "score": 1.0
+      },
+      "tags": ["tables", "list", "database"],
+      "related_queries": []
     }
   },
+  "categories": {
+    "database_queries": ["a3f2e8c9d1b4f7e6a5c8d9e1f2a3b4c5"],
+    "schema_operations": []
+  },
+  "feedback_log": [
+    {
+      "query_hash": "a3f2e8c9d1b4f7e6a5c8d9e1f2a3b4c5",
+      "query": "List all tables in the database",
+      "rating": "up",
+      "timestamp": "2026-01-13T22:30:50"
+    }
+  ],
   "stats": {
     "total_queries": 1,
     "cache_hits": 0,
-    "total_feedback": 0
+    "positive_feedback": 3,
+    "negative_feedback": 0
   }
 }
 ```
@@ -736,6 +776,138 @@ Average Response Time: 0.8 seconds (down from 2.3 seconds)
 
 ---
 
+## Cache Format v2.0 Schema
+
+### Overview
+
+The v2.0 cache format introduces enhanced metadata, categorization, and analytics capabilities. The system automatically migrates v1.0 caches to v2.0 on first load.
+
+### Schema Structure
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `version` | string | Schema version ("2.0") |
+| `metadata` | object | Cache metadata with timestamps |
+| `queries` | object | Hash-indexed query entries |
+| `categories` | object | Query categorization by type |
+| `feedback_log` | array | Chronological feedback history |
+| `stats` | object | Global statistics |
+
+### Query Entry Fields (v2.0)
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `query` | string | Original user query |
+| `normalized_query` | string | Lowercase, trimmed query for matching |
+| `response` | string | Agent's response text |
+| `context` | object | Database, schema, MCP server context |
+| `tools_used` | array | List of MCP tools used |
+| `tokens` | object | Input/output token counts |
+| `timestamps` | object | Created and last_used timestamps |
+| `usage` | object | Usage count and session tracking |
+| `feedback` | object | Positive, negative counts and score |
+| `tags` | array | Auto-generated or custom tags |
+| `related_queries` | array | Hashes of similar queries |
+
+### Categories
+
+Queries are automatically categorized:
+
+| Category | Trigger Keywords |
+|----------|------------------|
+| `database_queries` | select, list, show, get, find |
+| `data_insertion` | insert, add, create |
+| `data_modification` | update, modify, change |
+| `data_deletion` | delete, remove, drop |
+| `schema_operations` | schema, table, column |
+| `general` | (default) |
+
+### Feedback Score Calculation
+
+```python
+score = (positive - negative) / (positive + negative)
+# Range: -1.0 to 1.0
+# -1.0 = all negative feedback
+#  0.0 = neutral (equal positive/negative)
+#  1.0 = all positive feedback
+```
+
+### Auto-Generated Tags
+
+Tags are automatically extracted from queries based on keywords:
+- SQL keywords: `select`, `insert`, `update`, `delete`, `create`, `drop`
+- Database objects: `table`, `tables`, `database`, `schema`, `index`, `view`
+- Common entities: `employees`, `users`, `products`, `orders`, `customers`
+- Actions: `list`, `show`, `get`, `find`, `count`, `sum`, `avg`
+
+### Migration from v1.0 to v2.0
+
+When loading a v1.0 cache, the system automatically:
+1. Detects missing `version` field
+2. Creates v2.0 structure with metadata
+3. Migrates each query to new format
+4. Auto-generates tags from query text
+5. Detects and assigns categories
+6. Calculates feedback scores
+7. Saves migrated cache to disk
+
+```python
+# Migration is automatic on first load
+memory = SimpleMemory()  # Auto-migrates if needed
+# Output: "📦 Migrating cache from v1.0 to v2.0..."
+# Output: "✓ Migration complete!"
+```
+
+### New v2.0 API Methods
+
+#### Get Queries by Category
+```python
+db_queries = memory.get_queries_by_category("database_queries")
+# Returns list of all queries in that category
+```
+
+#### Add Related Queries
+```python
+memory.add_related_query("list employees", "show all employees")
+# Links similar queries for potential future fuzzy matching
+```
+
+#### Update Context
+```python
+memory.update_context("list employees", {
+    "database": "hr_db",
+    "schema": "public",
+    "mcp_server": "postgres"
+})
+```
+
+### Enhanced Statistics (v2.0)
+
+```python
+stats = memory.get_stats()
+# Returns:
+{
+    "cached_queries": 25,
+    "total_queries": 100,
+    "cache_hits": 45,
+    "cache_hit_rate": 45.0,
+    "positive_feedback": 32,
+    "negative_feedback": 8,
+    "version": "2.0",
+    "categories": {
+        "database_queries": 15,
+        "schema_operations": 5,
+        "general": 5
+    },
+    "top_queries": [
+        {"query": "list employees", "count": 10},
+        {"query": "show tables", "count": 8}
+    ]
+}
+```
+
+---
+
 ## Advanced Features
 
 ### 1. Query Similarity Detection
@@ -877,6 +1049,6 @@ The MCP Toolkit AI Agent implements a sophisticated yet simple learning system t
 
 ---
 
-**Last Updated:** 2026-01-13
-**Version:** 1.0
+**Last Updated:** 2026-01-14
+**Version:** 2.0
 **Author:** MCP Toolkit Team
