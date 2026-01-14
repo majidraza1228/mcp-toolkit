@@ -18,6 +18,7 @@ except ImportError:
     AZURE_AVAILABLE = False
 
 from utils import MCPManager, get_system_prompt
+from utils.simple_memory import SimpleMemory
 
 # Load environment variables
 load_dotenv()
@@ -50,6 +51,9 @@ class AgentService:
         self.agent: Optional[MCPAgent] = None
         self._initialized = False
 
+        # Initialize memory system for self-learning
+        self.memory = SimpleMemory()
+
     async def initialize(self) -> None:
         """Initialize the MCP manager and agent."""
         if self._initialized:
@@ -62,11 +66,13 @@ class AgentService:
         llm = self._create_llm()
 
         # Create agent with MCP client
+        # Set higher recursion limit to prevent getting stuck in reasoning loops
         self.agent = MCPAgent(
             llm=llm,
             client=self.mcp_manager.client,
             use_server_manager=self.use_server_manager,
             system_prompt=get_system_prompt(include_safety=True),
+            max_steps=30,  # Increase from default 5 to 30
         )
 
         self._initialized = True
@@ -152,13 +158,14 @@ class AgentService:
         }
 
     async def stream(
-        self, query: str, conversation_id: Optional[str] = None
+        self, query: str, conversation_id: Optional[str] = None, selected_server: str = "all"
     ) -> AsyncIterator[Dict[str, Any]]:
         """Stream agent responses in real-time.
 
         Args:
             query: User's natural language query
             conversation_id: Optional conversation ID for memory
+            selected_server: MCP server to use ('all', 'postgres', 'github', 'filesystem')
 
         Yields:
             Response chunks with incremental updates
@@ -166,12 +173,55 @@ class AgentService:
         if not self._initialized:
             raise RuntimeError("AgentService not initialized. Call initialize() first.")
 
-        print(f"\n🤔 Processing (streaming): {query}")
+        # Modify query based on selected server
+        if selected_server and selected_server != "all":
+            query_with_context = f"[Use only {selected_server} MCP server] {query}"
+        else:
+            query_with_context = query
 
-        # MCPAgent.stream() doesn't accept conversation_id parameter
-        # Just pass the query
-        async for chunk in self.agent.stream(query):
-            yield chunk
+        # Check cache first for similar queries (use original query for cache key)
+        cached = self.memory.get_cached_response(query)
+        if cached:
+            # Return cached response immediately
+            yield cached["response"]
+            return
+
+        print(f"\n🤔 Processing (streaming): {query}")
+        if selected_server != "all":
+            print(f"   Using server: {selected_server}")
+
+        # Collect response for caching
+        full_response = ""
+
+        try:
+            # MCPAgent.stream() doesn't accept conversation_id parameter
+            # Pass the query with server context if specified
+            async for chunk in self.agent.stream(query_with_context):
+                if isinstance(chunk, str):
+                    full_response = chunk
+                yield chunk
+
+            # Save to cache if we got a response
+            if full_response:
+                self.memory.save_query_response(query, full_response)
+
+        except Exception as e:
+            error_message = str(e)
+
+            # Handle recursion limit errors specifically
+            if "recursion" in error_message.lower() or "GRAPH_RECURSION_LIMIT" in error_message:
+                yield "⚠️ The agent encountered a complex query that required too many reasoning steps. This usually happens when:\n\n"
+                yield "1. The query is ambiguous or too broad\n"
+                yield "2. The required tools are not available\n"
+                yield "3. The agent is trying multiple approaches\n\n"
+                yield "💡 Try:\n"
+                yield "- Being more specific in your query\n"
+                yield "- Breaking complex requests into smaller steps\n"
+                yield "- Checking that the required MCP servers are connected\n\n"
+                yield f"Technical details: {error_message}"
+            else:
+                # Re-raise other errors
+                raise
 
     async def get_conversation_history(
         self, conversation_id: str
@@ -203,6 +253,23 @@ class AgentService:
             return {}
 
         return asyncio.run(self.mcp_manager.get_available_tools())
+
+    def record_feedback(self, query: str, rating: str):
+        """Record user feedback for a query.
+
+        Args:
+            query: The user's query
+            rating: 'up' or 'down'
+        """
+        self.memory.record_feedback(query, rating)
+
+    def get_memory_stats(self) -> Dict[str, Any]:
+        """Get memory and learning statistics.
+
+        Returns:
+            Dictionary with memory stats
+        """
+        return self.memory.get_stats()
 
     def get_server_status(self) -> Dict[str, Dict[str, Any]]:
         """Get status of all connected servers.

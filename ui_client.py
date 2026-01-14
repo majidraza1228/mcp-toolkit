@@ -21,6 +21,7 @@ class UIClient:
         self.service = AgentService()
         self.conversation_id = "default"
         self._loop = None
+        self.last_query = ""  # Track last query for feedback
 
     async def initialize(self):
         """Initialize the agent service."""
@@ -38,13 +39,14 @@ class UIClient:
         return self._loop
 
     def chat(
-        self, message: str, history: List
+        self, message: str, history: List, selected_server: str = "all"
     ) -> Tuple[str, List]:
         """Process a chat message.
 
         Args:
             message: User's message
             history: Chat history (list of message dicts)
+            selected_server: MCP server to use ('all', 'postgres', 'github', 'filesystem')
 
         Returns:
             Tuple of (empty string to clear input, updated history)
@@ -59,6 +61,9 @@ class UIClient:
         # Add user message to history in Gradio 6.x format
         history.append({"role": "user", "content": message})
 
+        # Track query for feedback
+        self.last_query = message
+
         # Run agent query
         loop = self._get_event_loop()
         response_text = ""
@@ -68,7 +73,7 @@ class UIClient:
             async def collect_response():
                 nonlocal response_text
                 async for chunk in self.service.stream(
-                    message, conversation_id=self.conversation_id
+                    message, conversation_id=self.conversation_id, selected_server=selected_server
                 ):
                     # Handle string chunks (final response)
                     if isinstance(chunk, str):
@@ -104,6 +109,22 @@ class UIClient:
 
         return "", history
 
+    def handle_feedback(self, rating: str) -> str:
+        """Handle user feedback.
+
+        Args:
+            rating: 'up' or 'down'
+
+        Returns:
+            Confirmation message
+        """
+        if not self.last_query:
+            return "⚠️ No query to rate"
+
+        self.service.record_feedback(self.last_query, rating)
+        emoji = "👍" if rating == "up" else "👎"
+        return f"{emoji} Thanks for your feedback!"
+
     def get_server_status(self) -> str:
         """Get formatted server status.
 
@@ -114,6 +135,9 @@ class UIClient:
 
         if not status:
             return "⚠️ No servers connected. Please check your configuration."
+
+        # Add memory stats
+        memory_stats = self.service.get_memory_stats()
 
         lines = ["### 🔌 Connected Servers\n"]
         for server, info in status.items():
@@ -127,6 +151,13 @@ class UIClient:
             else:
                 lines.append(f"**{server}** ✗ (disconnected)")
                 lines.append("")
+
+        # Add memory/learning stats
+        lines.append("\n### 🧠 Learning Stats\n")
+        lines.append(f"**Cached Queries:** {memory_stats.get('cached_queries', 0)}")
+        lines.append(f"**Cache Hit Rate:** {memory_stats.get('cache_hit_rate', 0)}%")
+        lines.append(f"**Positive Feedback:** {memory_stats.get('positive_feedback', 0)}")
+        lines.append(f"**Negative Feedback:** {memory_stats.get('negative_feedback', 0)}")
 
         return "\n".join(lines)
 
@@ -147,27 +178,31 @@ class UIClient:
         Returns:
             Tuple of (Gradio Blocks interface, launch parameters)
         """
-        # Custom CSS for better styling
+        # Custom CSS for professional dark theme
         custom_css = """
         .header {
             text-align: center;
             padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
             border-radius: 10px;
             margin-bottom: 20px;
+            border: 1px solid #2d3748;
         }
         .server-status {
             padding: 15px;
-            background: #f8f9fa;
+            background: #1e1e1e;
             border-radius: 8px;
             margin: 10px 0;
+            border: 1px solid #2d3748;
+            color: #e0e0e0;
         }
         .examples-box {
             padding: 10px;
-            background: #e8f4f8;
+            background: #1e1e1e;
             border-radius: 8px;
             margin: 10px 0;
+            border: 1px solid #2d3748;
         }
         """
 
@@ -194,6 +229,15 @@ class UIClient:
                     )
 
                     with gr.Row():
+                        server_selector = gr.Dropdown(
+                            label="MCP Server",
+                            choices=["all", "postgres", "github", "filesystem"],
+                            value="all",
+                            scale=1,
+                            info="Select which MCP server to use"
+                        )
+
+                    with gr.Row():
                         msg_input = gr.Textbox(
                             label="Message",
                             placeholder="Ask me anything about your database or GitHub...",
@@ -204,11 +248,20 @@ class UIClient:
 
                     with gr.Row():
                         clear_btn = gr.Button("Clear Conversation", size="sm")
+                        thumbs_up_btn = gr.Button("👍", size="sm", scale=0)
+                        thumbs_down_btn = gr.Button("👎", size="sm", scale=0)
+                        feedback_msg = gr.Textbox(
+                            label="Feedback",
+                            interactive=False,
+                            show_label=False,
+                            scale=1,
+                        )
+
+                    with gr.Row():
                         status_msg = gr.Textbox(
                             label="Status",
                             interactive=False,
                             show_label=False,
-                            scale=2,
                         )
 
                     # Example queries
@@ -268,19 +321,19 @@ class UIClient:
                         )
 
             # Event handlers
-            def submit_message(message, history):
-                return self.chat(message, history)
+            def submit_message(message, history, server):
+                return self.chat(message, history, server)
 
             # Send button and Enter key
             send_btn.click(
                 fn=submit_message,
-                inputs=[msg_input, chatbot],
+                inputs=[msg_input, chatbot, server_selector],
                 outputs=[msg_input, chatbot],
             )
 
             msg_input.submit(
                 fn=submit_message,
-                inputs=[msg_input, chatbot],
+                inputs=[msg_input, chatbot, server_selector],
                 outputs=[msg_input, chatbot],
             )
 
@@ -296,6 +349,17 @@ class UIClient:
                 outputs=server_status,
             )
 
+            # Feedback buttons
+            thumbs_up_btn.click(
+                fn=lambda: self.handle_feedback("up"),
+                outputs=feedback_msg,
+            )
+
+            thumbs_down_btn.click(
+                fn=lambda: self.handle_feedback("down"),
+                outputs=feedback_msg,
+            )
+
             # Startup message
             interface.load(
                 lambda: "✓ Agent service ready! Start chatting below.",
@@ -303,8 +367,40 @@ class UIClient:
             )
 
         # Return interface and launch parameters for Gradio 6.0
+        # Professional dark theme configuration
+        dark_theme = gr.themes.Base(
+            primary_hue="slate",
+            secondary_hue="blue",
+            neutral_hue="slate",
+        ).set(
+            body_background_fill="#0f0f0f",
+            body_background_fill_dark="#0f0f0f",
+            background_fill_primary="#1e1e1e",
+            background_fill_primary_dark="#1e1e1e",
+            background_fill_secondary="#2d3748",
+            background_fill_secondary_dark="#2d3748",
+            block_background_fill="#1e1e1e",
+            block_background_fill_dark="#1e1e1e",
+            block_border_color="#2d3748",
+            block_border_color_dark="#2d3748",
+            input_background_fill="#1e1e1e",
+            input_background_fill_dark="#1e1e1e",
+            input_border_color="#2d3748",
+            input_border_color_dark="#2d3748",
+            button_primary_background_fill="#3b82f6",
+            button_primary_background_fill_dark="#3b82f6",
+            button_primary_text_color="#ffffff",
+            button_primary_text_color_dark="#ffffff",
+            block_title_text_color="#e0e0e0",
+            block_title_text_color_dark="#e0e0e0",
+            block_label_text_color="#a0aec0",
+            block_label_text_color_dark="#a0aec0",
+            body_text_color="#e0e0e0",
+            body_text_color_dark="#e0e0e0",
+        )
+
         launch_params = {
-            "theme": gr.themes.Soft(),
+            "theme": dark_theme,
             "css": custom_css,
         }
         return interface, launch_params
