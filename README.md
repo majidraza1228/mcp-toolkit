@@ -39,17 +39,12 @@ This is a **browser-based AI chat application** that can:
 ### Advanced Topics
 - **[AI Agent Explained](docs/AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
 - **[Self-Learning Guide](docs/SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
-- **[Getting Started](docs/GETTING_STARTED.md)** - Detailed setup instructions
 - **[VS Code Copilot Setup](docs/VSCODE_COPILOT_SETUP.md)** - Optional VS Code integration
 - **[Python Version Guide](docs/PYTHON_VERSION_GUIDE.md)** - Python version management
 
 ### Configuration
 - **[mcp_config.json](mcp_config.json)** - Configure MCP servers
-- **[.env](.env)** - Set your API keys and credentials
-
-### Additional Resources
-- **[Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md)** - Technical implementation details
-- **[Screenshots Guide](docs/screenshots/HOW_TO_ADD_SCREENSHOT.md)** - How to add interface screenshots
+- **[.env.example](.env.example)** - Environment variables template
 
 ## ✨ Features
 
@@ -283,7 +278,7 @@ We welcome contributions! Feel free to:
 - Fix bugs
 - Improve documentation
 
-See [Implementation Summary](docs/IMPLEMENTATION_SUMMARY.md) for technical details.
+See [Architecture Overview](docs/ARCHITECTURE.md) for technical details.
 
 ## 📝 License
 
