@@ -2,7 +2,7 @@
   "version": "2.0",
   "metadata": {
     "created_at": "2026-01-13 22:28:17.118653",
-    "last_updated": "2026-01-17T14:38:56.956229",
+    "last_updated": "2026-01-17T18:49:27.913774",
     "schema_version": "2.0"
   },
   "queries": {
@@ -1052,6 +1052,600 @@
         "show"
       ],
       "related_queries": []
+    },
+    "a37f0ae950749014b2ee32248fd692f9": {
+      "query": "show me 1 repo",
+      "normalized_query": "show me 1 repo",
+      "response": "Here is one repository from the GitHub user [majidraza1228](https://github.com/majidraza1228):\n\n### [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n- **Description:** (No description provided)\n- **Created At:** December 25, 2025\n- **Last Updated:** January 17, 2026\n- **Default Branch:** main\n\nIf you need more information or assistance with anything else, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:13:31.133849",
+        "last_used": "2026-01-17T18:13:31.133849"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "5a745b796fc12aff6d9191a139b59668": {
+      "query": "show me all the repos",
+      "normalized_query": "show me all the repos",
+      "response": "I encountered an error while trying to retrieve the list of repositories. It seems that there is a missing library that is needed for this operation. To proceed, the 'fastembed' library needs to be installed. You can install it by running the following command:\n\n```bash\npip install mcp-use[search]\n```\n\nOnce the library is installed, we can retry the operation to show you all the repositories.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:48:37.404851",
+        "last_used": "2026-01-17T18:48:37.404851"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "83a0441181c06d17e62ca9a260606a7c": {
+      "query": "i need for this https://github.com/majidraza1228",
+      "normalized_query": "i need for this https://github.com/majidraza1228",
+      "response": "Here are some repositories from user [majidraza1228](https://github.com/majidraza1228):\n\n1. **[langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)**\n   - Created at: 2025-12-25\n   - Last pushed at: 2026-01-17\n\n2. **[SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)**\n   - Created at: 2019-11-02\n   - Last pushed at: 2023-11-03\n\n3. **[MasteringPython](https://github.com/majidraza1228/MasteringPython)**\n   - Created at: 2021-07-10\n   - Last pushed at: 2023-11-26\n\n4. **[MasteringGo](https://github.com/majidraza1228/MasteringGo)**\n   - Created at: 2022-09-26\n   - Last pushed at: 2022-09-26\n\n5. **[SyedDevtest](https://github.com/majidraza1228/SyedDevtest)**\n   - Description: Testing Development\n   - Created at: 2018-05-18\n   - Last pushed at: 2018-05-18\n\nThese are some of the repositories owned by [majidraza1228](https://github.com/majidraza1228).",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:22:52.985040",
+        "last_used": "2026-01-17T18:22:52.985040"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "045fee9386e0909119435fd6061701a9": {
+      "query": "can you create new branch  name \"test_mcp\" on this repo angchain-langgraph-demo",
+      "normalized_query": "can you create new branch  name \"test_mcp\" on this repo angchain-langgraph-demo",
+      "response": "I'm unable to create a new branch on the repository \"langchain-langgraph-demo\" for user \"majidraza1228\" due to authentication requirements. Please ensure that the necessary authentication credentials are provided to perform this action.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:23:30.207040",
+        "last_used": "2026-01-17T18:23:30.207040"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "f5cde6f30821f034c0ffecfa7bd9bb9e": {
+      "query": "i have token in env varaibble GITHUB_TOKEN\n",
+      "normalized_query": "i have token in env varaibble github_token",
+      "response": "It seems that the authentication using the GitHub token stored in the environment variable GITHUB_TOKEN is not successful. Please ensure that the token is valid and has the necessary permissions to create branches in repositories.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:24:23.458282",
+        "last_used": "2026-01-17T18:24:23.458282"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "ade31cd13a6dc62f839bd18ae64b5fa3": {
+      "query": "what token you need",
+      "normalized_query": "what token you need",
+      "response": "To create a branch on a GitHub repository using the MCP server, I would need a GitHub personal access token with the following scopes:\n- `repo` (Full control of private repositories)\n- `admin:org` (Full control of organization, including teams and memberships)\n\nPlease generate a personal access token with the required scopes and provide it to me for authentication.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:24:47.415527",
+        "last_used": "2026-01-17T18:24:47.415527"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "95ea18f66f2c897820406ecb770b9927": {
+      "query": "show me all the repos that my token has associated",
+      "normalized_query": "show me all the repos that my token has associated",
+      "response": "I encountered an error while trying to retrieve the list of repositories associated with your token. It seems that there is a missing library required for this operation. To resolve this issue, the 'fastembed' library needs to be installed. You can do so by running the following command:\n\n```bash\npip install mcp-use[search]\n```\n\nOnce the library is installed, we can retry the operation to fetch the repositories.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:27:42.109777",
+        "last_used": "2026-01-17T18:27:42.109777"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "60c7b0f5d467d9e6bcab6a5ea3e06e5b": {
+      "query": "giv me 2 repos",
+      "normalized_query": "giv me 2 repos",
+      "response": "I encountered an error while trying to retrieve repositories. It seems that the listed users and repositories cannot be searched either because the resources do not exist or you do not have permission to view them. \n\nPlease provide a valid query or let me know if you have a specific repository in mind that you would like to access.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:28:51.235287",
+        "last_used": "2026-01-17T18:28:51.235287"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "0fdfac189b765ab8cb97c218d7d042d4": {
+      "query": "can you create new branch \"test_mcp\" over here https://github.com/majidraza1228/langchain-langgraph-demo\n",
+      "normalized_query": "can you create new branch \"test_mcp\" over here https://github.com/majidraza1228/langchain-langgraph-demo",
+      "response": "It seems that authentication is required to perform the operation of creating a new branch. Please ensure that you are authenticated and have the necessary permissions to create branches in the specified repository. If you provide the required authentication, I can help you create the branch.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:29:46.832553",
+        "last_used": "2026-01-17T18:29:46.832553"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "8dd3988fe792ded84f045ff0b27b6d66": {
+      "query": "show me all the repos assoicated with my token",
+      "normalized_query": "show me all the repos assoicated with my token",
+      "response": "Here are some of the repositories associated with your GitHub account:\n1. Repository: [meteorirc](https://github.com/me/meteorirc)\n   Description: None\n   Created at: 2012-04-25\n   Last updated at: 2025-03-13\n\n2. Repository: [spider](https://github.com/me/spider)\n   Description: Yet another Ruby framework\n   Created at: 2008-11-21\n   Last updated at: 2025-08-01\n\n3. Repository: [cldr](https://github.com/me/cldr)\n   Description: Fork of Yotabanana's CLDR library\n   Created at: 2011-09-07\n   Last updated at: 2025-08-01\n\n4. Repository: [particle_filter_demo](https://github.com/me/particle_filter_demo)\n   Description: None\n   Created at: 2017-11-08\n   Last updated at: 2023-04-20\n\n5. Repository: [CocoaPodSpecs](https://github.com/me/CocoaPodSpecs)\n   Description: None\n   Created at: 2015-05-12\n   Last updated at: 2015-05-12\n\nThese are just a few of your repositories. Let me know if you need more information or if you want to perform any specific actions on these repositories.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:32:19.879994",
+        "last_used": "2026-01-17T18:32:19.879994"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "eb1291b6f85e1452224fd5280a454c52": {
+      "query": "i need langchian repo",
+      "normalized_query": "i need langchian repo",
+      "response": "I found the \"langchain\" repository you were looking for:\n- Repository: [langchain](https://github.com/langchain-ai/langchain)\n- Description: \ud83e\udd9c\ud83d\udd17 The platform for reliable agents.\n- Created at: 2022-10-17\n- Last updated at: 2026-01-17\n\nLet me know if you need more information or if you want to take any actions related to this repository.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:33:01.698351",
+        "last_used": "2026-01-17T18:33:01.698351"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "a1daf1817c9a7c5abea5368cd6e7f548": {
+      "query": "can i see repos https://github.com/majidraza1228/ under this only",
+      "normalized_query": "can i see repos https://github.com/majidraza1228/ under this only",
+      "response": "Here are some of the repositories under the user \"majidraza1228\":\n1. Repository: [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n   Description: None\n   Created at: 2025-12-25\n   Last updated at: 2026-01-17\n\n2. Repository: [SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)\n   Description: None\n   Created at: 2019-11-02\n   Last updated at: 2023-11-03\n\n3. Repository: [MasteringPython](https://github.com/majidraza1228/MasteringPython)\n   Description: None\n   Created at: 2021-07-10\n   Last updated at: 2021-10-27\n\n4. Repository: [MasteringGo](https://github.com/majidraza1228/MasteringGo)\n   Description: None\n   Created at: 2022-09-26\n   Last updated at: 2022-09-26\n\n5. Repository: [SyedDevtest](https://github.com/majidraza1228/SyedDevtest)\n   Description: Testing Developemnt\n   Created at: 2018-05-18\n   Last updated at: 2018-05-18\n\nThese are some of the repositories under the user \"majidraza1228\". Let me know if you need more information or if you want to perform any specific actions on these repositories.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:33:56.355289",
+        "last_used": "2026-01-17T18:33:56.355289"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "5d1cf73b43acdbb54240d8726cb62581": {
+      "query": "can you create test branch \"mcp_test_demo\" in this  langchain-langgraph-demo",
+      "normalized_query": "can you create test branch \"mcp_test_demo\" in this  langchain-langgraph-demo",
+      "response": "It seems that authentication is required to create a branch in the \"langchain-langgraph-demo\" repository under the user \"majidraza1228\". Please ensure that you are authenticated and have the necessary permissions to perform this action. If you need further assistance, feel free to let me know.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:34:38.565655",
+        "last_used": "2026-01-17T18:34:38.565655"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "ddfc5e578505c9678693c5888da904a7": {
+      "query": "show me all the repos under majdiraza1228",
+      "normalized_query": "show me all the repos under majdiraza1228",
+      "response": "I encountered an error while trying to retrieve the repositories under the user 'majdiraza1228'. It seems that the resources cannot be searched either because they do not exist or I do not have permission to view them. If you have any other GitHub user or repository in mind that you would like to explore, feel free to provide the details.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:39:21.718435",
+        "last_used": "2026-01-17T18:39:21.718435"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "7a85165403083ca3207cc8e4456f35c6": {
+      "query": "majidraza1228",
+      "normalized_query": "majidraza1228",
+      "response": "Here are some of the repositories under the user 'majidraza1228':\n\n1. Repository: [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n2. Repository: [SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)\n3. Repository: [MasteringPython](https://github.com/majidraza1228/MasteringPython)\n4. Repository: [MasteringGo](https://github.com/majidraza1228/MasteringGo)\n5. Repository: [SyedDevtest](https://github.com/majidraza1228/SyedDevtest)\n6. Repository: [local-mcpserver](https://github.com/majidraza1228/local-mcpserver)\n7. Repository: [MicroServicesHelloWorld](https://github.com/majidraza1228/MicroServicesHelloWorld)\n8. Repository: [test-node](https://github.com/majidraza1228/test-node)\n9. Repository: [Blockchain](https://github.com/majidraza1228/Blockchain)\n10. Repository: [Code](https://github.com/majidraza1228/Code)\n\nThese are just a few of the repositories owned by 'majidraza1228'. If you need more information about any specific repository or want to perform any actions on them, feel free to let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:39:39.538224",
+        "last_used": "2026-01-17T18:39:39.538224"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "9b3195594cecdaf389ec8c451dbe4047": {
+      "query": "create new brnach under this angchain-langgraph-demo branch name is \"test_mcp\"",
+      "normalized_query": "create new brnach under this angchain-langgraph-demo branch name is \"test_mcp\"",
+      "response": "It seems that authentication is required to create a new branch in the repository 'langchain-langgraph-demo' under the user 'majidraza1228'. Please ensure that proper authentication is provided to perform this action. If you need assistance with authentication or any other task, feel free to let me know.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:40:11.281424",
+        "last_used": "2026-01-17T18:40:11.281424"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "9490d59b3e6c5e957e4b72168de19e56": {
+      "query": "show me all the repos under majidraza1228",
+      "normalized_query": "show me all the repos under majidraza1228",
+      "response": "Here are some repositories under the user \"majidraza1228\":\n\n1. [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n2. [SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)\n3. [MasteringPython](https://github.com/majidraza1228/MasteringPython)\n4. [MasteringGo](https://github.com/majidraza1228/MasteringGo)\n5. [SyedDevtest](https://github.com/majidraza1228/SyedDevtest)\n6. [local-mcpserver](https://github.com/majidraza1228/local-mcpserver)\n7. [MicroServicesHelloWorld](https://github.com/majidraza1228/MicroServicesHelloWorld)\n8. [test-node](https://github.com/majidraza1228/test-node)\n9. [Blockchain](https://github.com/majidraza1228/Blockchain)\n10. [Code](https://github.com/majidraza1228/Code)",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:41:33.617329",
+        "last_used": "2026-01-17T18:41:33.617329"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "c46d7dcc22096f82429215501a739514": {
+      "query": "create new branh \"test_mcp\" under this langchain-langgraph-demo",
+      "normalized_query": "create new branh \"test_mcp\" under this langchain-langgraph-demo",
+      "response": "It seems that authentication is required to create a new branch in the repository \"langchain-langgraph-demo\" under the user \"majidraza1228.\" Please provide the necessary authentication credentials to proceed with creating the new branch.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:41:56.800523",
+        "last_used": "2026-01-17T18:41:56.800523"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "163cf6752f093baf6cfcd3c34675ba46": {
+      "query": "show me all the repos which my token has associated",
+      "normalized_query": "show me all the repos which my token has associated",
+      "response": "It seems there is a persistent issue with the MCP client connection to the GitHub server. I recommend reconnecting to the server and then retrying the operation to show you all the repositories associated with your token.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T18:49:27.913705",
+        "last_used": "2026-01-17T18:49:27.913705"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
     }
   },
   "categories": {
@@ -1082,16 +1676,37 @@
       "7db978f326faef5bb3caf99d4b5a3420",
       "034fc5accb759c6b37d2f380a40864c7",
       "9e6880bdb5539d9d3afbb82a752233bf",
-      "21e56ca2cce38884e9eff29b30200aa4"
+      "21e56ca2cce38884e9eff29b30200aa4",
+      "a37f0ae950749014b2ee32248fd692f9",
+      "5a745b796fc12aff6d9191a139b59668",
+      "95ea18f66f2c897820406ecb770b9927",
+      "8dd3988fe792ded84f045ff0b27b6d66",
+      "ddfc5e578505c9678693c5888da904a7",
+      "9490d59b3e6c5e957e4b72168de19e56",
+      "163cf6752f093baf6cfcd3c34675ba46"
     ],
     "general": [
       "613048cdd44b3ee6b461546d5f76fb37",
       "3716d055547af6a510bd4f817e869a90",
       "070035ad4283935b3fce8fcf284dbcf3",
-      "a6105c0a611b41b08f1209506350279e"
+      "a6105c0a611b41b08f1209506350279e",
+      "83a0441181c06d17e62ca9a260606a7c",
+      "f5cde6f30821f034c0ffecfa7bd9bb9e",
+      "ade31cd13a6dc62f839bd18ae64b5fa3",
+      "60c7b0f5d467d9e6bcab6a5ea3e06e5b",
+      "eb1291b6f85e1452224fd5280a454c52",
+      "a1daf1817c9a7c5abea5368cd6e7f548",
+      "7a85165403083ca3207cc8e4456f35c6"
     ],
     "schema_operations": [
       "0fd20d79c08c1dace10ffd4b90a96f66"
+    ],
+    "data_insertion": [
+      "045fee9386e0909119435fd6061701a9",
+      "0fdfac189b765ab8cb97c218d7d042d4",
+      "5d1cf73b43acdbb54240d8726cb62581",
+      "9b3195594cecdaf389ec8c451dbe4047",
+      "c46d7dcc22096f82429215501a739514"
     ]
   },
   "feedback_log": [
@@ -1151,7 +1766,7 @@
     }
   ],
   "stats": {
-    "total_queries": 37,
+    "total_queries": 57,
     "cache_hits": 1,
     "positive_feedback": 3,
     "negative_feedback": 6
