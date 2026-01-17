@@ -2,7 +2,7 @@
   "version": "2.0",
   "metadata": {
     "created_at": "2026-01-13 22:28:17.118653",
-    "last_updated": "2026-01-17T01:52:51.829959",
+    "last_updated": "2026-01-17T14:38:56.956229",
     "schema_version": "2.0"
   },
   "queries": {
@@ -432,7 +432,7 @@
     "6f6dc16d7b7e5fcd7b397ba222f5d0cb": {
       "query": "show me all the tables",
       "normalized_query": "show me all the tables",
-      "response": "Here are the tables and their column details from the available schemas:\n\n### Employees Database\n- **employeeid**: integer\n- **firstname**: character varying\n- **lastname**: character varying\n- **department**: character varying\n- **salary**: numeric\n\n### Product Reviews Database\n- **id**: integer\n- **product_name**: character varying\n- **rating**: integer\n- **comment**: text\n\n### Test Database\n- **id**: integer\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### Chatbot Database\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### Suppliers Database\n- **supplierid**: integer\n- **suppliername**: character varying\n- **contactemail**: character varying\n\nLet me know if you need further operations on these tables.",
+      "response": "Here are the tables in the public schema of the database:\n\n### Tables\n1. **employees**\n2. **product_reviews**\n3. **test**\n4. **chatbot**\n5. **suppliers**\n\nIf you need more information about any specific table or additional queries, let me know!",
       "context": {
         "database": null,
         "schema": null,
@@ -444,8 +444,8 @@
         "output": null
       },
       "timestamps": {
-        "created": "2026-01-17T01:45:00.017327",
-        "last_used": "2026-01-17T01:45:00.017327"
+        "created": "2026-01-17T14:21:04.085037",
+        "last_used": "2026-01-17T14:21:04.085037"
       },
       "usage": {
         "count": 1,
@@ -692,9 +692,9 @@
       "related_queries": []
     },
     "03674f09467d620bb16d0e512bd0b9ae": {
-      "query": "show me all schemas\n",
+      "query": "show me all schemas",
       "normalized_query": "show me all schemas",
-      "response": "Here are all the schemas in the database:\n\n1. **pg_toast**\n2. **pg_catalog**\n3. **public**\n4. **information_schema**\n5. **person**\n6. **humanresources**\n7. **production**\n8. **purchasing**\n9. **sales**\n10. **pe**\n11. **hr**\n12. **pr**\n13. **pu**\n14. **sa**\n\nIf you need more information about a specific schema or anything else, feel free to ask!",
+      "response": "Here are the schemas for the available databases:\n\n### 1. Employees Database Schema\n- **employeeid**: integer\n- **firstname**: character varying\n- **lastname**: character varying\n- **department**: character varying\n- **salary**: numeric\n\n### 2. Product Reviews Database Schema\n- **id**: integer\n- **product_name**: character varying\n- **rating**: integer\n- **comment**: text\n\n### 3. Test Database Schema\n- **id**: integer\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### 4. Chatbot Database Schema\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### 5. Suppliers Database Schema\n- **supplierid**: integer\n- **suppliername**: character varying\n- **contactemail**: character varying\n\nIf you need further details or queries on any specific schema, let me know!",
       "context": {
         "database": null,
         "schema": null,
@@ -706,8 +706,8 @@
         "output": null
       },
       "timestamps": {
-        "created": "2026-01-17T01:51:40.714397",
-        "last_used": "2026-01-17T01:51:40.714397"
+        "created": "2026-01-17T02:11:25.268445",
+        "last_used": "2026-01-17T02:11:25.268445"
       },
       "usage": {
         "count": 1,
@@ -821,6 +821,237 @@
         "table"
       ],
       "related_queries": []
+    },
+    "60594b5223591dfe1b6a358b2f0013c8": {
+      "query": "show me employee tables rows from Adventureworks db",
+      "normalized_query": "show me employee tables rows from adventureworks db",
+      "response": "Here are the rows from the employees table in the database:\n\n### Employees Table Rows\n1. **Employee ID**: 1\n   - **First Name**: John\n   - **Last Name**: Doe\n   - **Department**: Engineering\n   - **Salary**: $75,000.00\n\n2. **Employee ID**: 2\n   - **First Name**: Jane\n   - **Last Name**: Smith\n   - **Department**: Marketing\n   - **Salary**: $65,000.00\n\n3. **Employee ID**: 3\n   - **First Name**: Alice\n   - **Last Name**: Johnson\n   - **Department**: HR\n   - **Salary**: $60,000.00\n\n4. **Employee ID**: 4\n   - **First Name**: Bob\n   - **Last Name**: Brown\n   - **Department**: Finance\n   - **Salary**: $80,000.00\n\nIf you need any further analysis or specific queries, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T02:12:07.119354",
+        "last_used": "2026-01-17T02:12:07.119354"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "c43b5a3d78b8f8a7fd085e8658e935e4": {
+      "query": "show me all the emoloyes",
+      "normalized_query": "show me all the emoloyes",
+      "response": "Here are all the employees from the employees table:\n\n### Employees\n1. **Employee ID**: 1\n   - **First Name**: John\n   - **Last Name**: Doe\n   - **Department**: Engineering\n   - **Salary**: $75,000.00\n\n2. **Employee ID**: 2\n   - **First Name**: Jane\n   - **Last Name**: Smith\n   - **Department**: Marketing\n   - **Salary**: $65,000.00\n\n3. **Employee ID**: 3\n   - **First Name**: Alice\n   - **Last Name**: Johnson\n   - **Department**: HR\n   - **Salary**: $60,000.00\n\n4. **Employee ID**: 4\n   - **First Name**: Bob\n   - **Last Name**: Brown\n   - **Department**: Finance\n   - **Salary**: $80,000.00\n\nIf you need any further details or actions regarding this data, just let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:21:16.985753",
+        "last_used": "2026-01-17T14:21:16.985753"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "312498e6532daa097d2500a33c043826": {
+      "query": "use Adventureworks and show me all the tables",
+      "normalized_query": "use adventureworks and show me all the tables",
+      "response": "Here are the tables in the Adventureworks database:\n\n1. **employees**\n2. **product_reviews**\n3. **test**\n4. **chatbot**\n5. **suppliers** \n\nIf you need further details about any specific table, just let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:30:54.867110",
+        "last_used": "2026-01-17T14:30:54.867110"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "7db978f326faef5bb3caf99d4b5a3420": {
+      "query": "or get just me total count",
+      "normalized_query": "or get just me total count",
+      "response": "The total count of tables in the Adventureworks database is **5**. If you need further assistance or details, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:32:05.412290",
+        "last_used": "2026-01-17T14:32:05.412290"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "get",
+        "count"
+      ],
+      "related_queries": []
+    },
+    "034fc5accb759c6b37d2f380a40864c7": {
+      "query": "show me the repo count",
+      "normalized_query": "show me the repo count",
+      "response": "It seems I need a specific query to retrieve the repository count from GitHub. However, I can provide you with a way to search for repositories based on certain criteria.\n\nIf you have a specific topic or keyword in mind, please share it, and I can use that to count the repositories. Alternatively, if you're interested in counting all public repositories, I might not be able to get an exact count directly, but I can search for a few and estimate. Let me know how you would like to proceed!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:37:46.912608",
+        "last_used": "2026-01-17T14:37:46.912608"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show",
+        "count"
+      ],
+      "related_queries": []
+    },
+    "9e6880bdb5539d9d3afbb82a752233bf": {
+      "query": "https://github.com/majidraza1228  show me repo count",
+      "normalized_query": "https://github.com/majidraza1228  show me repo count",
+      "response": "The GitHub user [majidraza1228](https://github.com/majidraza1228) has a total of **34 repositories**. If you need any more specific information about these repositories or anything else, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:38:22.877781",
+        "last_used": "2026-01-17T14:38:22.877781"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show",
+        "count"
+      ],
+      "related_queries": []
+    },
+    "21e56ca2cce38884e9eff29b30200aa4": {
+      "query": "show me top 2 repos",
+      "normalized_query": "show me top 2 repos",
+      "response": "Here are the top 2 repositories from the GitHub user [majidraza1228](https://github.com/majidraza1228):\n\n1. **[langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)**\n   - **Description:** (No description provided)\n   - **Created At:** December 25, 2025\n   - **Last Updated:** January 17, 2026\n\n2. **[SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)**\n   - **Description:** (No description provided)\n   - **Created At:** November 2, 2019\n   - **Last Updated:** November 3, 2023\n\nIf you need more details or further assistance, let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T14:38:56.956201",
+        "last_used": "2026-01-17T14:38:56.956201"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
     }
   },
   "categories": {
@@ -844,7 +1075,14 @@
       "2740368f46ee64f2a687f9356a9a63be",
       "03674f09467d620bb16d0e512bd0b9ae",
       "177ca1906bd54e08f5960669c713b390",
-      "2d1cd46e4410fc808e1171ffb9e1b59f"
+      "2d1cd46e4410fc808e1171ffb9e1b59f",
+      "60594b5223591dfe1b6a358b2f0013c8",
+      "c43b5a3d78b8f8a7fd085e8658e935e4",
+      "312498e6532daa097d2500a33c043826",
+      "7db978f326faef5bb3caf99d4b5a3420",
+      "034fc5accb759c6b37d2f380a40864c7",
+      "9e6880bdb5539d9d3afbb82a752233bf",
+      "21e56ca2cce38884e9eff29b30200aa4"
     ],
     "general": [
       "613048cdd44b3ee6b461546d5f76fb37",
@@ -913,7 +1151,7 @@
     }
   ],
   "stats": {
-    "total_queries": 28,
+    "total_queries": 37,
     "cache_hits": 1,
     "positive_feedback": 3,
     "negative_feedback": 6

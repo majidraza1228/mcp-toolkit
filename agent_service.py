@@ -99,13 +99,14 @@ class AgentService:
                     "GitHub Models requires GITHUB_MODELS_API_KEY or GITHUB_TOKEN in .env"
                 )
 
-            # GitHub Models uses OpenAI-compatible API
+            model_name = self.model or "gpt-4o"
+
+            # GitHub Models uses OpenAI-compatible API for all models (GPT and Claude)
             return ChatOpenAI(
-                model=self.model or "gpt-4o",  # GitHub Models default
+                model=model_name,
                 temperature=self.temperature,
                 openai_api_key=github_token,
                 openai_api_base="https://models.inference.ai.azure.com",
-                # Alternative endpoint: https://api.githubcopilot.com
             )
 
         # Standard OpenAI

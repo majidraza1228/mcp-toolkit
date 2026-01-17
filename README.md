@@ -32,14 +32,13 @@ This is a **browser-based AI chat application** that can:
 ## 📖 Documentation
 
 ### Core Documentation
-- **[Quick Start Guide](docs/QUICK_START.md)** - Get started in 5 minutes
+- **[LLM Providers Guide](docs/LLM_PROVIDERS.md)** - Choose between GitHub Models (free), OpenAI, or Anthropic
 - **[Architecture Overview](docs/ARCHITECTURE.md)** - Understand how it works
 - **[Learning System](docs/LEARNING_SYSTEM.md)** - Self-learning capabilities explained
 
 ### Advanced Topics
 - **[AI Agent Explained](docs/AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
 - **[Self-Learning Guide](docs/SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
-- **[VS Code Copilot Setup](docs/VSCODE_COPILOT_SETUP.md)** - Optional VS Code integration
 - **[Python Version Guide](docs/PYTHON_VERSION_GUIDE.md)** - Python version management
 
 ### Configuration
@@ -77,7 +76,7 @@ Ask questions in plain English:
 - **Extensible** - Add your own MCP servers
 
 ### 🤖 AI-Powered
-- Uses OpenAI GPT-4 (your API key)
+- Multiple LLM providers: GitHub Models (FREE), OpenAI, or Anthropic
 - Automatically chooses the right tool for each task
 - Provides natural language responses
 - Learns from user feedback
@@ -111,8 +110,12 @@ See [Architecture Overview](docs/ARCHITECTURE.md) for detailed explanation.
 - **Python 3.11+** - Main application (required for mcp-use library)
 - **Node.js** - For MCP servers
 - **PostgreSQL** - Your database (optional, for database queries)
-- **OpenAI API Key** - For AI responses
-- **GitHub Token** - For GitHub access (optional)
+- **LLM Provider** - One of the following:
+  - **GitHub Token** (FREE) - For GitHub Models with your GitHub Copilot subscription
+  - **OpenAI API Key** (Paid) - For full OpenAI access
+  - **Anthropic API Key** (Paid) - For Claude models
+
+See [LLM Providers Guide](docs/LLM_PROVIDERS.md) for details.
 
 ## 🔧 Installation
 
@@ -124,10 +127,12 @@ See [Architecture Overview](docs/ARCHITECTURE.md) for detailed explanation.
    ```
 
 3. **Configure environment variables**
-   Edit `.env` file:
+   Edit `.env` file (see [LLM Providers Guide](docs/LLM_PROVIDERS.md) for details):
    ```bash
-   OPENAI_API_KEY=your-key-here
-   GITHUB_TOKEN=your-token-here
+   # Choose your LLM provider (github is FREE with GitHub Copilot)
+   LLM_PROVIDER=github
+   LLM_MODEL=gpt-4o-mini
+   GITHUB_TOKEN=your-github-token-here
    DATABASE_URL=postgresql://user:pass@localhost:5431/db
    ```
 

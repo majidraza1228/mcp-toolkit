@@ -1,13 +1,5 @@
 {
   "mcpServers": {
-    "postgres": {
-      "command": "npx",
-      "args": [
-        "@modelcontextprotocol/server-postgres",
-        "${DATABASE_URL}"
-      ],
-      "env": {}
-    },
     "github": {
       "command": "npx",
       "args": [
@@ -16,6 +8,17 @@
       "env": {
         "GITHUB_TOKEN": "${GITHUB_TOKEN}"
       }
+    }
+  },
+  "_disabled_servers": {
+    "_comment": "Uncomment servers above to enable them. Move from here to mcpServers.",
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-postgres",
+        "${DATABASE_URL}"
+      ],
+      "env": {}
     },
     "filesystem": {
       "command": "npx",
