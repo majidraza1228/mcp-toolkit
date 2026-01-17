@@ -21,8 +21,15 @@ def check_environment():
         if not os.getenv(var):
             missing_vars.append(var)
 
-    # Check if at least one LLM API key is present
-    has_llm_key = any(os.getenv(var) for var in llm_vars)
+    # Check LLM configuration
+    llm_provider = os.getenv("LLM_PROVIDER", "").lower()
+
+    # GitHub Models uses GITHUB_TOKEN (already checked above)
+    if llm_provider == "github":
+        has_llm_key = bool(os.getenv("GITHUB_TOKEN"))
+    else:
+        # Check if at least one LLM API key is present
+        has_llm_key = any(os.getenv(var) for var in llm_vars)
 
     if missing_vars or not has_llm_key:
         print("❌ Missing required environment variables!\n")
@@ -33,14 +40,28 @@ def check_environment():
                 print(f"  - {var}")
 
         if not has_llm_key:
-            print("\nLLM API Key (at least one required):")
+            print("\nLLM Configuration (choose one):")
+            print("  Option 1: Set LLM_PROVIDER=github (uses GITHUB_TOKEN)")
+            print("  Option 2: Set one of these API keys:")
             for var in llm_vars:
-                print(f"  - {var}")
+                print(f"    - {var}")
 
         print("\n📝 Please create a .env file with the required variables.")
         print("   You can copy .env.example and fill in your values:")
         print("   cp .env.example .env\n")
         return False
+
+    # Print LLM configuration
+    if llm_provider == "github":
+        print("✓ LLM Provider: GitHub Models (Free)")
+    elif os.getenv("OPENAI_API_KEY"):
+        print("✓ LLM Provider: OpenAI")
+    elif os.getenv("ANTHROPIC_API_KEY"):
+        print("✓ LLM Provider: Anthropic")
+    elif os.getenv("GROQ_API_KEY"):
+        print("✓ LLM Provider: Groq")
+
+    print(f"✓ LLM Model: {os.getenv('LLM_MODEL', 'gpt-4')}")
 
     return True
 

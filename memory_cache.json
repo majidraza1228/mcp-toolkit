@@ -2,7 +2,7 @@
   "version": "2.0",
   "metadata": {
     "created_at": "2026-01-13 22:28:17.118653",
-    "last_updated": "2026-01-13T23:49:20.585781",
+    "last_updated": "2026-01-17T01:52:51.829959",
     "schema_version": "2.0"
   },
   "queries": {
@@ -428,6 +428,399 @@
         "show"
       ],
       "related_queries": []
+    },
+    "6f6dc16d7b7e5fcd7b397ba222f5d0cb": {
+      "query": "show me all the tables",
+      "normalized_query": "show me all the tables",
+      "response": "Here are the tables and their column details from the available schemas:\n\n### Employees Database\n- **employeeid**: integer\n- **firstname**: character varying\n- **lastname**: character varying\n- **department**: character varying\n- **salary**: numeric\n\n### Product Reviews Database\n- **id**: integer\n- **product_name**: character varying\n- **rating**: integer\n- **comment**: text\n\n### Test Database\n- **id**: integer\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### Chatbot Database\n- **name**: character varying\n- **address**: character varying\n- **zipcode**: character varying\n\n### Suppliers Database\n- **supplierid**: integer\n- **suppliername**: character varying\n- **contactemail**: character varying\n\nLet me know if you need further operations on these tables.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:45:00.017327",
+        "last_used": "2026-01-17T01:45:00.017327"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "tables",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "cf0639f04ebbe09dc83c3bc25f375c90": {
+      "query": "use Adevnetureworks db and show me employee table in the grid\n",
+      "normalized_query": "use adevnetureworks db and show me employee table in the grid",
+      "response": "It seems the search functionality is currently unavailable for identifying the \"AdventureWorks\" database. Could you confirm if this database is already available in the current PostgreSQL server? If not, you may need to load it first. Let me know how you would like to proceed.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:45:55.874847",
+        "last_used": "2026-01-17T01:45:55.874847"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "a90172fac9cb553d97bbb1c42d596361": {
+      "query": "show me all the tabels in Adeventureworks",
+      "normalized_query": "show me all the tabels in adeventureworks",
+      "response": "The search functionality to locate the AdventureWorks database is currently unavailable. Could you confirm if the AdventureWorks database is already loaded into the PostgreSQL server? If yes, please specify its connection details or schema name so I can query it directly.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:47:19.948707",
+        "last_used": "2026-01-17T01:47:19.948707"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "a6105c0a611b41b08f1209506350279e": {
+      "query": "yes",
+      "normalized_query": "yes",
+      "response": "Could you please specify what you would like to explore or do next? Whether it's querying another table, checking a different schema, or something else, I'm here to help!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:52:32.458467",
+        "last_used": "2026-01-17T01:52:32.458467"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "677a649c6906879e2a4eb6630d50b685": {
+      "query": "use postgres  Adventureworks db and show me the schemas",
+      "normalized_query": "use postgres  adventureworks db and show me the schemas",
+      "response": "Here are the schemas available in the Adventureworks database:\n\n1. **information_schema**: Owned by `postgres`\n2. **public**: Owned by `postgres`\n3. **pg_catalog**: Owned by `postgres`\n4. **pg_toast**: Owned by `postgres`\n5. **sa**: Owned by `syedraza`\n6. **pu**: Owned by `syedraza`\n7. **pr**: Owned by `syedraza`\n8. **hr**: Owned by `syedraza`\n9. **pe**: Owned by `syedraza`\n10. **sales**: Owned by `syedraza`\n11. **purchasing**: Owned by `syedraza`\n12. **production**: Owned by `syedraza`\n13. **humanresources**: Owned by `syedraza`\n14. **person**: Owned by `syedraza`\n\nIf you need details about any specific schema or further assistance, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:49:38.945168",
+        "last_used": "2026-01-17T01:49:38.945168"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "schema",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "5a3bb870bbbb629c1792f095bcc20014": {
+      "query": "show me table in  sales schema",
+      "normalized_query": "show me table in  sales schema",
+      "response": "Here are the tables in the **sales** schema of the Adventureworks database:\n\n1. **countryregioncurrency**\n2. **creditcard**\n3. **currency**\n4. **currencyrate**\n5. **customer**\n6. **personcreditcard**\n7. **salesorderdetail**\n8. **salesorderheader**\n9. **salesorderheadersalesreason**\n10. **salespersonquotahistory**\n11. **salesperson**\n12. **salesreason**\n13. **specialoffer**\n14. **salestaxrate**\n15. **salesterritory**\n16. **salesterritoryhistory**\n17. **shoppingcartitem**\n18. **specialofferproduct**\n19. **store**\n20. **vinindividualcustomer**\n21. **vpersondemographics**\n22. **vsalesperson**\n23. **vsalespersonsalesbyfiscalyearsdata**\n24. **vsalespersonsalesbyfiscalyears**\n25. **vstorewithcontacts**\n26. **vstorewithaddresses**\n27. **vstorewithdemographics**\n\nIf you need further details on any specific table, just let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:50:06.989269",
+        "last_used": "2026-01-17T01:50:06.989269"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "schema",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "c7751422997721f4d9059549077c9367": {
+      "query": "show me sales history in tabulrar view",
+      "normalized_query": "show me sales history in tabulrar view",
+      "response": "It appears that the **salesterritoryhistory** table in the **sales** schema is currently empty, as no records were returned.\n\nIf you would like to explore another table or need further assistance, please let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:50:33.055631",
+        "last_used": "2026-01-17T01:50:33.055631"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "view",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "2740368f46ee64f2a687f9356a9a63be": {
+      "query": "can you find employee table",
+      "normalized_query": "can you find employee table",
+      "response": "The **employee** table does exist in the database. If you would like to see its contents or explore its schema, please let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:51:11.420401",
+        "last_used": "2026-01-17T01:51:11.420401"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "find"
+      ],
+      "related_queries": []
+    },
+    "03674f09467d620bb16d0e512bd0b9ae": {
+      "query": "show me all schemas\n",
+      "normalized_query": "show me all schemas",
+      "response": "Here are all the schemas in the database:\n\n1. **pg_toast**\n2. **pg_catalog**\n3. **public**\n4. **information_schema**\n5. **person**\n6. **humanresources**\n7. **production**\n8. **purchasing**\n9. **sales**\n10. **pe**\n11. **hr**\n12. **pr**\n13. **pu**\n14. **sa**\n\nIf you need more information about a specific schema or anything else, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:51:40.714397",
+        "last_used": "2026-01-17T01:51:40.714397"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "schema",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "177ca1906bd54e08f5960669c713b390": {
+      "query": "show me hr schemas table",
+      "normalized_query": "show me hr schemas table",
+      "response": "Here are the tables in the **humanresources** schema:\n\n1. **department**\n2. **employee**\n3. **employeedepartmenthistory**\n4. **employeepayhistory**\n5. **jobcandidate**\n6. **shift**\n7. **vemployee**\n8. **vemployeedepartment**\n9. **vemployeedepartmenthistory**\n10. **vjobcandidate**\n11. **vjobcandidateemployment**\n12. **vjobcandidateeducation**\n\nIf you need more details about any specific table or further assistance, just let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:51:58.789476",
+        "last_used": "2026-01-17T01:51:58.789476"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "schema",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "2d1cd46e4410fc808e1171ffb9e1b59f": {
+      "query": "show me employee in tabular form",
+      "normalized_query": "show me employee in tabular form",
+      "response": "It appears that the **employee** table in the **humanresources** schema is currently empty, as no records were returned.\n\nIf you would like to explore another table or need further assistance, please let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:52:18.509907",
+        "last_used": "2026-01-17T01:52:18.509907"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "0fd20d79c08c1dace10ffd4b90a96f66": {
+      "query": "employee table",
+      "normalized_query": "employee table",
+      "response": "It seems that the **employee** table in the **humanresources** schema is still empty, as no records were returned.\n\nIf there's another table you'd like to check, or if you need assistance with a different request, please let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-17T01:52:51.829933",
+        "last_used": "2026-01-17T01:52:51.829933"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table"
+      ],
+      "related_queries": []
     }
   },
   "categories": {
@@ -441,12 +834,26 @@
       "6b5ca09eb9b36d40a5370cf0bf64f55e",
       "c37997856827a6fb0b1564a6b1b16fba",
       "8a2c375cb38975fca37904dc26b0e28b",
-      "a54bebfda9ccd7b0c5276b9970cbf3b8"
+      "a54bebfda9ccd7b0c5276b9970cbf3b8",
+      "6f6dc16d7b7e5fcd7b397ba222f5d0cb",
+      "cf0639f04ebbe09dc83c3bc25f375c90",
+      "a90172fac9cb553d97bbb1c42d596361",
+      "677a649c6906879e2a4eb6630d50b685",
+      "5a3bb870bbbb629c1792f095bcc20014",
+      "c7751422997721f4d9059549077c9367",
+      "2740368f46ee64f2a687f9356a9a63be",
+      "03674f09467d620bb16d0e512bd0b9ae",
+      "177ca1906bd54e08f5960669c713b390",
+      "2d1cd46e4410fc808e1171ffb9e1b59f"
     ],
     "general": [
       "613048cdd44b3ee6b461546d5f76fb37",
       "3716d055547af6a510bd4f817e869a90",
-      "070035ad4283935b3fce8fcf284dbcf3"
+      "070035ad4283935b3fce8fcf284dbcf3",
+      "a6105c0a611b41b08f1209506350279e"
+    ],
+    "schema_operations": [
+      "0fd20d79c08c1dace10ffd4b90a96f66"
     ]
   },
   "feedback_log": [
@@ -506,7 +913,7 @@
     }
   ],
   "stats": {
-    "total_queries": 15,
+    "total_queries": 28,
     "cache_hits": 1,
     "positive_feedback": 3,
     "negative_feedback": 6

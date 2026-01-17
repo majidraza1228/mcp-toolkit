@@ -125,6 +125,27 @@ class UIClient:
         emoji = "👍" if rating == "up" else "👎"
         return f"{emoji} Thanks for your feedback!"
 
+    def get_llm_info(self) -> dict:
+        """Get current LLM provider information.
+
+        Returns:
+            Dictionary with provider and model info
+        """
+        provider = os.getenv("LLM_PROVIDER", "openai").lower()
+        model = os.getenv("LLM_MODEL", "gpt-4")
+
+        provider_names = {
+            "github": "GitHub Models (Free)",
+            "openai": "OpenAI (Paid)",
+            "anthropic": "Anthropic Claude (Paid)",
+        }
+
+        return {
+            "provider": provider,
+            "provider_name": provider_names.get(provider, provider),
+            "model": model,
+        }
+
     def get_server_status(self) -> str:
         """Get formatted server status.
 
@@ -136,10 +157,17 @@ class UIClient:
         if not status:
             return "⚠️ No servers connected. Please check your configuration."
 
+        # Add LLM info
+        llm_info = self.get_llm_info()
+
         # Add memory stats
         memory_stats = self.service.get_memory_stats()
 
-        lines = ["### 🔌 Connected Servers\n"]
+        lines = [f"### 🤖 LLM Provider\n"]
+        lines.append(f"**{llm_info['provider_name']}**")
+        lines.append(f"Model: `{llm_info['model']}`\n")
+
+        lines.append("### 🔌 Connected Servers\n")
         for server, info in status.items():
             if info.get("connected"):
                 lines.append(f"**{server}** ✓")
@@ -206,15 +234,23 @@ class UIClient:
         }
         """
 
+        # Get LLM info for header
+        llm_info = self.get_llm_info()
+        provider_badge = "🟢" if llm_info["provider"] == "github" else "🟡"
+
         with gr.Blocks(
             title="AI Agent Interface",
         ) as interface:
             # Header
             gr.HTML(
-                """
+                f"""
                 <div class="header">
                     <h1>🤖 AI Agent Interface</h1>
                     <p>Natural language interface to PostgreSQL and GitHub</p>
+                    <p style="margin-top: 10px; font-size: 14px;">
+                        {provider_badge} <strong>LLM:</strong> {llm_info['provider_name']} |
+                        <strong>Model:</strong> {llm_info['model']}
+                    </p>
                 </div>
                 """
             )
