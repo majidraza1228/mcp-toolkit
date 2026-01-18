@@ -31,7 +31,9 @@ MCP Servers (Node.js processes via npx)
 | `utils/mcp_manager.py` | MCP client connection management |
 | `utils/prompts.py` | System prompts for the AI agent |
 | `utils/simple_memory.py` | Query caching and learning system |
+| `utils/a2a_orchestrator.py` | A2A (Agent-to-Agent) orchestration |
 | `mcp_config.json` | MCP server configuration |
+| `mcp_config_a2a.json` | A2A mode config (all servers enabled) |
 | `.env` | Environment variables (API keys, database URL) |
 
 ## Configuration Rules
@@ -47,6 +49,9 @@ LLM_PROVIDER=github|openai|anthropic
 # - openai: gpt-4, gpt-4o, gpt-4-turbo, gpt-3.5-turbo
 # - anthropic: claude-sonnet-4-20250514, claude-opus-4-20250514
 LLM_MODEL=<model-name>
+
+# A2A (Agent-to-Agent) mode
+A2A_ENABLED=true|false
 
 # Required tokens/keys
 GITHUB_TOKEN=ghp_...        # Always required for GitHub MCP server

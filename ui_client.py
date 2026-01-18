@@ -140,10 +140,16 @@ class UIClient:
             "anthropic": "Anthropic Claude (Paid)",
         }
 
+        # Get A2A status
+        a2a_enabled = self.service.is_a2a_enabled() if hasattr(self.service, 'is_a2a_enabled') else False
+        a2a_status = self.service.get_a2a_status() if hasattr(self.service, 'get_a2a_status') else {}
+
         return {
             "provider": provider,
             "provider_name": provider_names.get(provider, provider),
             "model": model,
+            "a2a_enabled": a2a_enabled,
+            "a2a_agents": a2a_status.get("available_agents", []),
         }
 
     def get_server_status(self) -> str:
@@ -166,6 +172,15 @@ class UIClient:
         lines = [f"### 🤖 LLM Provider\n"]
         lines.append(f"**{llm_info['provider_name']}**")
         lines.append(f"Model: `{llm_info['model']}`\n")
+
+        # Add A2A status
+        if llm_info.get("a2a_enabled"):
+            lines.append("### 🔄 A2A Mode: **Active**\n")
+            agents = llm_info.get("a2a_agents", [])
+            if agents:
+                lines.append(f"Specialized Agents: {', '.join(agents)}\n")
+        else:
+            lines.append("### 🔄 A2A Mode: Disabled\n")
 
         lines.append("### 🔌 Connected Servers\n")
         for server, info in status.items():
@@ -237,6 +252,7 @@ class UIClient:
         # Get LLM info for header
         llm_info = self.get_llm_info()
         provider_badge = "🟢" if llm_info["provider"] == "github" else "🟡"
+        a2a_badge = "🔄 A2A" if llm_info.get("a2a_enabled") else ""
 
         with gr.Blocks(
             title="AI Agent Interface",
@@ -245,11 +261,12 @@ class UIClient:
             gr.HTML(
                 f"""
                 <div class="header">
-                    <h1>🤖 AI Agent Interface</h1>
+                    <h1>🤖 AI Agent Interface {a2a_badge}</h1>
                     <p>Natural language interface to PostgreSQL and GitHub</p>
                     <p style="margin-top: 10px; font-size: 14px;">
                         {provider_badge} <strong>LLM:</strong> {llm_info['provider_name']} |
                         <strong>Model:</strong> {llm_info['model']}
+                        {' | <strong style="color: #4ade80;">A2A Mode Active</strong>' if llm_info.get("a2a_enabled") else ''}
                     </p>
                 </div>
                 """

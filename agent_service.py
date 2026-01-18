@@ -19,6 +19,7 @@ except ImportError:
 
 from utils import MCPManager, get_system_prompt
 from utils.simple_memory import SimpleMemory
+from utils.a2a_orchestrator import A2AOrchestrator
 
 # Load environment variables
 load_dotenv()
@@ -49,7 +50,9 @@ class AgentService:
 
         self.mcp_manager = MCPManager(config_path)
         self.agent: Optional[MCPAgent] = None
+        self.a2a_orchestrator: Optional[A2AOrchestrator] = None
         self._initialized = False
+        self._a2a_enabled = os.getenv("A2A_ENABLED", "true").lower() == "true"
 
         # Initialize memory system for self-learning
         self.memory = SimpleMemory()
@@ -77,6 +80,16 @@ class AgentService:
 
         self._initialized = True
         print("✓ Agent service initialized")
+
+        # Initialize A2A orchestrator if enabled and multiple servers available
+        available_servers = self.mcp_manager.get_available_servers()
+        if self._a2a_enabled and len(available_servers) >= 1:
+            print("🔄 Initializing A2A orchestrator...")
+            self.a2a_orchestrator = A2AOrchestrator(
+                mcp_agent=self.agent,
+                available_servers=available_servers,
+            )
+            print(f"✓ A2A orchestrator ready with {len(available_servers)} agent(s)")
 
     async def cleanup(self) -> None:
         """Cleanup resources."""
@@ -159,7 +172,7 @@ class AgentService:
         }
 
     async def stream(
-        self, query: str, conversation_id: Optional[str] = None, selected_server: str = "all"
+        self, query: str, conversation_id: Optional[str] = None, selected_server: str = "all", use_a2a: bool = True
     ) -> AsyncIterator[Dict[str, Any]]:
         """Stream agent responses in real-time.
 
@@ -167,18 +180,13 @@ class AgentService:
             query: User's natural language query
             conversation_id: Optional conversation ID for memory
             selected_server: MCP server to use ('all', 'postgres', 'github', 'filesystem')
+            use_a2a: Whether to use A2A orchestration (default: True)
 
         Yields:
             Response chunks with incremental updates
         """
         if not self._initialized:
             raise RuntimeError("AgentService not initialized. Call initialize() first.")
-
-        # Modify query based on selected server
-        if selected_server and selected_server != "all":
-            query_with_context = f"[Use only {selected_server} MCP server] {query}"
-        else:
-            query_with_context = query
 
         # Check cache first for similar queries (use original query for cache key)
         cached = self.memory.get_cached_response(query)
@@ -188,8 +196,34 @@ class AgentService:
             return
 
         print(f"\n🤔 Processing (streaming): {query}")
-        if selected_server != "all":
+
+        # Use A2A orchestrator if enabled and 'all' servers selected
+        if use_a2a and self.a2a_orchestrator and selected_server == "all":
+            print("   Mode: A2A Orchestration")
+            full_response = ""
+            try:
+                async for chunk in self.a2a_orchestrator.stream(query):
+                    if isinstance(chunk, str):
+                        full_response += chunk
+                    yield chunk
+
+                # Save to cache if we got a response
+                if full_response:
+                    self.memory.save_query_response(query, full_response)
+                return
+
+            except Exception as e:
+                error_message = str(e)
+                yield f"⚠️ A2A Error: {error_message}\n\nFalling back to standard mode..."
+                # Fall through to standard mode
+
+        # Standard mode (single agent)
+        # Modify query based on selected server
+        if selected_server and selected_server != "all":
+            query_with_context = f"[Use only {selected_server} MCP server] {query}"
             print(f"   Using server: {selected_server}")
+        else:
+            query_with_context = query
 
         # Collect response for caching
         full_response = ""
@@ -282,6 +316,31 @@ class AgentService:
             return {}
 
         return self.mcp_manager.get_server_status()
+
+    def get_a2a_status(self) -> Dict[str, Any]:
+        """Get A2A orchestrator status.
+
+        Returns:
+            A2A status information
+        """
+        if not self._initialized or not self.a2a_orchestrator:
+            return {
+                "enabled": False,
+                "mode": "Standard",
+                "available_agents": [],
+            }
+
+        status = self.a2a_orchestrator.get_status()
+        status["enabled"] = True
+        return status
+
+    def is_a2a_enabled(self) -> bool:
+        """Check if A2A mode is enabled.
+
+        Returns:
+            True if A2A is enabled and orchestrator is available
+        """
+        return self._a2a_enabled and self.a2a_orchestrator is not None
 
 
 async def main():

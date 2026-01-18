@@ -13,6 +13,7 @@ This is a **browser-based AI chat application** that can:
 - 📁 Access and search local files
 - 🤖 Use AI (GPT-4) to understand and respond to your questions
 - 🧠 Learn from your feedback and get faster over time
+- 🔄 **A2A Mode**: Multiple specialized agents collaborate on complex tasks
 
 **No VS Code required** - runs completely standalone in your web browser!
 
@@ -37,6 +38,7 @@ This is a **browser-based AI chat application** that can:
 - **[Learning System](docs/LEARNING_SYSTEM.md)** - Self-learning capabilities explained
 
 ### Advanced Topics
+- **[A2A Guide](docs/A2A_GUIDE.md)** - Agent-to-Agent orchestration for multi-agent collaboration
 - **[AI Agent Explained](docs/AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
 - **[Self-Learning Guide](docs/SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
 - **[Python Version Guide](docs/PYTHON_VERSION_GUIDE.md)** - Python version management

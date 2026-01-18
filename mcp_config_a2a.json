@@ -1,4 +1,5 @@
 {
+  "_comment": "A2A Mode Configuration - Use this config with OpenAI or Anthropic (paid) for multi-agent collaboration",
   "mcpServers": {
     "github": {
       "command": "npx",
