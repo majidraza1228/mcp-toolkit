@@ -2,7 +2,7 @@
   "version": "2.0",
   "metadata": {
     "created_at": "2026-01-13 22:28:17.118653",
-    "last_updated": "2026-01-17T22:36:55.381133",
+    "last_updated": "2026-01-18T00:26:13.210225",
     "schema_version": "2.0"
   },
   "queries": {
@@ -531,7 +531,7 @@
     "a6105c0a611b41b08f1209506350279e": {
       "query": "yes",
       "normalized_query": "yes",
-      "response": "Could you please specify what you would like to explore or do next? Whether it's querying another table, checking a different schema, or something else, I'm here to help!",
+      "response": "\ud83d\udd04 **A2A Mode**: Fallback routing to primary server\n\n\ud83d\udccd **Agent**: github\n\nI encountered another error while trying to fetch the latest repositories for a user. It seems that the resources cannot be searched either because they do not exist or you do not have permission to view them. \n\nPlease make sure to replace \"USERNAME\" with the actual GitHub username for which you want to fetch the repositories. Let me know if you need any further assistance.",
       "context": {
         "database": null,
         "schema": null,
@@ -543,8 +543,8 @@
         "output": null
       },
       "timestamps": {
-        "created": "2026-01-17T01:52:32.458467",
-        "last_used": "2026-01-17T01:52:32.458467"
+        "created": "2026-01-18T00:22:47.594007",
+        "last_used": "2026-01-18T00:22:47.594007"
       },
       "usage": {
         "count": 1,
@@ -1783,6 +1783,228 @@
         "show"
       ],
       "related_queries": []
+    },
+    "875b333a8560998d696b9d3de68e0249": {
+      "query": "Find repos with database schemas and show me the table structure",
+      "normalized_query": "find repos with database schemas and show me the table structure",
+      "response": "\ud83d\udd04 **A2A Mode**: The task must be sequential because the second task (showing table structure) depends on the results from the first task (finding repos with database schemas).\n\n\ud83d\udccd **Agent**: github\n\nI searched for repositories that contain database schema files, but unfortunately, I couldn't find any matching repositories in the search results. If you have any specific criteria or keywords related to database schema files, please let me know so I can refine the search further.\n\n---\n\n**Additional Results:**\n\n\n\ud83d\udccd **postgres**:\nThe table structure for the \"product_reviews\" database schema is as follows:\n\n1. **id**: integer\n2. **product_name**: character varying\n3. **rating**: integer\n4. **comment**: text\n\nIf you have any more database schemas for which you'd like to see the table structures, feel free to let me know.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:19:36.493912",
+        "last_used": "2026-01-18T00:19:36.493912"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "database",
+        "schema",
+        "show",
+        "find"
+      ],
+      "related_queries": []
+    },
+    "c3e2776a470244a566525fec7c2ed69f": {
+      "query": "what is the repo name",
+      "normalized_query": "what is the repo name",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve the repository name, so the task must be sequential.\n\n\ud83d\udccd **Agent**: github\n\nI encountered the same error while trying to retrieve the repository name without using the server_manager functionality. It seems that the required library is not installed for this operation. If you have any other specific tasks or queries, feel free to let me know, and I'll be happy to assist you.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:20:17.189767",
+        "last_used": "2026-01-18T00:20:17.189767"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "53cfd99e8e22ab885911d28404a48e70": {
+      "query": "can you give me latest 2 repos",
+      "normalized_query": "can you give me latest 2 repos",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to fetch the latest repositories, so the task is sequential with a single agent.\n\n\ud83d\udccd **Agent**: github\n\nI encountered the same error while trying to fetch the latest 2 repositories using the GitHub MCP server. It appears that the required library is missing for this operation. If you have any other requests or tasks in mind, feel free to share them, and I'll assist you with those.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:20:54.014979",
+        "last_used": "2026-01-18T00:20:54.014979"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "3f3655bbc3e90a382999d10be314a972": {
+      "query": "how me my latest 2 repositories\n",
+      "normalized_query": "how me my latest 2 repositories",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve the latest repositories, and this task must be completed sequentially as it is a single query to the GitHub API.\n\n\ud83d\udccd **Agent**: github\n\nI encountered an error while trying to fetch the latest repositories for a user. It seems that there is a missing library that is required for this operation. I recommend installing the required library by running the following command:\n\n```bash\npip install mcp-use[search]\n```\n\nOnce the library is installed, we can proceed with fetching the latest repositories for the user. Let me know if you need any further assistance.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:22:24.815632",
+        "last_used": "2026-01-18T00:22:24.815632"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "0d94954453bf5e0e3a98822fe94f7459": {
+      "query": "username is majidraza1228",
+      "normalized_query": "username is majidraza1228",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve user information, and no other tasks are required to run in parallel.\n\n\ud83d\udccd **Agent**: github\n\nIt seems there are still issues with the input parameters for retrieving information about the user 'majidraza1228' from GitHub. Unfortunately, I'm unable to fetch the details at the moment due to these errors. If you have any other requests or need further assistance, feel free to let me know.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:23:25.550458",
+        "last_used": "2026-01-18T00:23:25.550458"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "1b829642f5d0ae3d7fdc8a94f470c5eb": {
+      "query": "show me the latest 2repos",
+      "normalized_query": "show me the latest 2repos",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to fetch the latest repositories, and this task does not require any dependencies or parallel execution.\n\n\ud83d\udccd **Agent**: github\n\nHere are the latest 2 repositories:\n\n1. Repository: [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x)\n   - Description: Master programming by recreating your favorite technologies from scratch.\n   - Owner: codecrafters-io\n   - Created At: 2018-05-09\n   - Updated At: 2026-01-18\n   - Pushed At: 2025-12-26\n   - Default Branch: master\n\n2. Repository: [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp)\n   - Description: freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.\n   - Owner: freeCodeCamp\n   - Created At: 2014-12-24\n   - Updated At: 2026-01-18\n   - Pushed At: 2026-01-17\n   - Default Branch: main\n\nThese repositories are actively maintained and have valuable resources for learning programming and technology.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:24:54.910957",
+        "last_used": "2026-01-18T00:24:54.910957"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "c18f0246643e6bcaf94c54ef57d40a04": {
+      "query": "show me database schemas  from local postgres MCP server",
+      "normalized_query": "show me database schemas  from local postgres mcp server",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to retrieve database schemas, and this task must be executed sequentially as it relies solely on the database query.\n\n\ud83d\udccd **Agent**: postgres\n\nHere are the database schemas from the local MCP server:\n\n1. **Employees Database Schema**:\n   - Columns:\n     - employeeid: integer\n     - firstname: character varying\n     - lastname: character varying\n     - department: character varying\n     - salary: numeric\n\n2. **Product Reviews Database Schema**:\n   - Columns:\n     - id: integer\n     - product_name: character varying\n     - rating: integer\n     - comment: text\n\n3. **Test Database Schema**:\n   - Columns:\n     - id: integer\n     - name: character varying\n     - address: character varying\n     - zipcode: character varying\n\n4. **Chatbot Database Schema**:\n   - Columns:\n     - name: character varying\n     - address: character varying\n     - zipcode: character varying\n\n5. **Suppliers Database Schema**:\n   - Columns:\n     - supplierid: integer\n     - suppliername: character varying\n     - contactemail: character varying\n\nThese schemas provide information about the tables and their corresponding columns in each database on the local MCP server. If you need more details or specific queries, feel free to ask.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-18T00:26:13.210201",
+        "last_used": "2026-01-18T00:26:13.210201"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "database",
+        "schema",
+        "show"
+      ],
+      "related_queries": []
     }
   },
   "categories": {
@@ -1824,7 +2046,10 @@
       "e7a79b85962f4f1e869cd1f2f9cf9894",
       "01d9fcabdd5a9ac49d85d126f01c224d",
       "10acee38e3255e6842bb355dfaa54727",
-      "2a8a68d4db211d91e5e74ac9f519f764"
+      "2a8a68d4db211d91e5e74ac9f519f764",
+      "875b333a8560998d696b9d3de68e0249",
+      "1b829642f5d0ae3d7fdc8a94f470c5eb",
+      "c18f0246643e6bcaf94c54ef57d40a04"
     ],
     "general": [
       "613048cdd44b3ee6b461546d5f76fb37",
@@ -1837,7 +2062,11 @@
       "60c7b0f5d467d9e6bcab6a5ea3e06e5b",
       "eb1291b6f85e1452224fd5280a454c52",
       "a1daf1817c9a7c5abea5368cd6e7f548",
-      "7a85165403083ca3207cc8e4456f35c6"
+      "7a85165403083ca3207cc8e4456f35c6",
+      "c3e2776a470244a566525fec7c2ed69f",
+      "53cfd99e8e22ab885911d28404a48e70",
+      "3f3655bbc3e90a382999d10be314a972",
+      "0d94954453bf5e0e3a98822fe94f7459"
     ],
     "schema_operations": [
       "0fd20d79c08c1dace10ffd4b90a96f66"
@@ -1907,7 +2136,7 @@
     }
   ],
   "stats": {
-    "total_queries": 61,
+    "total_queries": 69,
     "cache_hits": 1,
     "positive_feedback": 3,
     "negative_feedback": 6

@@ -33,7 +33,6 @@ MCP Servers (Node.js processes via npx)
 | `utils/simple_memory.py` | Query caching and learning system |
 | `utils/a2a_orchestrator.py` | A2A (Agent-to-Agent) orchestration |
 | `mcp_config.json` | MCP server configuration |
-| `mcp_config_a2a.json` | A2A mode config (all servers enabled) |
 | `.env` | Environment variables (API keys, database URL) |
 
 ## Configuration Rules

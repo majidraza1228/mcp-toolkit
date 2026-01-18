@@ -103,12 +103,7 @@ A2A mode works best with:
 
 ### MCP Configuration for A2A
 
-Use `mcp_config_a2a.json` for full A2A mode:
-```bash
-cp mcp_config_a2a.json mcp_config.json
-```
-
-Or manually enable all servers in `mcp_config.json`:
+Enable all servers you need in `mcp_config.json`:
 ```json
 {
   "mcpServers": {
