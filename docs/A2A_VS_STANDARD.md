@@ -1,6 +1,6 @@
 # A2A vs Standard Mode Comparison
 
-![A2A Mode Interface](screenshots/image.png)
+![A2A Mode Interface](./screenshots/image.png)
 *MCP Toolkit with A2A Mode showing multiple specialized agents collaborating*
 
 This document explains the differences between **A2A (Agent-to-Agent)** mode and **Standard** mode in MCP Toolkit.

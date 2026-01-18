@@ -1,6 +1,6 @@
 # A2A (Agent-to-Agent) Orchestration Guide
 
-![A2A Mode Interface](screenshots/image.png)
+![A2A Mode Interface](./screenshots/image.png)
 *MCP Toolkit with A2A Mode enabling multi-agent collaboration*
 
 This guide explains the A2A (Agent-to-Agent) feature in MCP Toolkit, which enables multiple specialized AI agents to collaborate on complex tasks.
