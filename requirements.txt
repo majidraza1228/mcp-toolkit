@@ -1,5 +1,5 @@
 # MCP Framework
-mcp-use>=0.1.0
+mcp-use[search]>=0.1.0
 
 # Web UI
 gradio>=4.0.0

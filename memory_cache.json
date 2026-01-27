@@ -2,7 +2,7 @@
   "version": "2.0",
   "metadata": {
     "created_at": "2026-01-13 22:28:17.118653",
-    "last_updated": "2026-01-18T00:26:13.210225",
+    "last_updated": "2026-01-26T23:39:50.267083",
     "schema_version": "2.0"
   },
   "queries": {
@@ -1492,7 +1492,7 @@
     "7a85165403083ca3207cc8e4456f35c6": {
       "query": "majidraza1228",
       "normalized_query": "majidraza1228",
-      "response": "Here are some of the repositories under the user 'majidraza1228':\n\n1. Repository: [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n2. Repository: [SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)\n3. Repository: [MasteringPython](https://github.com/majidraza1228/MasteringPython)\n4. Repository: [MasteringGo](https://github.com/majidraza1228/MasteringGo)\n5. Repository: [SyedDevtest](https://github.com/majidraza1228/SyedDevtest)\n6. Repository: [local-mcpserver](https://github.com/majidraza1228/local-mcpserver)\n7. Repository: [MicroServicesHelloWorld](https://github.com/majidraza1228/MicroServicesHelloWorld)\n8. Repository: [test-node](https://github.com/majidraza1228/test-node)\n9. Repository: [Blockchain](https://github.com/majidraza1228/Blockchain)\n10. Repository: [Code](https://github.com/majidraza1228/Code)\n\nThese are just a few of the repositories owned by 'majidraza1228'. If you need more information about any specific repository or want to perform any actions on them, feel free to let me know!",
+      "response": "\ud83d\udd04 **A2A Mode**: The query specifically pertains to searching for a user on GitHub, which requires the GitHub agent to handle it. No other agents are needed for this task.\n\n\ud83d\udccd **Agent**: github\n\nI encountered an error while trying to search for the user 'majidraza1228' in GitHub repositories or profiles. It seems there was an issue with the tool configuration related to searching for GitHub users. If you have any specific repositories or profiles in mind, please provide more details so I can assist you further.",
       "context": {
         "database": null,
         "schema": null,
@@ -1504,8 +1504,8 @@
         "output": null
       },
       "timestamps": {
-        "created": "2026-01-17T18:39:39.538224",
-        "last_used": "2026-01-17T18:39:39.538224"
+        "created": "2026-01-26T23:35:24.202316",
+        "last_used": "2026-01-26T23:35:24.202316"
       },
       "usage": {
         "count": 1,
@@ -1720,7 +1720,7 @@
     "10acee38e3255e6842bb355dfaa54727": {
       "query": "List all tables in my database",
       "normalized_query": "list all tables in my database",
-      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list tables in the database, and this task must be completed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe database tables in the PostgreSQL database are:\n1. employees\n2. product_reviews\n3. test\n4. chatbot\n5. suppliers\n\nThese are the tables available in the database schema.",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list tables in the database, and this task must be completed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe tables available in the database are:\n1. employees\n2. product_reviews\n3. test\n4. chatbot\n5. suppliers\n\nThese are the tables present in the 'public' schema of the database. If you need more details or have any specific queries related to these tables, feel free to ask!",
       "context": {
         "database": null,
         "schema": null,
@@ -1732,8 +1732,8 @@
         "output": null
       },
       "timestamps": {
-        "created": "2026-01-17T22:36:33.358434",
-        "last_used": "2026-01-17T22:36:33.358434"
+        "created": "2026-01-26T23:34:37.482158",
+        "last_used": "2026-01-26T23:34:37.482158"
       },
       "usage": {
         "count": 1,
@@ -2005,6 +2005,550 @@
         "show"
       ],
       "related_queries": []
+    },
+    "8ec01221a29f5b6ecdf0504b1b4851cd": {
+      "query": "show me all the database name",
+      "normalized_query": "show me all the database name",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to retrieve the list of database names, and this task must be executed sequentially as it involves a single database query.\n\n\ud83d\udccd **Agent**: postgres\n\nIt seems there was an error with the query execution. The specific command \"SHOW DATABASES\" is not recognized in this context. \n\nIf you have a specific database name in mind that you want to query, please provide it so that I can assist you with retrieving information from that database.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-19T00:20:39.320414",
+        "last_used": "2026-01-19T00:20:39.320414"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "database",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "75e7d0cb66ac15998a9bfd3391a93073": {
+      "query": "list the Advneturework db schemas",
+      "normalized_query": "list the advneturework db schemas",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list the schemas in the Adventurework database, so the task must be executed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe schemas in the Adventurework database are:\n- pg_toast\n- person\n- humanresources\n- production\n- purchasing\n- sales\n- pe\n- hr\n- pr\n- pu\n- sa\n\nThese are the schemas present in the Adventurework database. If you need more specific information from any of these schemas, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-19T00:21:17.451025",
+        "last_used": "2026-01-19T00:21:17.451025"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "schema",
+        "list"
+      ],
+      "related_queries": []
+    },
+    "99c2813b9371d4ee7b5250c470074062": {
+      "query": "can  you give me total repos in majidraza1228",
+      "normalized_query": "can  you give me total repos in majidraza1228",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve the total number of repositories for the specified user, so the task must be executed sequentially.\n\n\ud83d\udccd **Agent**: github\n\nThe total number of repositories for the user 'majidraza1228' is 33. \n\nHere is an example repository:\n- Repository Name: langchain-langgraph-demo\n- Full Name: majidraza1228/langchain-langgraph-demo\n- Description: Not provided\n- Created At: 2025-12-25\n- Updated At: 2026-01-17\n- Default Branch: main\n- Repository URL: [langchain-langgraph-demo Repository](https://github.com/majidraza1228/langchain-langgraph-demo)\n\nIf you need more information or details about other repositories, feel free to ask!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-19T00:22:04.571627",
+        "last_used": "2026-01-19T00:22:04.571627"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "e3a0e70fe74a1887b36d836fc41d29e4": {
+      "query": "create new branch in langchain-langgraph-demo repo with name test_mcp_syed",
+      "normalized_query": "create new branch in langchain-langgraph-demo repo with name test_mcp_syed",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to create a new branch in the specified repository, and this task must be completed sequentially as it involves a single operation.\n\n\ud83d\udccd **Agent**: github\n\nIt appears that authentication is required to create a new branch in the 'langchain-langgraph-demo' repository. \n\nPlease ensure that you are authenticated and have the necessary permissions to create branches in the repository. If you need further assistance with authentication or any other GitHub-related tasks, feel free to let me know.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-19T00:22:54.026764",
+        "last_used": "2026-01-19T00:22:54.026764"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "create"
+      ],
+      "related_queries": []
+    },
+    "374b549d2b5f2b3566e1cfc46498c577": {
+      "query": "show me all the table",
+      "normalized_query": "show me all the table",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to execute the SQL command to show all tables, and it must run sequentially as it is a single task.\n\n\ud83d\udccd **Agent**: postgres\n\nThe tables available in the database are:\n1. employees\n2. product_reviews\n3. test\n4. chatbot\n5. suppliers\n\nIs there anything specific you would like to know or do with these tables?",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:21:11.223947",
+        "last_used": "2026-01-26T23:21:11.223947"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "f76c5bd8a674f708bf2ee10cb587db89": {
+      "query": "list me all the repos ",
+      "normalized_query": "list me all the repos",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to list repositories, so the task must be executed sequentially.\n\n\ud83d\udccd **Agent**: github\n\nIt seems I don't have permission to list all repositories. Can you provide a specific GitHub username whose repositories you would like to see?",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:21:35.932770",
+        "last_used": "2026-01-26T23:21:35.932770"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "list"
+      ],
+      "related_queries": []
+    },
+    "462811b63ef203d8ba89b4c0bf71fba8": {
+      "query": "show me the repos which is recently updated",
+      "normalized_query": "show me the repos which is recently updated",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to fetch the recently updated repositories, so the task must be sequential.\n\n\ud83d\udccd **Agent**: github\n\nHere are the 5 recently updated public repositories:\n\n1. **Repository:** [tauri](https://github.com/tauri-apps/tauri)\n   - **Description:** Build smaller, faster, and more secure desktop and mobile applications with a web frontend.\n   - **Updated At:** 2026-01-27\n\n2. **Repository:** [pytorch](https://github.com/pytorch/pytorch)\n   - **Description:** Tensors and Dynamic neural networks in Python with strong GPU acceleration\n   - **Updated At:** 2026-01-27\n\n3. **Repository:** [awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps)\n   - **Description:** Collection of awesome LLM apps with AI Agents and RAG using OpenAI, Anthropic, Gemini, and opensource models.\n   - **Updated At:** 2026-01-27\n\n4. **Repository:** [awesome-interview-questions](https://github.com/DopplerHQ/awesome-interview-questions)\n   - **Description:** A curated awesome list of lists of interview questions. Feel free to contribute!\n   - **Updated At:** 2026-01-27\n\n5. **Repository:** [syncthing](https://github.com/syncthing/syncthing)\n   - **Description:** Open Source Continuous File Synchronization\n   - **Updated At:** 2026-01-27\n\nThese repositories have been recently updated.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:22:59.216142",
+        "last_used": "2026-01-26T23:22:59.216142"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "update",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "ce0b490bc4652bb436a2b26ec7774e5a": {
+      "query": "just look only on majidraza1228",
+      "normalized_query": "just look only on majidraza1228",
+      "response": "\ud83d\udd04 **A2A Mode**: The task requires querying a specific GitHub user, which can only be handled by the GitHub agent. No other agents are needed.\n\n\ud83d\udccd **Agent**: github\n\nI encountered errors while trying to fetch repositories, issues, and pull requests related to the user \"majidraza1228.\" It seems there was an issue with the input parameters provided. If you can provide more specific details or clarify the repositories, issues, or pull requests you are interested in, I can try again to retrieve the information.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:23:28.957821",
+        "last_used": "2026-01-26T23:23:28.957821"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "f5d462407c5b769836c5f362524d328e": {
+      "query": "this is github https://github.com/majidraza1228",
+      "normalized_query": "this is github https://github.com/majidraza1228",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to analyze the specified repository, and there are no dependencies or parallel tasks required.\n\n\ud83d\udccd **Agent**: github\n\nIt seems that the GitHub repository at https://github.com/majidraza1228 was not found. Please ensure that the repository exists and the URL is correct. If you have a different repository in mind or if there are specific files or information you would like to analyze, please provide more details so I can assist you effectively.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:23:59.293144",
+        "last_used": "2026-01-26T23:23:59.293144"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "9b1379e1011eccfc5e2c691309bf3f25": {
+      "query": "https://github.com/majidraza1228/mcp-toolkit I need detail of this\n",
+      "normalized_query": "https://github.com/majidraza1228/mcp-toolkit i need detail of this",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve details about the specified repository, so the task must be sequential.\n\n\ud83d\udccd **Agent**: github\n\nI encountered errors while trying to fetch details of the repository at https://github.com/majidraza1228/mcp-toolkit. It seems there was an issue with the input parameters provided. If you have the exact name of the repository or any specific details, please provide them so I can retry to retrieve the information.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:28:58.326568",
+        "last_used": "2026-01-26T23:28:58.326568"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "caa9a28f70393031f4f714179d9fb2b9": {
+      "query": "can you give me detail https://github.com/majidraza1228/mcp-toolkit",
+      "normalized_query": "can you give me detail https://github.com/majidraza1228/mcp-toolkit",
+      "response": "I encountered errors while trying to fetch details of the repository at https://github.com/majidraza1228/mcp-toolkit. It seems there was an issue with the input parameters provided. If you have the exact name of the repository or any specific details, please provide them so I can retry to retrieve the information.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:29:25.387664",
+        "last_used": "2026-01-26T23:29:25.387664"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "366cf054c317d4d612ac82b9f24968b1": {
+      "query": "Count the number of records in each table",
+      "normalized_query": "count the number of records in each table",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to count the records in each table, and this task must be executed sequentially as it involves querying the database.\n\n\ud83d\udccd **Agent**: postgres\n\nThe query returned a count of 5 tables in the 'public' schema of the database. If you need further information or have any specific queries related to these tables, feel free to let me know!",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:34:26.753527",
+        "last_used": "2026-01-26T23:34:26.753527"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "count"
+      ],
+      "related_queries": []
+    },
+    "607bdd4b0a81a1b56d9ddbcea79c0138": {
+      "query": "Find all users in the database who have GitHub accounts",
+      "normalized_query": "find all users in the database who have github accounts",
+      "response": "To find all users in the database who have GitHub accounts, we need to search for users who have associated their GitHub accounts with the database. This information may not be directly available in the database itself, but we can search for users who have GitHub accounts based on their profiles or external links.\n\nCould you provide more context or details on how the database is structured and where the information about GitHub accounts is stored? This will help in identifying the approach to find users with GitHub accounts.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:33:54.401379",
+        "last_used": "2026-01-26T23:33:54.401379"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "database",
+        "users",
+        "find",
+        "count"
+      ],
+      "related_queries": []
+    },
+    "ad617cc6ac7fcb10820ea0fc1dbb9f22": {
+      "query": "Show me the schema of the users table",
+      "normalized_query": "show me the schema of the users table",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to retrieve the schema of the users table, and this task must be executed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe query did not return any results for the \"users\" table in the database. It seems that the table might not exist or may have a different name. If you have a specific table name or need assistance with a different table, please provide more details so I can assist you further.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:34:54.643952",
+        "last_used": "2026-01-26T23:34:54.643952"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "table",
+        "schema",
+        "users",
+        "show"
+      ],
+      "related_queries": []
+    },
+    "8687517e9953a5f623506120f92a501c": {
+      "query": "Show my recent GitHub activity",
+      "normalized_query": "show my recent github activity",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to retrieve recent activity, so the task must be sequential.\n\n\ud83d\udccd **Agent**: github\n\nTo fetch recent activity for a user on GitHub, I will need the specific username of the user you are interested in. Please provide the GitHub username so that I can retrieve the recent activity for that user.",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:35:06.251930",
+        "last_used": "2026-01-26T23:35:06.251930"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "show"
+      ],
+      "related_queries": []
+    },
+    "11fb7faeae10f5da1a4f0a5a66936552": {
+      "query": "ist repositories owned by majidraza1228",
+      "normalized_query": "ist repositories owned by majidraza1228",
+      "response": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to list repositories, and this task does not require any dependencies or parallel execution.\n\n\ud83d\udccd **Agent**: github\n\nHere are some repositories owned by **majidraza1228**:\n\n1. Repository: [langchain-langgraph-demo](https://github.com/majidraza1228/langchain-langgraph-demo)\n2. Repository: [SyedHelloWorld](https://github.com/majidraza1228/SyedHelloWorld)\n3. Repository: [MasteringPython](https://github.com/majidraza1228/MasteringPython)\n4. Repository: [MasteringGo](https://github.com/majidraza1228/MasteringGo)\n5. Repository: [SyedDevtest](https://github.com/majidraza1228/SyedDevtest)\n6. Repository: [local-mcpserver](https://github.com/majidraza1228/local-mcpserver)\n7. Repository: [MicroServicesHelloWorld](https://github.com/majidraza1228/MicroServicesHelloWorld)\n8. Repository: [test-node](https://github.com/majidraza1228/test-node)\n9. Repository: [Blockchain](https://github.com/majidraza1228/Blockchain)\n10. Repository: [Code](https://github.com/majidraza1228/Code)",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:38:45.270681",
+        "last_used": "2026-01-26T23:38:45.270681"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [],
+      "related_queries": []
+    },
+    "bed9788d29df86729e4970fadbac3cbc": {
+      "query": "show me repo which has recently updated",
+      "normalized_query": "show me repo which has recently updated",
+      "response": "The repository **langchain-langgraph-demo** owned by **majidraza1228** was recently updated on **2026-01-25**. You can view the repository [here](https://github.com/majidraza1228/langchain-langgraph-demo).",
+      "context": {
+        "database": null,
+        "schema": null,
+        "mcp_server": null
+      },
+      "tools_used": [],
+      "tokens": {
+        "input": null,
+        "output": null
+      },
+      "timestamps": {
+        "created": "2026-01-26T23:39:50.267033",
+        "last_used": "2026-01-26T23:39:50.267033"
+      },
+      "usage": {
+        "count": 1,
+        "sessions": []
+      },
+      "feedback": {
+        "positive": 0,
+        "negative": 0,
+        "score": 0.0
+      },
+      "tags": [
+        "update",
+        "show"
+      ],
+      "related_queries": []
     }
   },
   "categories": {
@@ -2049,7 +2593,16 @@
       "2a8a68d4db211d91e5e74ac9f519f764",
       "875b333a8560998d696b9d3de68e0249",
       "1b829642f5d0ae3d7fdc8a94f470c5eb",
-      "c18f0246643e6bcaf94c54ef57d40a04"
+      "c18f0246643e6bcaf94c54ef57d40a04",
+      "8ec01221a29f5b6ecdf0504b1b4851cd",
+      "75e7d0cb66ac15998a9bfd3391a93073",
+      "374b549d2b5f2b3566e1cfc46498c577",
+      "f76c5bd8a674f708bf2ee10cb587db89",
+      "462811b63ef203d8ba89b4c0bf71fba8",
+      "607bdd4b0a81a1b56d9ddbcea79c0138",
+      "ad617cc6ac7fcb10820ea0fc1dbb9f22",
+      "8687517e9953a5f623506120f92a501c",
+      "bed9788d29df86729e4970fadbac3cbc"
     ],
     "general": [
       "613048cdd44b3ee6b461546d5f76fb37",
@@ -2066,17 +2619,25 @@
       "c3e2776a470244a566525fec7c2ed69f",
       "53cfd99e8e22ab885911d28404a48e70",
       "3f3655bbc3e90a382999d10be314a972",
-      "0d94954453bf5e0e3a98822fe94f7459"
+      "0d94954453bf5e0e3a98822fe94f7459",
+      "99c2813b9371d4ee7b5250c470074062",
+      "ce0b490bc4652bb436a2b26ec7774e5a",
+      "f5d462407c5b769836c5f362524d328e",
+      "9b1379e1011eccfc5e2c691309bf3f25",
+      "caa9a28f70393031f4f714179d9fb2b9",
+      "11fb7faeae10f5da1a4f0a5a66936552"
     ],
     "schema_operations": [
-      "0fd20d79c08c1dace10ffd4b90a96f66"
+      "0fd20d79c08c1dace10ffd4b90a96f66",
+      "366cf054c317d4d612ac82b9f24968b1"
     ],
     "data_insertion": [
       "045fee9386e0909119435fd6061701a9",
       "0fdfac189b765ab8cb97c218d7d042d4",
       "5d1cf73b43acdbb54240d8726cb62581",
       "9b3195594cecdaf389ec8c451dbe4047",
-      "c46d7dcc22096f82429215501a739514"
+      "c46d7dcc22096f82429215501a739514",
+      "e3a0e70fe74a1887b36d836fc41d29e4"
     ]
   },
   "feedback_log": [
@@ -2136,7 +2697,7 @@
     }
   ],
   "stats": {
-    "total_queries": 69,
+    "total_queries": 90,
     "cache_hits": 1,
     "positive_feedback": 3,
     "negative_feedback": 6
