@@ -32,6 +32,10 @@ MCP Servers (Node.js processes via npx)
 | `utils/prompts.py` | System prompts for the AI agent |
 | `utils/simple_memory.py` | Query caching and learning system |
 | `utils/a2a_orchestrator.py` | A2A (Agent-to-Agent) orchestration |
+| `utils/agentic_loop.py` | Plan-Act-Observe-Reflect agentic pattern |
+| `utils/eval_framework.py` | Agent evaluation and testing framework |
+| `run_eval.py` | CLI tool to run agent evaluations |
+| `docs/TESTING_GUIDE.md` | Comprehensive testing documentation |
 | `mcp_config.json` | MCP server configuration |
 | `.env` | Environment variables (API keys, database URL) |
 
@@ -51,6 +55,9 @@ LLM_MODEL=<model-name>
 
 # A2A (Agent-to-Agent) mode
 A2A_ENABLED=true|false
+
+# Agentic Loop (Plan-Act-Observe-Reflect)
+AGENTIC_MODE=true|false
 
 # Required tokens/keys
 GITHUB_TOKEN=ghp_...        # Always required for GitHub MCP server

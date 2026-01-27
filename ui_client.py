@@ -39,7 +39,7 @@ class UIClient:
         return self._loop
 
     def chat(
-        self, message: str, history: List, selected_server: str = "all"
+        self, message: str, history: List, selected_server: str = "all", use_agentic: bool = False
     ) -> Tuple[str, List]:
         """Process a chat message.
 
@@ -47,6 +47,7 @@ class UIClient:
             message: User's message
             history: Chat history (list of message dicts)
             selected_server: MCP server to use ('all', 'postgres', 'github', 'filesystem')
+            use_agentic: Whether to use Agentic Loop mode
 
         Returns:
             Tuple of (empty string to clear input, updated history)
@@ -73,7 +74,7 @@ class UIClient:
             async def collect_response():
                 nonlocal response_text
                 async for chunk in self.service.stream(
-                    message, conversation_id=self.conversation_id, selected_server=selected_server
+                    message, conversation_id=self.conversation_id, selected_server=selected_server, use_agentic=use_agentic
                 ):
                     # Handle string chunks (final response)
                     if isinstance(chunk, str):
@@ -144,12 +145,18 @@ class UIClient:
         a2a_enabled = self.service.is_a2a_enabled() if hasattr(self.service, 'is_a2a_enabled') else False
         a2a_status = self.service.get_a2a_status() if hasattr(self.service, 'get_a2a_status') else {}
 
+        # Get Agentic status
+        agentic_enabled = self.service.is_agentic_enabled() if hasattr(self.service, 'is_agentic_enabled') else False
+        agentic_status = self.service.get_agentic_status() if hasattr(self.service, 'get_agentic_status') else {}
+
         return {
             "provider": provider,
             "provider_name": provider_names.get(provider, provider),
             "model": model,
             "a2a_enabled": a2a_enabled,
             "a2a_agents": a2a_status.get("available_agents", []),
+            "agentic_enabled": agentic_enabled,
+            "agentic_status": agentic_status,
         }
 
     def get_server_status(self) -> str:
@@ -181,6 +188,14 @@ class UIClient:
                 lines.append(f"Specialized Agents: {', '.join(agents)}\n")
         else:
             lines.append("### 🔄 A2A Mode: Disabled\n")
+
+        # Add Agentic Loop status
+        if llm_info.get("agentic_enabled"):
+            lines.append("### 🧠 Agentic Loop: **Available**\n")
+            lines.append("Enable checkbox to use Plan-Act-Observe-Reflect\n")
+        else:
+            lines.append("### 🧠 Agentic Loop: Disabled\n")
+            lines.append("Set `AGENTIC_MODE=true` in .env to enable\n")
 
         lines.append("### 🔌 Connected Servers\n")
         for server, info in status.items():
@@ -286,8 +301,14 @@ class UIClient:
                             label="MCP Server",
                             choices=["all", "postgres", "github", "filesystem"],
                             value="all",
-                            scale=1,
+                            scale=2,
                             info="Select which MCP server to use"
+                        )
+                        agentic_checkbox = gr.Checkbox(
+                            label="🧠 Agentic Mode",
+                            value=False,
+                            scale=1,
+                            info="Use Plan-Act-Observe-Reflect for complex queries"
                         )
 
                     with gr.Row():
@@ -374,19 +395,19 @@ class UIClient:
                         )
 
             # Event handlers
-            def submit_message(message, history, server):
-                return self.chat(message, history, server)
+            def submit_message(message, history, server, use_agentic):
+                return self.chat(message, history, server, use_agentic)
 
             # Send button and Enter key
             send_btn.click(
                 fn=submit_message,
-                inputs=[msg_input, chatbot, server_selector],
+                inputs=[msg_input, chatbot, server_selector, agentic_checkbox],
                 outputs=[msg_input, chatbot],
             )
 
             msg_input.submit(
                 fn=submit_message,
-                inputs=[msg_input, chatbot, server_selector],
+                inputs=[msg_input, chatbot, server_selector, agentic_checkbox],
                 outputs=[msg_input, chatbot],
             )
 

@@ -20,6 +20,7 @@ except ImportError:
 from utils import MCPManager, get_system_prompt
 from utils.simple_memory import SimpleMemory
 from utils.a2a_orchestrator import A2AOrchestrator
+from utils.agentic_loop import AgenticLoop, AgenticLoopFactory
 
 # Load environment variables
 load_dotenv()
@@ -51,8 +52,10 @@ class AgentService:
         self.mcp_manager = MCPManager(config_path)
         self.agent: Optional[MCPAgent] = None
         self.a2a_orchestrator: Optional[A2AOrchestrator] = None
+        self.agentic_loop: Optional[AgenticLoop] = None
         self._initialized = False
         self._a2a_enabled = os.getenv("A2A_ENABLED", "true").lower() == "true"
+        self._agentic_enabled = os.getenv("AGENTIC_MODE", "false").lower() == "true"
 
         # Initialize memory system for self-learning
         self.memory = SimpleMemory()
@@ -90,6 +93,15 @@ class AgentService:
                 available_servers=available_servers,
             )
             print(f"✓ A2A orchestrator ready with {len(available_servers)} agent(s)")
+
+        # Initialize Agentic Loop if enabled
+        if self._agentic_enabled:
+            print("🔄 Initializing Agentic Loop (Plan-Act-Observe-Reflect)...")
+            self.agentic_loop = AgenticLoopFactory.create_default(
+                mcp_agent=self.agent,
+                llm=llm
+            )
+            print("✓ Agentic Loop ready")
 
     async def cleanup(self) -> None:
         """Cleanup resources."""
@@ -172,7 +184,7 @@ class AgentService:
         }
 
     async def stream(
-        self, query: str, conversation_id: Optional[str] = None, selected_server: str = "all", use_a2a: bool = True
+        self, query: str, conversation_id: Optional[str] = None, selected_server: str = "all", use_a2a: bool = True, use_agentic: bool = False
     ) -> AsyncIterator[Dict[str, Any]]:
         """Stream agent responses in real-time.
 
@@ -181,6 +193,7 @@ class AgentService:
             conversation_id: Optional conversation ID for memory
             selected_server: MCP server to use ('all', 'postgres', 'github', 'filesystem')
             use_a2a: Whether to use A2A orchestration (default: True)
+            use_agentic: Whether to use Agentic Loop for complex reasoning (default: False)
 
         Yields:
             Response chunks with incremental updates
@@ -196,6 +209,26 @@ class AgentService:
             return
 
         print(f"\n🤔 Processing (streaming): {query}")
+
+        # Use Agentic Loop if enabled and requested
+        if use_agentic and self.agentic_loop:
+            print("   Mode: Agentic Loop (Plan-Act-Observe-Reflect)")
+            full_response = ""
+            try:
+                async for chunk in self.agentic_loop.run(query):
+                    if isinstance(chunk, str):
+                        full_response += chunk
+                    yield chunk
+
+                # Save to cache if we got a response
+                if full_response:
+                    self.memory.save_query_response(query, full_response)
+                return
+
+            except Exception as e:
+                error_message = str(e)
+                yield f"⚠️ Agentic Loop Error: {error_message}\n\nFalling back to standard mode..."
+                # Fall through to A2A or standard mode
 
         # Use A2A orchestrator if enabled and 'all' servers selected
         if use_a2a and self.a2a_orchestrator and selected_server == "all":
@@ -341,6 +374,35 @@ class AgentService:
             True if A2A is enabled and orchestrator is available
         """
         return self._a2a_enabled and self.a2a_orchestrator is not None
+
+    def is_agentic_enabled(self) -> bool:
+        """Check if Agentic Loop mode is enabled.
+
+        Returns:
+            True if Agentic Loop is enabled
+        """
+        return self._agentic_enabled and self.agentic_loop is not None
+
+    def get_agentic_status(self) -> Dict[str, Any]:
+        """Get Agentic Loop status.
+
+        Returns:
+            Agentic status information
+        """
+        if not self._initialized or not self.agentic_loop:
+            return {
+                "enabled": False,
+                "mode": "Standard",
+                "description": "Single-step agent without planning",
+            }
+
+        return {
+            "enabled": True,
+            "mode": "Agentic Loop",
+            "description": "Multi-step planning with Plan-Act-Observe-Reflect",
+            "max_iterations": self.agentic_loop.max_iterations,
+            "max_retries": self.agentic_loop.max_retries_per_step,
+        }
 
 
 async def main():

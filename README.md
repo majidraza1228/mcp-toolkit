@@ -14,6 +14,8 @@ This is a **browser-based AI chat application** that can:
 - 🤖 Use AI (GPT-4) to understand and respond to your questions
 - 🧠 Learn from your feedback and get faster over time
 - 🔄 **A2A Mode**: Multiple specialized agents collaborate on complex tasks
+- 🎯 **Agentic Loop**: Plan-Act-Observe-Reflect pattern for complex reasoning
+- 📊 **Evaluation Framework**: Test and measure agent performance
 
 **No VS Code required** - runs completely standalone in your web browser!
 
@@ -36,9 +38,13 @@ This is a **browser-based AI chat application** that can:
 - **[LLM Providers Guide](docs/LLM_PROVIDERS.md)** - Choose between GitHub Models (free), OpenAI, or Anthropic
 - **[Architecture Overview](docs/ARCHITECTURE.md)** - Understand how it works
 - **[Learning System](docs/LEARNING_SYSTEM.md)** - Self-learning capabilities explained
+- **[Testing Guide](docs/TESTING_GUIDE.md)** - Verify all features work correctly
 
 ### Advanced Topics
 - **[A2A Guide](docs/A2A_GUIDE.md)** - Agent-to-Agent orchestration for multi-agent collaboration
+- **[A2A vs Standard](docs/A2A_VS_STANDARD.md)** - Compare A2A and Standard modes
+- **[Agentic Improvements](docs/AGENTIC_IMPROVEMENTS.md)** - True agentic patterns and evaluation framework
+- **[Testing Guide](docs/TESTING_GUIDE.md)** - Verify all features are working correctly
 - **[AI Agent Explained](docs/AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
 - **[Self-Learning Guide](docs/SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
 - **[Python Version Guide](docs/PYTHON_VERSION_GUIDE.md)** - Python version management
@@ -83,6 +89,21 @@ Ask questions in plain English:
 - Provides natural language responses
 - Learns from user feedback
 
+### 🎯 Agentic Loop (NEW!)
+True agentic behavior with multi-step reasoning:
+- **Plan**: Breaks complex tasks into sub-goals
+- **Act**: Executes tools toward current sub-goal
+- **Observe**: Checks results of actions
+- **Reflect**: Analyzes success/failure and adjusts
+- **Self-Correction**: Retries with different approaches on failure
+
+### 📊 Evaluation Framework (NEW!)
+Built-in testing and quality measurement:
+- **Pre-defined Test Cases**: GitHub, Database, Multi-domain queries
+- **Metrics**: Pass rate, tool accuracy, result accuracy, efficiency
+- **CLI Tool**: Run evaluations from command line
+- **JSON Reports**: Save and track results over time
+
 ### 🌐 Web-Based UI
 - Clean chat interface powered by Gradio
 - Works in any modern browser
@@ -93,17 +114,36 @@ Ask questions in plain English:
 
 ```
 Browser → Python App → AI Agent → MCP Servers → Data Sources
-                                   ├─ PostgreSQL
-                                   ├─ GitHub API
-                                   └─ Filesystem
+              │            │          ├─ PostgreSQL
+              │            │          ├─ GitHub API
+              │            │          └─ Filesystem
+              │            │
+              │            ├─ Standard Mode (single agent)
+              │            ├─ A2A Mode (multi-agent orchestration)
+              │            └─ Agentic Loop (plan-act-observe-reflect)
+              │
+              └─ Evaluation Framework (test & measure)
 ```
 
-The application uses a ReAct (Reasoning + Acting) agent pattern that:
+The application supports multiple agent patterns:
+
+**Standard Mode** - Simple ReAct pattern:
 1. Receives your natural language query
 2. Reasons about which tools to use
 3. Executes actions through MCP servers
 4. Returns results in natural language
-5. Caches responses for future speed improvements
+
+**A2A Mode** - Multi-agent orchestration:
+1. Analyzes query to identify domains (GitHub, Database, Filesystem)
+2. Routes to specialized agents in parallel
+3. Combines results from multiple agents
+
+**Agentic Loop** - Advanced reasoning:
+1. Plans multi-step execution strategy
+2. Executes each step with tool calls
+3. Observes and validates results
+4. Reflects on success/failure
+5. Self-corrects and retries if needed
 
 See [Architecture Overview](docs/ARCHITECTURE.md) for detailed explanation.
 
@@ -199,6 +239,160 @@ The agent learns from your interactions:
 4. **Result**: 25x faster!
 
 See [Learning System](docs/LEARNING_SYSTEM.md) for complete details.
+
+## 🎯 Agentic Loop - Multi-Step Reasoning
+
+The Agentic Loop enables complex, multi-step reasoning with self-correction. Unlike standard chat, it plans, executes, and reflects on each step.
+
+### How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    AGENTIC LOOP                             │
+│  ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐ │
+│  │  PLAN    │ → │   ACT    │ → │ OBSERVE  │ → │ REFLECT  │ │
+│  │          │   │          │   │          │   │          │ │
+│  │ Break    │   │ Execute  │   │ Check    │   │ Analyze  │ │
+│  │ into     │   │ tools    │   │ results  │   │ success  │ │
+│  │ sub-goals│   │          │   │          │   │ & adjust │ │
+│  └──────────┘   └──────────┘   └──────────┘   └──────────┘ │
+│       ↑                                             │       │
+│       └─────────────── ITERATE ─────────────────────┘       │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Enable Agentic Mode
+
+**Option 1: Environment Variable (always on)**
+```bash
+# In .env
+AGENTIC_MODE=true
+```
+
+**Option 2: UI Checkbox (per-query)**
+- Check the **🧠 Agentic Mode** checkbox in the UI for complex queries
+
+### Example: Agentic Query
+
+```
+Query: "Find all repos with open issues, then summarize the database tables"
+
+🎯 Planning: Analyzing task...
+📋 Plan created (3 steps):
+   1. Search repositories for the user
+   2. List open issues for each repository
+   3. Query database for table information
+
+⚡ Step 1/3: Search repositories for the user
+✅ Completed: Found 5 repositories
+
+⚡ Step 2/3: List open issues for each repository
+✅ Completed: Found 12 open issues
+
+⚡ Step 3/3: Query database for table information
+✅ Completed: Found 5 tables
+
+📊 Summary (Progress: 3/3):
+[Combined results from all steps...]
+```
+
+### When to Use Agentic Mode
+
+| Query Type | Standard Mode | Agentic Mode |
+|------------|---------------|--------------|
+| Simple lookup | ✅ Best | Overkill |
+| Multi-step task | May fail | ✅ Best |
+| Cross-domain query | Limited | ✅ Best |
+| Complex analysis | Unreliable | ✅ Best |
+
+See [Agentic Improvements](docs/AGENTIC_IMPROVEMENTS.md) for more details.
+
+## 📊 Evaluation Framework
+
+Test and measure your agent's performance with the built-in evaluation framework.
+
+### Run Evaluations
+
+```bash
+# Run all tests
+python run_eval.py
+
+# Quick evaluation (easy tests only)
+python run_eval.py --quick
+
+# Filter by category
+python run_eval.py --category github
+python run_eval.py --category database
+
+# Filter by difficulty
+python run_eval.py --difficulty easy
+python run_eval.py --difficulty hard
+```
+
+### Sample Output
+
+```
+============================================================
+               AGENT EVALUATION REPORT
+============================================================
+Timestamp: 2026-01-27T00:15:30
+
+📊 Overall Results:
+   Total Cases: 7
+   Passed: 6 (85.7%)
+   Failed: 1
+
+⏱️  Performance:
+   Avg Latency: 2340ms
+   Avg Efficiency: 78.5%
+
+🎯 Accuracy:
+   Tool Accuracy: 82.3%
+   Result Accuracy: 88.1%
+
+📁 By Category:
+   github: 2/2 (100%)
+   database: 3/3 (100%)
+   multi-domain: 1/2 (50%)
+
+📈 By Difficulty:
+   easy: 4/4 (100%)
+   medium: 2/2 (100%)
+   hard: 0/1 (0%)
+============================================================
+```
+
+### Metrics Explained
+
+| Metric | Description | Target |
+|--------|-------------|--------|
+| **Pass Rate** | % of tests completing successfully | > 80% |
+| **Tool Accuracy** | % of expected tools used correctly | > 70% |
+| **Result Accuracy** | % of expected keywords in results | > 70% |
+| **Efficiency** | Expected steps / actual steps taken | > 60% |
+| **Latency** | Average response time per query | < 10s |
+
+### Custom Test Cases
+
+```python
+from utils.eval_framework import EvalCase, AgentEvaluator
+
+custom_cases = [
+    EvalCase(
+        id="my_test_1",
+        query="Show all employees with salary > 50000",
+        expected_tools=["query"],
+        expected_result_contains=["employee", "salary"],
+        category="database",
+        difficulty="medium"
+    ),
+]
+
+evaluator = AgentEvaluator(agent_service)
+report = await evaluator.run_eval_suite(custom_cases)
+```
+
+See [Agentic Improvements](docs/AGENTIC_IMPROVEMENTS.md) for complete evaluation documentation.
 
 ## 🔐 Security Notes
 

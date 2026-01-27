@@ -205,6 +205,11 @@ Or select a specific server in the UI dropdown instead of "all".
 |----------|---------|-------------|
 | `A2A_ENABLED` | `true` | Enable/disable A2A mode |
 
+## Related Documentation
+
+- [AGENTIC_IMPROVEMENTS.md](AGENTIC_IMPROVEMENTS.md) - True agentic patterns and evaluation framework
+- [A2A_VS_STANDARD.md](A2A_VS_STANDARD.md) - Comparison between A2A and Standard modes
+
 ## Future Enhancements
 
 Planned features:
@@ -212,3 +217,4 @@ Planned features:
 - Cross-agent context passing
 - Custom agent definitions
 - Agent performance metrics
+- Agentic loop with Plan-Act-Observe-Reflect pattern
