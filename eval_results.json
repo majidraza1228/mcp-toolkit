@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-01-27T00:24:40.495910",
+  "total_cases": 4,
+  "passed": 3,
+  "failed": 1,
+  "pass_rate": 0.75,
+  "avg_latency_ms": 9813.560664653778,
+  "avg_tool_accuracy": 0.75,
+  "avg_result_accuracy": 0.75,
+  "avg_efficiency": 1.0,
+  "by_category": {
+    "github": {
+      "total": 2,
+      "passed": 1
+    },
+    "database": {
+      "total": 2,
+      "passed": 2
+    }
+  },
+  "by_difficulty": {
+    "easy": {
+      "total": 4,
+      "passed": 3
+    }
+  },
+  "results": [
+    {
+      "case_id": "gh_easy_1",
+      "success": true,
+      "actual_tools_used": [
+        "search_repositories"
+      ],
+      "tool_call_count": 1,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only one agent (github) is needed to list the repositories, and there are no dependencies.\n\n\ud83d\udccd **Agent**: github\n\nHere are the repositories for the authenticated user 'me':\n\n1. **Repository:** [meteorirc](https://github.com/me/meteorirc)\n   - **Description:** No description\n   - **Created At:** 2012-04-25\n   - **Last Updated:** 2025-03-13\n\n2. **Repository:** [spider](https://github.com/me/spider)\n   - **Description:** Yet another Ruby framework\n   - **Created At:** 2008-11-21\n   -",
+      "latency_ms": 14265.09404182434,
+      "error": null,
+      "tokens_used": 0,
+      "tool_accuracy": 1.0,
+      "result_accuracy": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "case_id": "gh_easy_2",
+      "success": false,
+      "actual_tools_used": [],
+      "tool_call_count": 0,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to search for a user, and this task does not require any other agents.\n\n\ud83d\udccd **Agent**: github\n\n\u26a0\ufe0f A2A Error: Error code: 400 - {'error': {'message': \"This model's maximum context length is 16385 tokens. However, your messages resulted in 16718 tokens (14149 in the messages, 2569 in the functions). Please reduce the length of the messages or functions.\", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}\n\nFalling",
+      "latency_ms": 13822.556972503662,
+      "error": "can only concatenate str (not \"tuple\") to str",
+      "tokens_used": 0,
+      "tool_accuracy": 0.0,
+      "result_accuracy": 0.0,
+      "efficiency": 1.0
+    },
+    {
+      "case_id": "db_easy_1",
+      "success": true,
+      "actual_tools_used": [
+        "list_pull_requests",
+        "query"
+      ],
+      "tool_call_count": 2,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list tables in the database, and this task must be completed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe database contains the following tables in the public schema:\n\n1. **employees**\n2. **product_reviews**\n3. **test**\n4. **chatbot**\n5. **suppliers**\n\nThese are the tables available in the database. Let me know if you need more information or assistance with any specific table.",
+      "latency_ms": 6966.533899307251,
+      "error": null,
+      "tokens_used": 0,
+      "tool_accuracy": 1.0,
+      "result_accuracy": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "case_id": "db_easy_2",
+      "success": true,
+      "actual_tools_used": [
+        "query"
+      ],
+      "tool_call_count": 1,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to count rows in the employees table, and this task must be executed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe total count of rows in the `employees` table is 4. If you have any more queries or need further analysis, feel free to ask!",
+      "latency_ms": 4200.057744979858,
+      "error": null,
+      "tokens_used": 0,
+      "tool_accuracy": 1.0,
+      "result_accuracy": 1.0,
+      "efficiency": 1.0
+    }
+  ]
+}

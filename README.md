@@ -44,6 +44,7 @@ This is a **browser-based AI chat application** that can:
 - **[A2A Guide](docs/A2A_GUIDE.md)** - Agent-to-Agent orchestration for multi-agent collaboration
 - **[A2A vs Standard](docs/A2A_VS_STANDARD.md)** - Compare A2A and Standard modes
 - **[Agentic Improvements](docs/AGENTIC_IMPROVEMENTS.md)** - True agentic patterns and evaluation framework
+- **[Evaluation Framework](docs/EVALUATION_FRAMEWORK.md)** - Test and measure agent performance with metrics
 - **[Testing Guide](docs/TESTING_GUIDE.md)** - Verify all features are working correctly
 - **[AI Agent Explained](docs/AI_AGENT_EXPLAINED.md)** - What makes this a true AI agent
 - **[Self-Learning Guide](docs/SELF_LEARNING_GUIDE.md)** - Advanced learning strategies
@@ -315,18 +316,18 @@ Test and measure your agent's performance with the built-in evaluation framework
 
 ```bash
 # Run all tests
-python run_eval.py
+python3.11 run_eval.py
 
 # Quick evaluation (easy tests only)
-python run_eval.py --quick
+python3.11 run_eval.py --quick
 
 # Filter by category
-python run_eval.py --category github
-python run_eval.py --category database
+python3.11 run_eval.py --category github
+python3.11 run_eval.py --category database
 
 # Filter by difficulty
-python run_eval.py --difficulty easy
-python run_eval.py --difficulty hard
+python3.11 run_eval.py --difficulty easy
+python3.11 run_eval.py --difficulty hard
 ```
 
 ### Sample Output

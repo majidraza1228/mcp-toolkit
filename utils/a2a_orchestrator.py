@@ -406,7 +406,16 @@ class A2AOrchestrator:
                 yield f"📍 **Agent**: {agent_type.value}\n\n"
                 agent = self.agents[agent_type]
                 async for chunk in agent.stream(primary_task["query"]):
-                    yield chunk
+                    # Handle different chunk types
+                    if isinstance(chunk, str):
+                        yield chunk
+                    elif isinstance(chunk, tuple):
+                        # Skip tuple chunks (intermediate states)
+                        continue
+                    elif hasattr(chunk, 'content'):
+                        yield str(chunk.content)
+                    else:
+                        yield str(chunk)
 
                 # If multiple tasks, execute remaining and append results
                 if len(plan["tasks"]) > 1:

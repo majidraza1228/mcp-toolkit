@@ -164,24 +164,24 @@ Automated testing of agent performance.
 
 ```bash
 # Run easy tests only (fastest)
-python run_eval.py --quick
+python3.11 run_eval.py --quick
 ```
 
 ### Run Full Evaluation
 
 ```bash
 # Run all tests
-python run_eval.py
+python3.11 run_eval.py
 
 # Run GitHub tests only
-python run_eval.py --category github
+python3.11 run_eval.py --category github
 
 # Run database tests only
-python run_eval.py --category database
+python3.11 run_eval.py --category database
 
 # Run by difficulty
-python run_eval.py --difficulty easy
-python run_eval.py --difficulty medium
+python3.11 run_eval.py --difficulty easy
+python3.11 run_eval.py --difficulty medium
 ```
 
 ### Expected Output
@@ -389,7 +389,7 @@ Use this checklist to verify all features:
 - [ ] Self-correction on failures (if any)
 
 ### Evaluation Framework
-- [ ] `python run_eval.py --quick` runs without errors
+- [ ] `python3.11 run_eval.py --quick` runs without errors
 - [ ] Report shows pass/fail statistics
 - [ ] `eval_results.json` is created
 - [ ] Results show metrics breakdown
@@ -415,8 +415,8 @@ Use this checklist to verify all features:
 tail -f /tmp/mcp_app.log
 
 # Run evaluations
-python run_eval.py --quick
-python run_eval.py --category github
+python3.11 run_eval.py --quick
+python3.11 run_eval.py --category github
 
 # Check configurations
 cat .env | grep -E "LLM|A2A|AGENTIC"

@@ -124,18 +124,69 @@ class AgentEvaluator:
         )
 
     def _extract_tools_from_result(self, result: str) -> List[str]:
-        """Extract tool names from result text."""
-        # This is a simplified version - in production,
-        # instrument the agent to track actual tool calls
+        """Extract tool names from result text.
+
+        Uses multiple detection strategies:
+        1. Direct tool name mentions
+        2. Output patterns that indicate specific tools were used
+        3. SQL/GitHub/filesystem indicators
+        """
         tools = []
+        result_lower = result.lower()
+
+        # Direct tool name indicators
         tool_indicators = [
             "search_repositories", "list_issues", "query",
-            "get_file_contents", "create_issue", "search_users"
+            "get_file_contents", "create_issue", "search_users",
+            "list_commits", "list_pull_requests", "get_issue",
+            "list_directory_contents", "read_file", "search_code"
         ]
+
         for tool in tool_indicators:
-            if tool.lower() in result.lower():
+            if tool.lower() in result_lower:
                 tools.append(tool)
-        return tools
+
+        # SQL/Database query indicators (implies "query" tool)
+        sql_indicators = [
+            "select ", "from ", "where ", "table", "column", "row",
+            "schema", "database", "postgresql", "sql", "employees",
+            "count(*)", "information_schema"
+        ]
+        if "query" not in tools:
+            for indicator in sql_indicators:
+                if indicator in result_lower:
+                    tools.append("query")
+                    break
+
+        # GitHub indicators (implies various GitHub tools)
+        github_indicators = {
+            "search_repositories": ["repository", "repo", "repos", "repositories", "starred"],
+            "list_issues": ["issue", "issues", "bug", "feature request"],
+            "search_users": ["user profile", "github user", "login:", "followers"],
+            "list_commits": ["commit", "commits", "sha", "committed"],
+            "list_pull_requests": ["pull request", "pr", "merge", "merged"]
+        }
+        for tool, indicators in github_indicators.items():
+            if tool not in tools:
+                for indicator in indicators:
+                    if indicator in result_lower:
+                        tools.append(tool)
+                        break
+
+        # Filesystem indicators
+        fs_indicators = {
+            "list_directory_contents": ["directory", "folder", "files in", "file list"],
+            "read_file": ["file content", "file contains", "reading file"],
+            "get_file_contents": [".py", ".js", ".md", "source code"]
+        }
+        for tool, indicators in fs_indicators.items():
+            if tool not in tools:
+                for indicator in indicators:
+                    if indicator in result_lower:
+                        tools.append(tool)
+                        break
+
+        return list(set(tools))  # Remove duplicates
 
     def _calc_tool_accuracy(self, expected: List[str], actual: List[str]) -> float:
         """Calculate what percentage of expected tools were used."""

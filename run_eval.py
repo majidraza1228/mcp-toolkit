@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.11
 """
 Run agent evaluation suite.
 
 Usage:
-    python run_eval.py              # Run all tests
-    python run_eval.py --quick      # Run quick subset
-    python run_eval.py --category github  # Run only GitHub tests
+    python3.11 run_eval.py              # Run all tests
+    python3.11 run_eval.py --quick      # Run quick subset
+    python3.11 run_eval.py --category github  # Run only GitHub tests
 """
 
 import asyncio
