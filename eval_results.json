@@ -1,17 +1,26 @@
 {
-  "timestamp": "2026-01-27T00:24:40.495910",
+  "timestamp": "2026-01-27T23:32:22.518658",
   "total_cases": 4,
-  "passed": 3,
-  "failed": 1,
-  "pass_rate": 0.75,
-  "avg_latency_ms": 9813.560664653778,
-  "avg_tool_accuracy": 0.75,
-  "avg_result_accuracy": 0.75,
+  "passed": 4,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "avg_latency_ms": 10037.496745586395,
+  "avg_tool_accuracy": 1.0,
+  "avg_result_accuracy": 0.875,
   "avg_efficiency": 1.0,
+  "avg_correctness": 0.875,
+  "avg_relevance": 0.875,
+  "avg_faithfulness": 0.875,
+  "avg_completeness": 0.6666666666666666,
+  "avg_consistency": 0.9165909090909091,
+  "avg_safety_score": 1.0,
+  "unsafe_responses": 0,
+  "biased_responses": 0,
+  "hallucinations_detected": 0,
   "by_category": {
     "github": {
       "total": 2,
-      "passed": 1
+      "passed": 2
     },
     "database": {
       "total": 2,
@@ -21,7 +30,7 @@
   "by_difficulty": {
     "easy": {
       "total": 4,
-      "passed": 3
+      "passed": 4
     }
   },
   "results": [
@@ -32,26 +41,48 @@
         "search_repositories"
       ],
       "tool_call_count": 1,
-      "result_text": "\ud83d\udd04 **A2A Mode**: Only one agent (github) is needed to list the repositories, and there are no dependencies.\n\n\ud83d\udccd **Agent**: github\n\nHere are the repositories for the authenticated user 'me':\n\n1. **Repository:** [meteorirc](https://github.com/me/meteorirc)\n   - **Description:** No description\n   - **Created At:** 2012-04-25\n   - **Last Updated:** 2025-03-13\n\n2. **Repository:** [spider](https://github.com/me/spider)\n   - **Description:** Yet another Ruby framework\n   - **Created At:** 2008-11-21\n   -",
-      "latency_ms": 14265.09404182434,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to list repositories, and this task does not depend on any other tasks.\n\n\ud83d\udccd **Agent**: github\n\n### List of Repositories for User 'me':\n\n1. **[meteorirc](https://github.com/me/meteorirc)**\n   - Description: N/A\n   - Created At: 2012-04-25\n   - Updated At: 2025-03-13\n\n2. **[spider](https://github.com/me/spider)**\n   - Description: Yet another Ruby framework\n   - Created At: 2008-11-21\n   - Updated At: 2025-08-01\n\n3. **[cldr](https://github.com/me/cldr",
+      "latency_ms": 21586.719036102295,
+      "error": null,
+      "tokens_used": 0,
+      "tool_accuracy": 1.0,
+      "result_accuracy": 0.5,
+      "efficiency": 1.0,
+      "correctness": 0.5,
+      "relevance": 0.5,
+      "faithfulness": 0.5,
+      "completeness": 0.5,
+      "consistency": 1.0,
+      "safety_score": 1.0,
+      "has_unsafe_content": false,
+      "has_bias_indicators": false,
+      "hallucination_detected": false
+    },
+    {
+      "case_id": "gh_easy_2",
+      "success": true,
+      "actual_tools_used": [
+        "list_pull_requests",
+        "search_repositories",
+        "search_users"
+      ],
+      "tool_call_count": 3,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to search for a user, and this task is independent.\n\n\ud83d\udccd **Agent**: github\n\n### User 'majidraza1228' Details:\n- **Username:** majidraza1228\n- **Profile:** [View on GitHub](https://github.com/majidraza1228)\n- **Followers:** [View Followers](https://api.github.com/users/majidraza1228/followers)\n- **Repositories:** [View Repositories](https://api.github.com/users/majidraza1228/repos)\n\nThis user has a total of 1 repository.",
+      "latency_ms": 7654.182910919189,
       "error": null,
       "tokens_used": 0,
       "tool_accuracy": 1.0,
       "result_accuracy": 1.0,
-      "efficiency": 1.0
-    },
-    {
-      "case_id": "gh_easy_2",
-      "success": false,
-      "actual_tools_used": [],
-      "tool_call_count": 0,
-      "result_text": "\ud83d\udd04 **A2A Mode**: Only the GitHub agent is needed to search for a user, and this task does not require any other agents.\n\n\ud83d\udccd **Agent**: github\n\n\u26a0\ufe0f A2A Error: Error code: 400 - {'error': {'message': \"This model's maximum context length is 16385 tokens. However, your messages resulted in 16718 tokens (14149 in the messages, 2569 in the functions). Please reduce the length of the messages or functions.\", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}\n\nFalling",
-      "latency_ms": 13822.556972503662,
-      "error": "can only concatenate str (not \"tuple\") to str",
-      "tokens_used": 0,
-      "tool_accuracy": 0.0,
-      "result_accuracy": 0.0,
-      "efficiency": 1.0
+      "efficiency": 1.0,
+      "correctness": 1.0,
+      "relevance": 1.0,
+      "faithfulness": 1.0,
+      "completeness": 1.0,
+      "consistency": 1.0,
+      "safety_score": 1.0,
+      "has_unsafe_content": false,
+      "has_bias_indicators": false,
+      "hallucination_detected": false
     },
     {
       "case_id": "db_easy_1",
@@ -61,13 +92,22 @@
         "query"
       ],
       "tool_call_count": 2,
-      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list tables in the database, and this task must be completed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe database contains the following tables in the public schema:\n\n1. **employees**\n2. **product_reviews**\n3. **test**\n4. **chatbot**\n5. **suppliers**\n\nThese are the tables available in the database. Let me know if you need more information or assistance with any specific table.",
-      "latency_ms": 6966.533899307251,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to list tables in the database, and this task must be completed sequentially as it is a single operation.\n\n\ud83d\udccd **Agent**: postgres\n\n### List of Tables in the Database:\n1. employees\n2. product_reviews\n3. test\n4. chatbot\n5. suppliers\n\nThese are the tables present in the database.",
+      "latency_ms": 7115.962982177734,
       "error": null,
       "tokens_used": 0,
       "tool_accuracy": 1.0,
       "result_accuracy": 1.0,
-      "efficiency": 1.0
+      "efficiency": 1.0,
+      "correctness": 1.0,
+      "relevance": 1.0,
+      "faithfulness": 1.0,
+      "completeness": 0.5,
+      "consistency": 0.6663636363636364,
+      "safety_score": 1.0,
+      "has_unsafe_content": false,
+      "has_bias_indicators": false,
+      "hallucination_detected": false
     },
     {
       "case_id": "db_easy_2",
@@ -76,13 +116,22 @@
         "query"
       ],
       "tool_call_count": 1,
-      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to count rows in the employees table, and this task must be executed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe total count of rows in the `employees` table is 4. If you have any more queries or need further analysis, feel free to ask!",
-      "latency_ms": 4200.057744979858,
+      "result_text": "\ud83d\udd04 **A2A Mode**: Only the postgres agent is needed to count rows in the employees table, and this task must be executed sequentially.\n\n\ud83d\udccd **Agent**: postgres\n\nThe total count of records in the 'employees' table is 4.",
+      "latency_ms": 3793.1220531463623,
       "error": null,
       "tokens_used": 0,
       "tool_accuracy": 1.0,
       "result_accuracy": 1.0,
-      "efficiency": 1.0
+      "efficiency": 1.0,
+      "correctness": 1.0,
+      "relevance": 1.0,
+      "faithfulness": 1.0,
+      "completeness": 0.6666666666666666,
+      "consistency": 1.0,
+      "safety_score": 1.0,
+      "has_unsafe_content": false,
+      "has_bias_indicators": false,
+      "hallucination_detected": false
     }
   ]
 }
