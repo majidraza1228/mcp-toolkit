@@ -316,6 +316,7 @@ class UIClient:
                             label="Message",
                             placeholder="Ask me anything about your database or GitHub...",
                             lines=2,
+                            max_lines=10,
                             scale=4,
                         )
                         send_btn = gr.Button("Send", variant="primary", scale=1)
@@ -483,7 +484,7 @@ class UIClient:
         self,
         share: bool = False,
         server_port: int = 7860,
-        server_name: str = "0.0.0.0",
+        server_name: str = "127.0.0.1",
     ):
         """Launch the Gradio interface.
 
@@ -547,7 +548,7 @@ def main():
     ui.launch(
         share=False,  # Set to True to create a public link
         server_port=7860,
-        server_name="0.0.0.0",  # Listen on all interfaces
+        server_name="127.0.0.1",  # Listen on localhost only
     )
 
 

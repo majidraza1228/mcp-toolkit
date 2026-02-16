@@ -10,13 +10,6 @@ from langchain_anthropic import ChatAnthropic
 
 from mcp_use import MCPAgent
 
-# GitHub Models (VS Code Copilot) support
-try:
-    from langchain_openai import AzureChatOpenAI
-    AZURE_AVAILABLE = True
-except ImportError:
-    AZURE_AVAILABLE = False
-
 from utils import MCPManager, get_system_prompt
 from utils.simple_memory import SimpleMemory
 from utils.a2a_orchestrator import A2AOrchestrator
@@ -266,7 +259,7 @@ class AgentService:
             # Pass the query with server context if specified
             async for chunk in self.agent.stream(query_with_context):
                 if isinstance(chunk, str):
-                    full_response = chunk
+                    full_response += chunk
                 yield chunk
 
             # Save to cache if we got a response
